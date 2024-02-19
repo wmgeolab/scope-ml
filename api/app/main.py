@@ -1,21 +1,18 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from .models import DocumentQABulkRequest
+
 
 app = FastAPI()
-
-
-class DocumentQARequest(BaseModel):
-    question: str
-    document_id: str
-
-
-class DocumentQABulkRequest(BaseModel):
-    questions: list[DocumentQARequest]
 
 
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+
+
+@app.post("/document_summary")
+def document_summary(document_id: str):
+    return {"DocumentSummary": document_id}
 
 
 @app.post("/document_qa_bulk")
