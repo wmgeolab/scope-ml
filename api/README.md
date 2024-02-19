@@ -15,7 +15,6 @@ After installing Ubuntu on WSL, start the instance and install:
 - poetry
 - pyenv (optional, to install python 3.11)
 - python 3.11
-- 
 
 
 ## Installing the correct version of python
