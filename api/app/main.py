@@ -1,6 +1,10 @@
+import logging
+
 from fastapi import FastAPI
+
 from .models import DocumentQABulkRequest
 
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
