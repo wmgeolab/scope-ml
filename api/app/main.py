@@ -19,6 +19,5 @@ def read_root():
 
 
 @app.post("/document_qa_bulk")
-def document_qa():
-    """ """
-    return {"Hello": "World"}
+def document_qa(request: DocumentQABulkRequest):
+    return {"DocumentQA": request}
