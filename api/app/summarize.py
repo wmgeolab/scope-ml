@@ -4,7 +4,7 @@ This file is for interacting with models to compute document summaries.
 
 import logging
 
-from .scope_db import get_document
+from .integrations.scope_db import get_document
 
 logger = logging.getLogger(__name__)
 

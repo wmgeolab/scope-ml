@@ -2,7 +2,7 @@ import logging
 
 from fastapi import FastAPI
 
-from .models import DocumentQABulkRequest
+from .types import DocumentQABulkRequest
 
 logger = logging.getLogger(__name__)
 
