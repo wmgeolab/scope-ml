@@ -4,7 +4,7 @@ This file is for interacting with models to answer questions about documents.
 
 import logging
 
-from .integrations.scope_db import get_document
+from ..integrations.scope_db import get_document
 
 logger = logging.getLogger(__name__)
 
