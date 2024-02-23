@@ -2,7 +2,7 @@
 FROM python:3.11
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /ml-api
 
 RUN pip install poetry
 
@@ -20,7 +20,7 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-root --no-interaction
 
 # Copy the project files to the container
-COPY app/ ./app
+COPY ml_api/ ./ml_api
 
 # Expose the port on which the FastAPI server will run
 EXPOSE 8000
