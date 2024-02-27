@@ -15,3 +15,11 @@ def answer_question(document_id: str, question: str) -> str:
     return (
         f"Answering the question '{question}' about the document with id {document_id}."
     )
+
+
+def extract_locations(document_id: str):
+    pass
+
+
+def extract_actors(document_id: str):
+    pass
