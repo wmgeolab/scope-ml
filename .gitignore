@@ -26,3 +26,6 @@ env/
 
 # Miscellaneous
 .DS_Store
+
+# Database Credentials
+db_config.cnf
