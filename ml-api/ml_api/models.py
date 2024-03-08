@@ -1,0 +1,12 @@
+from typing import List, Optional
+
+from sqlmodel import Field, Session, SQLModel, create_engine, select
+
+
+class ScopeSource(SQLModel, table=True):
+    __tablename__: str = "scopeBackend_source"
+
+    id: int = Field(primary_key=True)
+    text: str
+    url: str
+    sourceType_id: int = Field(index=True)
