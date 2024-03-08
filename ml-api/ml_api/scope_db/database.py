@@ -1,6 +1,6 @@
-from sqlmodel import create_engine
-
 import os
+
+from sqlmodel import create_engine
 
 if not os.environ.get("MYSQL_USER"):
     print("ENV WASN'T LOADED IN DATABASE.PY")

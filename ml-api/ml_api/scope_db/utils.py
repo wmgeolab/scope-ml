@@ -1,7 +1,7 @@
+from sqlmodel import Session, select
+
 from .database import engine
 from .models import ScopeSource
-
-from sqlmodel import Session, select
 
 
 def get_document(document_id: int) -> ScopeSource:
