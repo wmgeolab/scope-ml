@@ -5,8 +5,9 @@ from fastapi import FastAPI
 from .ml_algorithms.summarize import summarize_document
 from .types import DocumentQABulkRequest
 
-from .database import engine
-from .models import ScopeSource
+from .scope_db.database import engine
+from .scope_db.models import ScopeSource
+from .scope_db.utils import get_document
 from sqlmodel import Session, select
 
 logger = logging.getLogger(__name__)
@@ -52,3 +53,8 @@ def test_sqlmodel():
 
         print(f"Successfully retrieved {len(results)} results from the database.")
         return results
+
+
+@app.post("/test_get_doc")
+def test_get_doc(document_id: int):
+    return get_document(document_id)
