@@ -39,7 +39,7 @@ def document_qa(request: DocumentQABulkRequest):
 @app.get("/together")
 def together():
 
-    return summarize_document("sample_id")
+    return summarize_document(12)
 
 
 @app.get("/test_sqlmodel", response_model=list[ScopeSource])
