@@ -30,4 +30,4 @@ def summarize_document(document_id: str) -> str:
 
     output = llm.chat(messages, max_tokens=2048)
 
-    return output
+    return str(output)
