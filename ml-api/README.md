@@ -2,7 +2,7 @@
 
 - Access document data from SQL database
 - Run document through Document QA model from HuggingFace
--
+
 
 # Running the api
 
@@ -15,14 +15,14 @@ After installing Ubuntu on WSL, start the instance and install:
 - git
 - github cli (optional, makes git auth easier)
 - poetry
-- pyenv (optional, to install python 3.11)
+- pyenv (optional, to install specific python version easier)
 - python 3.11
 
 ## Installing the correct version of python
 
 <!-- Install pyenv  -->
 
-This project uses `python 3.11`. To install the correct version of python, run this command from the `/api` directory:
+This project uses `python 3.11`. To install the correct version of python, run this command from the `/ml-api` directory:
 
 ```bash
 pyenv install 3.11.8
@@ -32,13 +32,13 @@ pyenv install 3.11.8
 
 First you have to install `poetry`. Follow the instructions from the [Poetry Docs](https://python-poetry.org/docs/#installation).
 
-Then to install the packages, run this command from the `/api` directory:
+Then to install the packages, run this command from the `/ml-api` directory:
 
 ```bash
 poetry install
 ```
 
-To activate the environment, run this command from the `/api` directory:
+To activate the environment, run this command from the `/ml-api` directory:
 
 ```bash
 poetry shell
@@ -52,7 +52,7 @@ sudo apt-get install libmysqlclient-dev
 
 ## Run the api
 
-After activating the environment, run this command from the `/api` directory to start the api:
+After activating the environment, run this command from the `/ml-api` directory to start the api:
 
 ```bash
 uvicorn app.main:app --reload
