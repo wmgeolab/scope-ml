@@ -1,6 +1,10 @@
 # Use the official Python base image
 FROM python:3.11
 
+RUN mkdir -p /var/cache/python && chmod -R 777 /var/cache/python
+
+ENV PYTHONPYCACHEPREFIX=/var/cache/python
+
 # Set the working directory in the container
 WORKDIR /ml-api
 
