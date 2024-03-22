@@ -10,7 +10,6 @@ RUN poetry config virtualenvs.create false
 # Copy the requirements file to the container
 COPY pyproject.toml ./
 COPY poetry.lock ./
-COPY poetry.toml ./
 
 # Install the project dependencies
 RUN poetry install --no-root --no-interaction
