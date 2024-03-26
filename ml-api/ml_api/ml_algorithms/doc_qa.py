@@ -27,7 +27,7 @@ def answer_question(document_id: int, question: str) -> str:
     )
 
 
-def extract_locations(document_id: int) -> ExtractedLocations:
+def doc_extract_locations(document_id: int) -> ExtractedLocations:
     source = get_sourcing_source(document_id)
 
     program = LLMTextCompletionProgram.from_defaults(
@@ -44,7 +44,7 @@ def extract_locations(document_id: int) -> ExtractedLocations:
     return valid_response
 
 
-def extract_actors(document_id: int):
+def doc_extract_actors(document_id: int):
     source = get_sourcing_source(document_id)
 
     program = LLMTextCompletionProgram.from_defaults(

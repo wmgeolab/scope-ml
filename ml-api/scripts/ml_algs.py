@@ -2,14 +2,14 @@ import logging
 
 # logging.basicConfig(level=logging.DEBUG)
 
-from ml_api.ml_algorithms.doc_qa import extract_actors, extract_locations
+from ml_api.ml_algorithms.doc_qa import doc_extract_actors, doc_extract_locations
 from ml_api.models.extraction import ExtractedActors, ExtractedLocations
 
 from ml_api.scope_db.crud import get_document, get_sourcing_source, get_sourcing_sources
 
 
 def extract_locations_test():
-    extracted_locations = extract_locations(2)
+    extracted_locations = doc_extract_locations(2)
 
     for location in extracted_locations.locations:
         print(location)

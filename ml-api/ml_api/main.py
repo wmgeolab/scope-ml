@@ -1,16 +1,16 @@
 import logging
 
+from dotenv import load_dotenv
 from fastapi import FastAPI
 
+from .ml_algorithms.doc_qa import doc_extract_actors, doc_extract_locations
 from .ml_algorithms.summarize import summarize_document
-from .scope_db.crud import get_document
-from .scope_db.models import ScopeSource
-from .types import DocumentQABulkRequest
+from .models.extraction import ExtractedActors, ExtractedLocations
+
+# from .models.requests import DocumentQABulkRequest
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
-
-from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -30,30 +30,16 @@ def document_summary(document_id: int):
     return {"summary": summary}
 
 
-@app.post("/document_qa_bulk")
-def document_qa(request: DocumentQABulkRequest):
-    return {"DocumentQA": request}
+# @app.post("/document_qa_bulk")
+# def document_qa(request: DocumentQABulkRequest):
+#     return {"DocumentQA": request}
 
 
-@app.get("/together")
-def together():
-
-    return summarize_document(12)
-
-
-# @app.get("/test_sqlmodel", response_model=list[ScopeSource])
-# def test_sqlmodel():
-
-#     with Session(engine) as session:
-#         statement = select(ScopeSource)
-#         results = session.exec(statement)
-
-#         results = results.all()
-
-#         print(f"Successfully retrieved {len(results)} results from the database.")
-#         return results
+@app.post("/api/extract/locations")
+def extract_locations_from_document(document_id: int) -> ExtractedLocations:
+    return doc_extract_locations(document_id)
 
 
-# @app.post("/test_get_doc")
-# def test_get_doc(document_id: int):
-#     return get_document(document_id)
+@app.post("/api/extract/actors")
+def extract_actors_from_document(document_id: int) -> ExtractedActors:
+    return doc_extract_actors(document_id)
