@@ -20,14 +20,16 @@ EXTRACT_LOCATIONS_TEMPLATE = PromptTemplate(
     """
     {document_text}
     
-    Extract the locations mentioned in the above document.
+    Extract the locations mentioned in the above document. Respond in in the requested JSON format. You do not need to escape underscores in strings.
     """
 )
 
 EXTRACT_ACTORS_TEMPLATE = PromptTemplate(
     """
-    {document_text}
+    Extract the actors mentioned in the below document.
     
-    Extract the actors mentioned in the above document.
+    {document_text}
+        
+    Respond in in the requested JSON format. You do not need to escape underscores in strings. Be strict about the format of the response.
     """
 )
