@@ -4,6 +4,8 @@ This file is for interacting with models to answer questions about documents.
 
 import logging
 from llama_index.llms.together import TogetherLLM
+from llama_index.core.program import LLMTextCompletionProgram
+from llama_index.core.output_parsers import PydanticOutputParser
 from ..scope_db.crud import get_document, get_sourcing_source
 
 from ..models.extraction import ExtractedActors, ExtractedLocations
@@ -26,18 +28,34 @@ def answer_question(document_id: int, question: str) -> str:
 
 
 def extract_locations(document_id: int) -> ExtractedLocations:
-
-    # document = get_document(document_id)
     source = get_sourcing_source(document_id)
 
-    response = llm.structured_predict(
-        ExtractedLocations, EXTRACT_LOCATIONS_TEMPLATE, document_text=source.source_text  # type: ignore this is because the library is using pydantic v1
+    program = LLMTextCompletionProgram.from_defaults(
+        llm=llm,
+        output_parser=PydanticOutputParser(output_cls=ExtractedLocations),
+        prompt=EXTRACT_LOCATIONS_TEMPLATE,
+        verbose=True,
     )
 
-    valid_response = ExtractedLocations.model_validate(response)
+    output = program(document_text=source.source_text)
+
+    valid_response = ExtractedLocations.parse_obj(output)
 
     return valid_response
 
 
 def extract_actors(document_id: int):
-    pass
+    source = get_sourcing_source(document_id)
+
+    program = LLMTextCompletionProgram.from_defaults(
+        llm=llm,
+        output_parser=PydanticOutputParser(output_cls=ExtractedActors),
+        prompt=EXTRACT_ACTORS_TEMPLATE,
+        verbose=True,
+    )
+
+    output = program(document_text=source.source_text)
+
+    valid_response = ExtractedActors.parse_obj(output)
+
+    return valid_response
