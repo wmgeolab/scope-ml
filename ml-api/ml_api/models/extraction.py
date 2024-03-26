@@ -8,9 +8,11 @@ class Actor(BaseModel):
     Represents the information of a geopolitical actor. TODO consult with Dan about what fields to include
     """
 
-    name: str
-    actor_type: str
-    goals: List[str]
+    name: str = Field(description="The name of the actor")
+    type: str = Field(description="The type of actor")
+    goals: List[str] = Field(
+        description="The specific goals or intentions of the actor"
+    )
 
 
 class Location(BaseModel):
@@ -19,7 +21,7 @@ class Location(BaseModel):
     """
 
     name: str = Field(description="The name of the location.")
-    location_type: str = Field(description="The type of location.")
+    type: str = Field(description="The type of location.")
     description: str = Field(description="A description of the location.")
 
 
