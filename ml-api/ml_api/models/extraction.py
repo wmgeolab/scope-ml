@@ -1,6 +1,6 @@
 from typing import List
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel, Field
 
 
 class Actor(BaseModel):
@@ -15,12 +15,12 @@ class Actor(BaseModel):
 
 class Location(BaseModel):
     """
-    Represents the information of a location. TODO consult with Dan about what fields to include
+    Represents the information of a location.
     """
 
-    name: str
-    location_type: str
-    description: str
+    name: str = Field(description="The name of the location.")
+    location_type: str = Field(description="The type of location.")
+    description: str = Field(description="A description of the location.")
 
 
 class ExtractedLocations(BaseModel):
@@ -28,7 +28,9 @@ class ExtractedLocations(BaseModel):
     Represents the extracted locations from a document.
     """
 
-    locations: List[Location]
+    locations: List[Location] = Field(
+        description="The locations extracted from the document."
+    )
 
 
 class ExtractedActors(BaseModel):
