@@ -8,8 +8,8 @@ import os
 from dotenv import load_dotenv
 from llama_index.llms.together import TogetherLLM
 
-from ..scope_db.crud import get_document
 from ..prompts import SUMMARY_TEMPLATE
+from ..scope_db.crud import get_document
 
 load_dotenv()
 

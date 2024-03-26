@@ -3,13 +3,14 @@ This file is for interacting with models to answer questions about documents.
 """
 
 import logging
-from llama_index.llms.together import TogetherLLM
-from llama_index.core.program import LLMTextCompletionProgram
+
 from llama_index.core.output_parsers import PydanticOutputParser
-from ..scope_db.crud import get_document, get_sourcing_source
+from llama_index.core.program import LLMTextCompletionProgram
+from llama_index.llms.together import TogetherLLM
 
 from ..models.extraction import ExtractedActors, ExtractedLocations
 from ..prompts import EXTRACT_ACTORS_TEMPLATE, EXTRACT_LOCATIONS_TEMPLATE
+from ..scope_db.crud import get_document, get_sourcing_source
 
 logger = logging.getLogger(__name__)
 
