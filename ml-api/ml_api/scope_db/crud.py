@@ -19,3 +19,11 @@ def get_sourcing_source(source_id: int) -> SourcingSource:
         source = session.exec(statement).one()
 
         return source
+
+
+def get_sourcing_sources():
+    with Session(engine) as session:
+        statement = select(SourcingSource)
+        sources = session.exec(statement).all()
+
+        return sources
