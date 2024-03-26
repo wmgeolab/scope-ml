@@ -21,3 +21,19 @@ class Location(BaseModel):
     name: str
     location_type: str
     description: str
+
+
+class ExtractedLocations(BaseModel):
+    """
+    Represents the extracted locations from a document.
+    """
+
+    locations: List[Location]
+
+
+class ExtractedActors(BaseModel):
+    """
+    Represents the extracted actors from a document.
+    """
+
+    actors: List[Actor]
