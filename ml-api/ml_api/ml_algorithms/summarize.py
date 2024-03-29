@@ -6,8 +6,11 @@ import logging
 import os
 
 from dotenv import load_dotenv
+from llama_index.core.output_parsers import PydanticOutputParser
+from llama_index.core.program import LLMTextCompletionProgram
 from llama_index.llms.together import TogetherLLM
 
+from ..models.qa import SummarizeDocumentResponse
 from ..prompts import SUMMARY_TEMPLATE
 from ..scope_db.crud import get_document
 
@@ -22,12 +25,19 @@ llm = TogetherLLM(
 )
 
 
-def summarize_document(document_id: int) -> str:
+def summarize_document(document_id: int) -> SummarizeDocumentResponse:
     """Summarize a document."""
     document = get_document(document_id)
-    messages = SUMMARY_TEMPLATE.format_messages(document_text=document.text)
-    logger.info(messages)
 
-    output = llm.chat(messages, max_tokens=2048)
+    program = LLMTextCompletionProgram.from_defaults(
+        llm=llm,
+        output_parser=PydanticOutputParser(output_cls=SummarizeDocumentResponse),
+        prompt=SUMMARY_TEMPLATE,
+        verbose=True,
+    )
 
-    return str(output)
+    output = program(document_text=document.text)
+
+    valid_response = SummarizeDocumentResponse.parse_obj(output)
+
+    return valid_response

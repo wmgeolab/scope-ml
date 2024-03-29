@@ -7,3 +7,11 @@ class QuestionAnsweringResponse(BaseModel):
     """
 
     answer: str = Field(description="The answer to the question.")
+
+
+class SummarizeDocumentResponse(BaseModel):
+    """
+    Represents the response to a document summarization request.
+    """
+
+    summary: str = Field(description="The summary of the document.")
