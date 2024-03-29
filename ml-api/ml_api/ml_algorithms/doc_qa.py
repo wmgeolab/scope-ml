@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 llm = TogetherLLM(model="mistralai/Mixtral-8x7B-Instruct-v0.1")
 
 
-def answer_question(document_id: int, question: str) -> QuestionAnsweringResponse:
+def doc_answer_question(document_id: int, question: str) -> QuestionAnsweringResponse:
     """Answer a question about a document."""
     # document = get_document(document_id)
     source = get_sourcing_source(document_id)

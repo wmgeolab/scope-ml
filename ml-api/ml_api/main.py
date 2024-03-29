@@ -2,13 +2,16 @@ import logging
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
-from ml_api.models.qa import SummarizeDocumentResponse
 
-from .ml_algorithms.extract import doc_extract_actors, doc_extract_locations
-from .ml_algorithms.summarize import doc_generate_summary
+from .ml_algorithms import (
+    doc_answer_question,
+    doc_extract_actors,
+    doc_extract_locations,
+    doc_generate_summary,
+)
 from .models.extraction import ExtractedActors, ExtractedLocations
+from .models.qa import QuestionAnsweringResponse, SummarizeDocumentResponse
 
-# from .models.requests import DocumentQABulkRequest
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -37,3 +40,10 @@ def extract_locations_from_document(document_id: int) -> ExtractedLocations:
 @app.post("/api/extract_actors")
 def extract_actors_from_document(document_id: int) -> ExtractedActors:
     return doc_extract_actors(document_id)
+
+
+@app.post("/api/answer_question")
+def answer_question_from_document(
+    document_id: int, question: str
+) -> QuestionAnsweringResponse:
+    return doc_answer_question(document_id, question)
