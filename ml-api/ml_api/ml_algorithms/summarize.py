@@ -25,7 +25,7 @@ llm = TogetherLLM(
 )
 
 
-def summarize_document(document_id: int) -> SummarizeDocumentResponse:
+def doc_generate_summary(document_id: int) -> SummarizeDocumentResponse:
     """Summarize a document."""
     document = get_document(document_id)
 

@@ -2,9 +2,10 @@ import logging
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from ml_api.models.qa import SummarizeDocumentResponse
 
 from .ml_algorithms.extract import doc_extract_actors, doc_extract_locations
-from .ml_algorithms.summarize import summarize_document
+from .ml_algorithms.summarize import doc_generate_summary
 from .models.extraction import ExtractedActors, ExtractedLocations
 
 # from .models.requests import DocumentQABulkRequest
@@ -23,23 +24,16 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.post("/document_summary")
-def document_summary(document_id: int):
-    summary = summarize_document(document_id)
-
-    return {"summary": summary}
+@app.post("/api/generate_summary")
+def generate_summary_from_document(document_id: int) -> SummarizeDocumentResponse:
+    return doc_generate_summary(document_id)
 
 
-# @app.post("/document_qa_bulk")
-# def document_qa(request: DocumentQABulkRequest):
-#     return {"DocumentQA": request}
-
-
-@app.post("/api/extract/locations")
+@app.post("/api/extract_locations")
 def extract_locations_from_document(document_id: int) -> ExtractedLocations:
     return doc_extract_locations(document_id)
 
 
-@app.post("/api/extract/actors")
+@app.post("/api/extract_actors")
 def extract_actors_from_document(document_id: int) -> ExtractedActors:
     return doc_extract_actors(document_id)
