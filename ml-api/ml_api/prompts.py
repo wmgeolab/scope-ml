@@ -10,7 +10,13 @@ SUMMARY_TEMPLATE = PromptTemplate(
 
 QA_TEMPLATE = PromptTemplate(
     """
+    Use the following context to answer the question below.
+    
+    --- CONTENT START ---
     {document_text}
+        
+    --- CONTENT END ---    
+    
     
     Answer the following question: {question}
     """
