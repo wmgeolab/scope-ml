@@ -1,5 +1,5 @@
 import pytest
-from ml_api.ml_algorithms.doc_qa import doc_extract_actors, doc_extract_locations
+from ml_api.ml_algorithms.extract import doc_extract_actors, doc_extract_locations
 from ml_api.models.extraction import ExtractedActors, ExtractedLocations
 
 VALID_DOCUMENT_IDS = [1, 2, 3]

@@ -1,6 +1,6 @@
 import logging
 
-from ml_api.ml_algorithms.doc_qa import doc_extract_actors, doc_extract_locations
+from ml_api.ml_algorithms.extract import doc_extract_actors, doc_extract_locations
 from ml_api.models.extraction import ExtractedActors, ExtractedLocations
 from ml_api.scope_db.crud import get_document, get_sourcing_source, get_sourcing_sources
 
