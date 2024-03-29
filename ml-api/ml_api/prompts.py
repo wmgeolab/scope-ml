@@ -12,10 +12,10 @@ QA_TEMPLATE = PromptTemplate(
     """
     Use the following context to answer the question below.
     
-    --- CONTENT START ---
+    --- CONTEXT START ---
     {document_text}
         
-    --- CONTENT END ---    
+    --- CONTEXT END ---    
     
     
     Answer the following question: {question}
