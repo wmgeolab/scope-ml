@@ -3,7 +3,7 @@ import logging
 from dotenv import load_dotenv
 from fastapi import FastAPI
 
-from .ml_algorithms.doc_qa import doc_extract_actors, doc_extract_locations
+from .ml_algorithms.extract import doc_extract_actors, doc_extract_locations
 from .ml_algorithms.summarize import summarize_document
 from .models.extraction import ExtractedActors, ExtractedLocations
 
