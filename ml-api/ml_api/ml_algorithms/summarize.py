@@ -12,7 +12,7 @@ from llama_index.llms.together import TogetherLLM
 
 from ..models.qa import SummarizeDocumentResponse
 from ..prompts import SUMMARY_TEMPLATE
-from ..scope_db.crud import get_document
+from ..scope_db.crud import get_sourcing_source
 
 load_dotenv()
 
@@ -27,7 +27,7 @@ llm = TogetherLLM(
 
 def doc_generate_summary(document_id: int) -> SummarizeDocumentResponse:
     """Summarize a document."""
-    document = get_document(document_id)
+    document = get_sourcing_source(document_id)
 
     program = LLMTextCompletionProgram.from_defaults(
         llm=llm,
@@ -36,7 +36,7 @@ def doc_generate_summary(document_id: int) -> SummarizeDocumentResponse:
         verbose=True,
     )
 
-    output = program(document_text=document.text)
+    output = program(document_text=document.source_text)
 
     valid_response = SummarizeDocumentResponse.parse_obj(output)
 
