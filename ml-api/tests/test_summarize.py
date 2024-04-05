@@ -2,7 +2,7 @@ import pytest
 from ml_api.ml_algorithms.summarize import doc_generate_summary
 from ml_api.models.qa import SummarizeDocumentResponse
 
-VALID_DOCUMENT_IDS = [1, 2, 3]
+from .config import VALID_DOCUMENT_IDS
 
 
 @pytest.mark.parametrize("document_id", VALID_DOCUMENT_IDS)

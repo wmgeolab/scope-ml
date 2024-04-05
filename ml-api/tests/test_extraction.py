@@ -2,7 +2,7 @@ import pytest
 from ml_api.ml_algorithms.extract import doc_extract_actors, doc_extract_locations
 from ml_api.models.extraction import ExtractedActors, ExtractedLocations
 
-VALID_DOCUMENT_IDS = [1, 2, 3]
+from .config import VALID_DOCUMENT_IDS
 
 
 @pytest.mark.parametrize("document_id", VALID_DOCUMENT_IDS)
