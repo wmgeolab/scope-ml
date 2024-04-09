@@ -27,6 +27,10 @@ manage_env() {
             docker compose -f $compose_file build --no-cache
             docker compose -f $compose_file up $up_options
             ;;
+        clean)
+            # Remove all __pycache__ folders
+            find . -type d -name "__pycache__" -exec rm -r {} +
+            ;;
         *)
             echo "Invalid action: $action. Please use 'start', 'stop', or 'rebuild'."
             exit 1
@@ -40,7 +44,7 @@ interactive_mode="no"
 # Parse command line arguments
 while [ $# -gt 0 ]; do
     case "$1" in
-        start|stop|rebuild)
+        start|stop|rebuild|clean)
             action="$1"
             ;;
         -i)
@@ -49,7 +53,7 @@ while [ $# -gt 0 ]; do
         *)
             echo "Invalid argument: $1"
             echo "Usage: $0 <action> [-i]"
-            echo "<action> can be 'start', 'stop', or 'rebuild'."
+            echo "<action> can be 'start', 'stop', 'clean', or 'rebuild'."
             echo "Use -i for interactive mode (not detached)."
             exit 1
             ;;
