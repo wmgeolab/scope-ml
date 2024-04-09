@@ -1,8 +1,8 @@
 import logging
 
-from dotenv import load_dotenv
 from fastapi import FastAPI
 
+from .config import Config
 from .ml_algorithms import (
     doc_answer_question,
     doc_extract_actors,
@@ -12,12 +12,11 @@ from .ml_algorithms import (
 from .models.extraction import ExtractedActors, ExtractedLocations
 from .models.qa import QuestionAnsweringResponse, SummarizeDocumentResponse
 
-
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
-load_dotenv()
 
+Config.validate()
 
 app = FastAPI()
 
