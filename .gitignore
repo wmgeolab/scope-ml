@@ -29,3 +29,5 @@ env/
 
 # Database Credentials
 db_config.cnf
+
+.pytest_cache/
