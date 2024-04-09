@@ -13,16 +13,14 @@ from llama_index.llms.together import TogetherLLM
 from ..models.qa import SummarizeDocumentResponse
 from ..prompts import SUMMARY_TEMPLATE
 from ..scope_db.crud import get_sourcing_source
+from ..utils import get_llm
 
 load_dotenv()
 
 logger = logging.getLogger(__name__)
 
 
-llm = TogetherLLM(
-    model="mistralai/Mixtral-8x7B-Instruct-v0.1",
-    api_key=os.environ.get("TOGETHER_API_KEY"),
-)
+llm = get_llm()
 
 
 def doc_generate_summary(document_id: int) -> SummarizeDocumentResponse:

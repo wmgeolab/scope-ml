@@ -7,11 +7,11 @@ from llama_index.llms.together import TogetherLLM
 from ..models.extraction import ExtractedActors, ExtractedLocations
 from ..prompts import EXTRACT_ACTORS_TEMPLATE, EXTRACT_LOCATIONS_TEMPLATE
 from ..scope_db.crud import get_sourcing_source
+from ..utils import get_llm
 
 logger = logging.getLogger(__name__)
 
-
-llm = TogetherLLM(model="mistralai/Mixtral-8x7B-Instruct-v0.1")
+llm = get_llm()
 
 
 def doc_extract_locations(document_id: int) -> ExtractedLocations:

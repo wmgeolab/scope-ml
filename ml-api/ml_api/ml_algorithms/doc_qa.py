@@ -7,15 +7,16 @@ import logging
 from llama_index.core.output_parsers import PydanticOutputParser
 from llama_index.core.program import LLMTextCompletionProgram
 from llama_index.llms.together import TogetherLLM
-from ml_api.models.qa import QuestionAnsweringResponse
-from ml_api.prompts import QA_TEMPLATE
 
+from ..models.qa import QuestionAnsweringResponse
+from ..prompts import QA_TEMPLATE
 from ..scope_db.crud import get_document, get_sourcing_source
+from ..utils import get_llm
 
 logger = logging.getLogger(__name__)
 
 
-llm = TogetherLLM(model="mistralai/Mixtral-8x7B-Instruct-v0.1")
+llm = get_llm()
 
 
 def doc_answer_question(document_id: int, question: str) -> QuestionAnsweringResponse:
