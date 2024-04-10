@@ -17,6 +17,7 @@ COPY poetry.lock ./
 
 # Install the project dependencies
 RUN poetry install --no-root --no-interaction
+RUN poetry install --no-interaction
 
 # Copy the project files to the container
 COPY ml_api/ ./ml_api
