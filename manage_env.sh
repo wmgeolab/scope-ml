@@ -30,9 +30,11 @@ manage_env() {
         clean)
             # Remove all __pycache__ folders
             find . -type d -name "__pycache__" -exec rm -r {} +
+            # Remove any .pytest_cache folders
+            find . -type d -name ".pytest_cache" -exec rm -r {} +
             ;;
         *)
-            echo "Invalid action: $action. Please use 'start', 'stop', or 'rebuild'."
+            echo "Invalid action: $action. Please use 'start', 'stop', 'clean', or 'rebuild'."
             exit 1
             ;;
     esac
@@ -63,7 +65,7 @@ done
 
 # Validate action argument
 if [[ -z "$action" ]]; then
-    echo "Action not set. Please specify 'start', 'stop', or 'rebuild'."
+    echo "Action not set. Please specify 'start', 'stop', 'clean', or 'rebuild'."
     exit 1
 fi
 
