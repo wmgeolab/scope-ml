@@ -6,11 +6,10 @@ import logging
 
 from llama_index.core.output_parsers import PydanticOutputParser
 from llama_index.core.program import LLMTextCompletionProgram
-from llama_index.llms.together import TogetherLLM
 
 from ..models.qa import QuestionAnsweringResponse
 from ..prompts import QA_TEMPLATE
-from ..scope_db.crud import get_document, get_sourcing_source
+from ..scope_db.crud import get_sourcing_source
 from ..utils import get_llm
 
 logger = logging.getLogger(__name__)
@@ -19,11 +18,8 @@ logger = logging.getLogger(__name__)
 llm = get_llm()
 
 
-def doc_answer_question(document_id: int, question: str) -> QuestionAnsweringResponse:
-    """Answer a question about a document."""
-    # document = get_document(document_id)
-    source = get_sourcing_source(document_id)
-
+def answer_question(text: str, question: str) -> QuestionAnsweringResponse:
+    """Answer a question using some text."""
     program = LLMTextCompletionProgram.from_defaults(
         llm=llm,
         output_parser=PydanticOutputParser(output_cls=QuestionAnsweringResponse),
@@ -31,8 +27,15 @@ def doc_answer_question(document_id: int, question: str) -> QuestionAnsweringRes
         verbose=True,
     )
 
-    output = program(document_text=source.source_text, question=question)
+    output = program(document_text=text, question=question)
 
     valid_response = QuestionAnsweringResponse.parse_obj(output)
 
     return valid_response
+
+
+def doc_answer_question(document_id: int, question: str) -> QuestionAnsweringResponse:
+    """Answer a question about a document."""
+    source = get_sourcing_source(document_id)
+
+    return answer_question(source.source_text, question)

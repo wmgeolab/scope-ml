@@ -3,12 +3,10 @@ This file is for interacting with models to compute document summaries.
 """
 
 import logging
-import os
 
 from dotenv import load_dotenv
 from llama_index.core.output_parsers import PydanticOutputParser
 from llama_index.core.program import LLMTextCompletionProgram
-from llama_index.llms.together import TogetherLLM
 
 from ..models.qa import SummarizeDocumentResponse
 from ..prompts import SUMMARY_TEMPLATE
@@ -23,10 +21,7 @@ logger = logging.getLogger(__name__)
 llm = get_llm()
 
 
-def doc_generate_summary(document_id: int) -> SummarizeDocumentResponse:
-    """Summarize a document."""
-    document = get_sourcing_source(document_id)
-
+def generate_summary(text: str) -> SummarizeDocumentResponse:
     program = LLMTextCompletionProgram.from_defaults(
         llm=llm,
         output_parser=PydanticOutputParser(output_cls=SummarizeDocumentResponse),
@@ -34,8 +29,15 @@ def doc_generate_summary(document_id: int) -> SummarizeDocumentResponse:
         verbose=True,
     )
 
-    output = program(document_text=document.source_text)
+    output = program(document_text=text)
 
     valid_response = SummarizeDocumentResponse.parse_obj(output)
 
     return valid_response
+
+
+def doc_generate_summary(document_id: int) -> SummarizeDocumentResponse:
+    """Summarize a document."""
+    document = get_sourcing_source(document_id)
+
+    return generate_summary(document.source_text)
