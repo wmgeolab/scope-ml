@@ -1,18 +1,542 @@
-Document Id,Document Url,Actors,Locations,Topics,Keywords/phrases,date?,source?
-80,https://www.washingtonpost.com/politics/2020/09/15/if-putin-sends-troops-belarus-dont-expect-russians-applaud/,"Putin, the Kremlin, Lukashenko, Russian citizens","Russia, Belarus","economic recession in Russia, political unrest in Belarus, possible military intervention","economic recession, political unrest, military intervention, Russian politics",,
-120,https://www.prnewswire.com/news-releases/china-hazelnut-imports-report-2020-2024-featuring-major-players---tianchen-shangpin--zhongdi-301132242.html,China,"China, United States",hazelnut imports to China,"economics, hazelnuts, imports",,
-116,https://www.prnewswire.com/news-releases/china-almond-imports-report-2020-2024-australia-replaced-the-usa-as-the-major-source-of-imported-almonds-in-china-301130287.html,"China, United States, Australia","China, United States, Australia","almond inports to China, Sino-US trade war","economics, almonds, imports, trade war",,
-121,https://thehill.com/opinion/international/516752-bidens-build-back-better-could-build-a-better-us-foreign-policy,"Joe Biden, United States, China","United States, China, Kenya, Sri Lanka","foreign aid to developing countries, Build Back Better, Belt and Road Initiative, climate change","foreign investments, soft power, climate change, developing countries",,
-124,https://www.prnewswire.com:443/news-releases/xinhua-silk-road-e-chinas-ningbo-city-accelerates-smart-city-construction-301132017.html,"China, Ningbo city","East China, Ningbo city",infrastructure development in China,"5G networks, infrastructure development, smart city",,
-125,https://www.skynews.com.au/details/_6191348784001,"Premier Daniel Andrews, Jim Molan, Eric Abetz",Australia,"Australian politics, Belt and Road Initiative","foreign investments, committee inquiry",,
-126,http://www.xinhuanet.com/english/2020-09/16/c_139373631.htm,Chinese Academy of Sciences,China,"scientific cooperation, global innovation network, Chinese scientific institutions","science, global innovation network, international cooperation",,
-127,https://eurasiantimes.com/china-established-44000-companies-overseas-in-2019/,"Chinese investors, China",China,"Belt and Road Initiative, outbound foreign direct investments","foreign investments, economic growth",,
-129,https://www.cepal.org/en/publications/46009-investing-future-latin-america-and-caribbean,"Latin America, the Caribbean, Gulf Cooperation Council, Chinese companies","Latin America, the Caribbean","economic development in Latin America and the Caribbean, Belt and Road Initiative","economic investments, foreign investments, digital economy",,
-131,https://www.rfa.org/english/news/cambodia/sanctions-09152020113052.html,"US Department of Treasury, Union Development Group, China","Cambodia, Dara Sakor","political corruption in Cambodia, Belt and Road Initiative, Chinese military expansion","political unrest, human rights violations, economic sanctions, corruption",,
-133,https://www.hellenicshippingnews.com/chinas-belt-and-road-initiative-is-creating-a-new-continent-eurasia-says-veteran-lankan-communist-leader/,"China, Sri Lanka","China, Sri Lanka","Belt and Road Initiative, economic growth in Asia","foreign investments, economic growth",,
-135,https://www.thesundaily.my/business/us-imposes-sanctions-on-china-firm-over-port-airport-and-resort-project-in-cambodia-YD4072809,"United States, US Department of Treasury, Union Development Group, China","Cambodia, Dara Sakor","Belt and Road Initiative, Chinese military expansion","human rights violations, economic sanctions",,
-149,https://www.reuters.com/article/indonesia-economy-idUSL4N2GD2HL,"Indonesia, China","Indonesia, Jakarta","Belt and Road Initiative, construction delays due to coronavirus pandemic","infrastructure development, coronavirus pandemic",,
-153,http://www.xinhuanet.com/english/2020-09/16/c_139373399.htm,"Hungary, China","Hungary, China",Belt and Road Initiative,"intergovernment cooperation, coronavirus pandemic, international trade",,
-154,https://www.hellenicshippingnews.com/china-europe-cargo-trains-drive-belt-and-road-cooperation/,"Europe, China","Europe, China","Belt and Road Initiative, expansion of freight train routes","international trade, economic growth, coronavirus pandemic",,
-161,https://www.eureporter.co/economy/2020/09/15/bank-embraces-blockchain-to-facilitate-belt-and-road-trade/,"European Union, China, LGR Global","China, Asia, Europe","use of the blockchain and cryptocurrency in international trade, Belt and Road Initiative","international trade, blockchain, cryptocurrency",,
-162,https://timesofindia.indiatimes.com/world/china/china-pakistan-jointly-testing-deadly-pathogens/articleshow/78124334.cms,"China, Wuhan Institute of Virology, Pakistan army","China, Pakistan","Belt and Road Initiative, research on deadly pathogens","bio-warfare, infectious diseases",,
+Document Id,Document Url,Text,Date,Actors,Locations,Topics,Keywords/phrases,date?,source?
+80,https://www.washingtonpost.com/politics/2020/09/15/if-putin-sends-troops-belarus-dont-expect-russians-applaud/,"If Putin sends troops to Belarus, don’t expect Russians to applaud
+Russians don’t like military adventures in bad economic times, my research finds
+
+Yesterday, Belarusian President Alexander Lukashenko met with Russia’s president, Vladimir Putin, in Sochi to discuss closer integration. The ongoing political unrest in Belarus — a small country that is politically close to Russia and borders it on its west — has led some observers to speculate Putin might intervene militarily to prevent Belarus’s government from being overthrown.
+
+Putin faces his own domestic problems, with Russia in the middle of a deep recession. Intervention might be popular with the Russian public, just as Russia’s annexation of Crimea from Ukraine was. However, as my research shows, this is unlikely: Ordinary Russians don’t like military adventures in bad economic times.
+Belarus’s leader is in political trouble
+
+Lukashenko has ruled Belarus for nearly 30 years, despite a sagging economy, international isolation and mass dissatisfaction. In the lead-up to the August 2020 presidential elections, he sought to arrest key political opponents and hang onto his rule. This led to mass protests. When Lukashenko announced he had won with a purported 80.1 percent of votes, spontaneous and leaderless street gatherings turned into a countrywide uprising.
+
+The peaceful protests in Belarus have kept going and growing, attracting tens of thousands of people, labor unions and entire industries. Lukashenko has sought to stop them through police beatings, guns and explosives, mass arrests, kidnappings and torture. However, he hasn’t been able to reestablish order. Increasingly, it appears he cannot remain in power without outside help.
+
+Putin has been paying attention
+
+Russia’s leaders are worried that a “color” revolution in Belarus — previous peaceful revolutions in Eastern Europe have identified with specific colors — could trigger a revolution in Russia at a moment when Putin’s rule is not particularly stable, with Russians unhappy with the economy, the national response to the pandemic and Putin’s recent move to extend his rule for 12 more years. Concerns about a chain reaction are particularly strong because of the cultural and historical similarities between Russia and Belarus, as well as a long-standing tendency for political developments in Belarus to foreshadow events in Russia. Like Lukashenko, Putin has persecuted opponents, co-opted parliament and the courts, and organized a nationwide vote to extend his presidential terms. But Russia’s opposition has also learned from the experience of Belarusian protesters. Furthermore, if Lukashenko were forced out, Belarus might drift away from its military commitments to Russia. Russian military doctrine sees Belarus as its western forward base, and a pivotal element in Russia’s defense against attacks from the West. Losing its commitment would be a problem.
+
+All this makes some observers wonder whether Russia might invade or even annex Belarus, just as it did Crimea when Ukraine began turning Westward. Putin has warned he stands ready to send Russian forces to Belarus if necessary.
+
+How I did my research
+
+However, my own research in Russia suggests most Russians are unlikely to support military action. In June 2019, I ran an online experimental survey in Russia on a representative survey of Russian population to see how economic conditions affected their attitudes to foreign policy. The survey was run by Russia’s Centre for Independent Social Research, one of the most reputable polling companies in Russia. The participants were divided into three groups of approximately 400 people each. One group read an introduction that offered no information about Russia’s economic situation; another read information that suggested Russia’s economic situation was bad, and the third read information suggesting Russia’s economic situation was good. The information was drawn from real news sources and standardized as much as possible. After this reading, all participants answered a set of questions about their foreign policy views.
+
+Russia’s public may not be happy with military action
+
+People who had been told that the economy was in trouble were less likely than those who had been given no information — and still less likely than those who had been told that the economy was good — to favor hard power. They were less likely to want to spend money on defense that might undermine economic growth, more likely to think that internal problems were more important than external threats, and more likely to prioritize high standards of living over Russian military strength.
+
+Other polls of Russian citizens have found that support for Russia’s military intervention in Syria and confrontation with the West and Ukraine has declined as the economy stagnated. Instead, Russians increasingly believed the government should focus on fixing declining living standards, rising prices, and deteriorating social welfare supports.
+
+Russia and Belarus are joined in an economic and political “union.” Deepening the political relationship with Belarus is already unpopular. In January 2020, before the pandemic-driven economic crisis, only 13 percent of Russians supported plans to deepen the Belarus-Russia Union with a unified leadership; another 10 percent believed Belarus should become part of Russia (the majority supported deepening economic rather than political cooperation). Since then, the pandemic and falling oil prices have led to a sharp decline in living standards. As a result, public opinion polls find the largest drop in positive assessments of the economy since the 2008 world financial crisis.
+
+Of course, public sentiment is only one factor in the Kremlin’s decisions about Belarus. Even in democratic countries, leaders sometimes launch politically unpopular wars. However, this does mean any intervention would probably have political costs. Putin may be more likely to try to maintain Russia’s hold over Belarus through such indirect means as providing economic assistance, spreading propaganda, sending strikebreakers to replace workers on strike to assist in broadcasting Belarusian state media stations, and sending unmarked military to shore up existing Belarus security forces.","September 15, 2020 at 6:00 a.m. EDT","Putin, the Kremlin, Lukashenko, Russian citizens","Russia, Belarus","economic recession in Russia, political unrest in Belarus, possible military intervention","economic recession, political unrest, military intervention, Russian politics",,
+120,https://www.prnewswire.com/news-releases/china-hazelnut-imports-report-2020-2024-featuring-major-players---tianchen-shangpin--zhongdi-301132242.html,"China Hazelnut Imports Report 2020-2024 Featuring Major Players - Tianchen Shangpin & Zhongdi 
+
+According to this report, the quality of hazelnuts produced in China is generally poor and the yield is low. Therefore, hazelnuts consumed in China still rely on imports. According to conservative estimates, the annual consumption of hazelnuts in China is more than 100 kilotons, while the annual output is only about 10 kilotons.
+
+China's imports of unshelled hazelnuts increased significantly, from 947.50 tons in 2017 to 16,954 tons in 2019, while the import volume and import value of shelled hazelnut in China decreased slightly from 2017 to 2019.
+
+The major sources of China's imported hazelnuts are the United States and Turkey. From April 2, 2018, China imposed a 15% tariff on hazelnuts produced in the United States, which impacted American hazelnuts exports to China According to the analyst, the most imported hazelnuts came through Jiangsu, Shanghai, and Zhejiang Customs in China.
+
+Between 2017 to 2019, China's hazelnut imports increased significantly, with the import volume increasing from 3,997 tons to 19,948 tons, and the import volume increased from 29.04 million US dollars to 69.34 million US dollars. In 2020, the total import value from January to June was only 16.99 million US dollars. And the overall import price of hazelnuts has generally declined.
+
+Readers will obtain the following information through this report:
+
+    Economic Environment of Hazelnuts Industry in China
+    Policies for Imported Hazelnuts in China
+    Analysis of Supply and Demand of Hazelnuts in China
+    Analysis of Imported Hazelnuts in China
+    Analysis of Major Sources of Hazelnuts in China
+    Price Trends for Imported Hazelnuts in China
+    China's import of hazelnuts into customs
+
+Key Topics Covered:
+
+1 The Development Environment of China's Hazelnut imports
+1.1 China's Consumption Environment
+1.2 Policy Environment for Hazelnut Imports
+
+2 China's Hazelnut Imports from 2017 to 2020
+2.1 Classification of Hazelnuts by China Customs
+2.2 Total Import Volume and Value
+2.3 Import Volume and Value of Subdivided Products
+2.3.1 Hazelnuts in Shell
+2.3.2 Hazelnuts without Shell
+2.4 Average Import Price
+
+3 China's Major Hazelnut Import Companies
+3.1 Zhongdi
+3.2 Tianchen Shangpin
+
+4 China's Major Hazelnut Import Source Countries 2017-2020
+4.1 China's main hazelnut import source countries 2017
+4.1.1 Hazelnuts in Shell
+4.1.2 Hazelnuts without Shell
+4.2 China's main hazelnut import source countries in 2018
+4.3 2019 China's main hazelnut import source countries
+4.4 China's main hazelnut import source countries in 2020
+
+5 Imported Volume and Value of Hazelnuts by Provincial-level Customs in China, 2017-2020
+5.1 Imported Volume and Value of Hazelnuts by Provincial-level Customs in China 2017
+5.1.1 Hazelnuts in Shell
+5.1.2 Hazelnuts without Shell
+5.2 Imported Volume and Value of Hazelnuts by Provincial-level Customs in China 2018
+5.3 Imported Volume and Value of Hazelnuts by Provincial-level Customs in China 2019
+5.4 China Imported Hazelnuts Entry Customs in 2020
+
+Companies Mentioned
+
+    Tianchen Shangpin
+    Zhongdi
+
+For more information about this report visit https://www.researchandmarkets.com/r/r3bf1k
+
+Research and Markets also offers Custom Research services providing focused, comprehensive and tailored research.","Sep 16, 2020, 11:30 ET",China,"China, United States",hazelnut imports to China,"economics, hazelnuts, imports",,
+116,https://www.prnewswire.com/news-releases/china-almond-imports-report-2020-2024-australia-replaced-the-usa-as-the-major-source-of-imported-almonds-in-china-301130287.html,"China Almond Imports Report 2020-2024: Australia Replaced the USA as the Major Source of Imported Almonds in China
+According to the report, from 2017 to 2019, the import volume and value of almonds increased year by year in China. But in the first half of 2020, the import volume was only 10.46 kilotons in China, less than half of that in 2019. Most almonds are imported through Guangdong Customs. The Chinese market divides almonds into two categories according to whether they are shelled or not.
+
+According to the report, from August 2018 to July 2019, China's Almond production was 43 kilotons. In China, Almonds are only intensively cultivated in the Hetian area of Kashgar, Xinjiang province. Almond consumption highly depends on imports in China because of the large gap between the demand and the limited domestic supply.
+
+California is the largest almond supplier in the world. More than 80% of almonds in the world are produced in California. Thus, the United States was the largest source of China's almond imports before the Sino-US trade war. China imposed a 50% tariff on American almonds in 2018. After that, Chinese importers looked for Australian and Thai almonds as substitutes, and Australia replaced the USA as the major source of imported almonds in China.
+
+Readers will obtain the following information through this report:
+
+    Economic Environment of Almonds Industry in China
+    Policies in Imported Almonds in China
+    Analysis of Supply and Demand of Almonds in China
+    Analysis of Imported Almonds in China
+    Analysis of Major Sources of Almonds in China
+    Price Trends of Imported Almonds in China
+    China's import of almonds into customs
+
+Key Topics Covered:
+
+1 The Development Environment of China's Almond Imports
+1.1 China's Consumption Environment
+1.2 The Policy Environment for China's almond imports
+
+2 The Status of China's Almond Imports from 2017 to 2020
+2.1 Classification of Almonds by China Customs
+2.2 Total Import Volume and Value
+2.3 Sub Products Import Volume and Value
+2.3.1 Almonds in Shell
+2.3.2 Shelled Almonds
+
+3 Major Importers of Almonds in China
+3.1 Zhongdi
+3.2 Tianchen Shangpin
+
+4 China's Major Sources of Almond Imports 2017-2020
+4.1 China's main sources of almond imports in 2017
+4.1.1 Almonds in Shell
+4.1.2 Shelled Almonds
+4.2 China's main sources of almond imports in 2018
+4.2.1 Almonds in Shell
+4.2.2 Shelled Almonds
+4.3 China's main sources of almond imports in 2019
+4.3.1 Almonds in Shell
+4.3.2 Shelled Almonds
+4.4 China's main sources of almond imports in 2020
+4.4.1 Almonds in Shell
+4.4.2 Shelled Almonds
+
+5 Imported Volume and Value of Almonds by Provincial-level Customs in China, 2017-2020
+5.1 Imported Volume and Value of Almonds by Provincial-level Customs in China 2017
+5.1.1 Almonds in Shell
+5.1.2 Shelled Almonds
+5.2 Imported Volume and Value of Almonds by Provincial-level Customs in China 2018
+5.2.1 Almonds in Shell
+5.2.2 Shelled Almonds
+5.3 Imported Volume and Value of Almonds by Provincial-level Customs in China 2019
+5.3.1 Almonds in Shell
+5.3.2 Shelled Almonds
+5.4 Imported Volume and Value of Almonds by Provincial-level Customs in China 2020
+5.4.1 Almonds in Shell
+5.4.2 Shelled Almonds
+
+Companies Mentioned
+
+    Tianchen Shangpin
+    Zhongdi
+
+For more information about this report visit https://www.researchandmarkets.com/r/83erpl
+
+Research and Markets also offers Custom Research services providing focused, comprehensive and tailored research.","Sep 15, 2020, 11:15 ET","China, United States, Australia","China, United States, Australia","almond inports to China, Sino-US trade war","economics, almonds, imports, trade war",,
+121,https://thehill.com/opinion/international/516752-bidens-build-back-better-could-build-a-better-us-foreign-policy,"Biden’s ‘build back better’ could build a better US foreign policy
+In response to the economic collapse caused by COVID-19, Democratic presidential nominee Joe Biden has proposed an ambitious sustainable infrastructure program called “Build Back Better.” While Biden’s proposal is domestic, this concept is equally powerful if applied globally. Indeed, a similar global initiative could help the U.S. regain the soft-power advantage it has ceded to China while repairing relations with U.S. allies in the fight against climate change. 
+
+By applying the “Build Back Better” approach internationally, the U.S. could make up the ground it has lost to China in building relations with developing countries. In recent years, China has used overseas investments and aid as its primary foreign policy instrument to bolster its soft power. Since 2013, China has already invested an estimated $200 billion through its Belt and Road Initiative to construct infrastructure projects in 138 countries in Asia, Africa, Europe and Latin America. Meanwhile, under President Trump, U.S. foreign assistance has dropped dramatically to the administration’s low-priority areas such as climate change mitigation and adaptation and infrastructure.
+
+A green foreign infrastructure program would get America back on the international playing field and would contrast sharply with China’s Belt and Road Initiative. The U.S. could provide investments and assistance to low- and middle-income countries for green infrastructures, such as solar and wind technologies and climate resilience projects. This could be accomplished through traditional foreign assistance programs of USAID, loans from U.S.-supported international institutions such as the World Bank, and private-sector investment assistance from the U.S. International Development Finance Corporation. 
+
+Many developing countries might consider such a program attractive after their experience with China’s recent infrastructure investments. While President Xi Jinping has given lip service to the idea of a “Green Belt and Road,” many more Chinese infrastructure projects have been brown and polluting rather than green and clean. A growing number of recipient countries have experienced buyer’s remorse after projects proved exploitative and unresponsive to social and environmental concerns. China pressed forward with Kenya’s Lamu coal-fired power plant without required environmental assessments, only to be ultimately blocked by Kenyan courts. The Hambantota port modernization project in Sri Lanka created such an enormous debt burden that the government could not afford it and transferred ownership to China. 
+
+In the wake of these stumbles, China has quietly pared back its lending. Last year, overseas energy financing by China’s two policy banks was at its lowest level since 2008. China issued only three Belt and Road energy project loans for $3.2 billion in 2019, a 71 percent reduction in just a year. The program’s reputational damage and its pause in lending provides an opening for a U.S. program focused on market-based economic recovery and sustainability and run through reliable and transparent Western institutions. 
+
+Such a global commitment by the U.S. could also improve relations with its traditional allies. Over the last four years, U.S. actions such as dropping out of the Paris Climate Treaty have strained dealings with Europe. The Build Back Better principles align closely with programs of U.S. allies, such as the European Union Green Deal and South Korean Green New Deal, which focus on reducing carbon emissions, building climate resilience and slowing biodiversity loss. Promoting green infrastructure and climate resilience as components of global economic recovery could help rebuild bonds with our longtime friends abroad.
+
+A unified U.S.-Europe vision of a green recovery could also pressure China to emphasize green infrastructure lending and reduce fossil fuel dependence in its Belt and Road Initiative. President Xi’s previous commitment to a “new vision of green development…that is green, low-carbon, circular and sustainable” provides a face-saving blueprint for this course correction. The proper leadership could enable the U.S., Europe and China to join forces to advance a global green recovery that would lay the groundwork for meeting the Paris Agreement goals. 
+
+A foreign policy framework that rebuilds U.S. soft power and alliances, while improving the environmental impact of China’s investment program, is a triple win. But to be successful, the U.S. must act while countries are developing their recovery plans and before China revives its overseas infrastructure investments. If Biden is elected, an administration laser-focused on the domestic economy should act quickly on the international front as well. Reasserting America leadership in the post-pandemic world may depend on it.",09/16/20 4:30 PM ET,"Joe Biden, United States, China","United States, China, Kenya, Sri Lanka","foreign aid to developing countries, Build Back Better, Belt and Road Initiative, climate change","foreign investments, soft power, climate change, developing countries",,
+124,https://www.prnewswire.com:443/news-releases/xinhua-silk-road-e-chinas-ningbo-city-accelerates-smart-city-construction-301132017.html,"Xinhua Silk Road: E China's Ningbo city accelerates smart city construction
+BEIJING, Sept. 16, 2020 /PRNewswire/ -- East China's Ningbo city, an important contributor to the Belt and Road Initiative (BRI) and one of the Chinese cities piloting implemention of the national strategic plan to further develop the manufacturing sector in China, is speeding up smart city construction.
+On June 5 this year, Ningbo released its action plan for promoting new infrastructure construction during the 2020-2022 period, pointing out that it would use cloud computing, big data, Internet of Things, 5G, artificial intelligence, and blockchain technologies in such areas as governance, healthcare, industrial economy to make urban governance and public services smarter.
+
+The coastal city initiated a city brain project with investment of 460 million yuan on August 8. Prioritizing the digitalization of government services, law enforcement supervision, social governance, services for improving people's wellbeing, the project is regarded as the core infrastructure of digital, intelligent and smart governance in Ningbo.
+
+The city attaches great importance to the building of 5G networks, which are the foundation of smart city construction. As of the end of August this year, 9,458 5G base stations have been built in Ningbo, with 5G signals covering key urban areas, ports and bays across the city, said Chen Chenghai, an official with Ningbo Municipal Economic and Information Technology Bureau, at a session of the 10th Smart City and Intelligent Economy Expo.
+
+Ningbo has formed a number of typical application demonstration cases of 5G plus intelligent port, intelligent driving, smart culture and tourism, intelligent manufacturing and industrial Internet. For example, Ningbo Zhoushan Port, China's busiest port, has started using 5G technology to control cranes since last April, the first of its kind in the country.
+
+In the next step, Ningbo will continue to speed up deploying 5G networks to empower smart city construction, said Chen.
+
+See the original link: https://en.imsilkroad.com/p/316215.html
+
+SOURCE Xinhua Silk Road Information Service","Sep 16, 2020, 03:27 ET","China, Ningbo city","East China, Ningbo city",infrastructure development in China,"5G networks, infrastructure development, smart city",,
+125,https://www.skynews.com.au/details/_6191348784001,"Andrews will definitely ‘find a way to be too busy’ to attend Belt and Road inquiry
+
+Liberal Senator Jim Molan says Premier Daniel Andrews will “definitely find a way to be too busy” to show up for the federal committee’s inquiry into his decision to sign off on the Belt and Road deal.
+
+Mr Andrews will be asked to front the Senate’s Foreign Affairs and Defence Committee to answer questions about his decision to sign on to China’s Belt and Road Initiative.
+
+Mr Molan said “(for) so much of what the premier has done, he has refused to comment on, he has refused to answer questions, or he has just denied.”
+
+“Eric (Senator Eric Abetz) will run an excellent inquiry, … Premier Andrews will definitely find a way to be too busy.”
+
+Mr Molan said one of the premier’s major faults was taking on too much himself which had taken him away from looking to see the effects of his decisions.
+
+“I reckon one of the major faults that he has had in the way he … has taken on far too much himself, which takes him away, being so busy, from the ability to look down at what’s going on,” Mr Molan told Sky News host Paul Murray.
+
+“To say to himself, I wonder if the actual quarantine is working?
+
+“I wonder if people are walking out the front door?
+
+“This is management and leadership 101 that I don’t see down there.”","September 16, 2020 - 10:39PM","Premier Daniel Andrews, Jim Molan, Eric Abetz",Australia,"Australian politics, Belt and Road Initiative","foreign investments, committee inquiry",,
+126,http://www.xinhuanet.com/english/2020-09/16/c_139373631.htm,"China Focus: CAS actively integrates into global innovation network 
+
+BEIJING, Sept. 16 (Xinhua) -- The Chinese Academy of Sciences (CAS) has been actively integrating into the global innovation network, highlighting information sharing and international cooperation, its president Bai Chunli said on Wednesday.
+
+As a national scientific research organization, CAS has been accelerating its pace of ""going out"" and actively integrating into the international innovation network, regardless of the current backlash against globalization, said Bai at a press conference on the role of CAS in China's science and technology development.
+
+During the battle against COVID-19, CAS, along with other Chinese research institutes, lost no time in analyzing and sharing the virus' first completed genome sequence, providing information for virus research, drug screening and vaccine development, said Bai.
+
+CAS also used online platforms to share its latest COVID-19 research proceedings. The 2019 Novel Coronavirus Resource database under the China National Center for Bioinformation has amassed more than 100,000 entries containing information about the virus.
+
+According to Bai, the database has thus far provided data services to more than 170,000 visitors from 175 countries and regions, and more than 120 million downloads have been recorded. More than 60 percent of visits are from foreign users.
+
+CAS has also used the Alliance of International Science Organization (ANSO) as a platform to share the latest proceedings of CAS studies, supporting the global battle against COVID-19, Bai noted.
+
+ANSO, launched in late 2018 under the framework of the Belt and Road Initiative (BRI), consists of scientific research organizations from countries participating in the BRI, as well as international organizations.
+
+Bai added that through platforms like ANSO and the World Academy of Sciences, 1,200 overseas students have been granted funding to study in China, and more than 4,000 high-level sci-tech talents have been trained for countries and regions along the Belt and Road.
+
+CAS has also built 10 overseas science and education centers in Belt and Road countries and regions, which have become significant platforms to carry out projects involving scientific collaboration.
+
+Bai added that since 2018, CAS has been inking cooperation agreements with its foreign counterparts in countries like Russia, France and Germany.
+
+CAS has also participated in large-scale international science projects. It supports the Square Kilometer Array, an international project to build the world's largest radio telescope. It also plays a significant role in ITER, the world's largest nuclear fusion experiment. Enditem",9/16/2020 23:52,Chinese Academy of Sciences,China,"scientific cooperation, global innovation network, Chinese scientific institutions","science, global innovation network, international cooperation",,
+127,https://eurasiantimes.com/china-established-44000-companies-overseas-in-2019/,"China Established 44,000 Companies Overseas In 2019
+
+Chinese investors in 2019 established about 44,000 enterprises in over 80% of countries and regions across the world, state-run media said on Wednesday.
+
+According to Global Times, the country’s outbound foreign direct investment (ODI) totaled $136.9 billion in 2019, down 4.3% from the previous year, but Beijing still remained second in the world in term of foreign investment after Japan.
+
+By the end of last year, China’s cumulative ODI had reached $2.2 trillion, third in the world following the US and the Netherlands, the daily said, citing Commerce Ministry, National Bureau of Statistics, and State Administration of Foreign Exchange data.
+
+Chinese investment, covering 188 countries and region around the world along with the Belt and Road Initiative (BRI), also saw steady growth last year, and the country’s total investment in the BRI between 2013 to 2019 stands at $117.3 billion, according to official data.
+
+China’s Belt and Road Initiative (BRI) is an ambitious program to connect Asia with Africa and Europe via land and maritime networks along six corridors with the aim of improving regional integration, boosting trade, and stimulating economic growth.
+The BRI’s geographical scope covers over 70 countries, accounting for about 65% of the world’s population and around one-third of the world’s Gross Domestic Product (GDP).
+
+According to data, Chinese direct investment made contributions to the host countries and companies not only by hiring 2.27 million foreign employees but also paying $56 billion in taxes to the countries and region where they are operating.",16-Sep-20,"Chinese investors, China",China,"Belt and Road Initiative, outbound foreign direct investments","foreign investments, economic growth",,
+129,https://www.cepal.org/en/publications/46009-investing-future-latin-america-and-caribbean,"Investing for the future in Latin America and the Caribbean
+
+
+Description
+
+Latin America and the Caribbean is a large, heterogeneous region that has been open to foreign direct investment (FDI) and is home to two of the top FDI recipient economies in the world: Brazil and Mexico. The trade and investment relationship between the region and the member States of the Gulf Cooperation Council (GCC) (Bahrain, Kuwait, Oman, Qatar, Saudi Arabia and the United Arab Emirates) has been concentrated on infrastructure and energy, and to a lesser extent commercial and financial services, agriculture and tourism. Both regions could exploit synergies to benefit more from bilateral relations. In addition, in a changing global scenario, small and medium-sized enterprises have the potential to attract investment to develop the digital economy; venture capital for digital start-ups in Latin America and the Caribbean has risen steeply in recent years. Meanwhile, in a region where more than 80% of the population lives in urban areas, the development of clean, livable, inclusive and smart cities is of growing importance. Lastly, the extension of the Belt and Road Initiative into Latin America and the Caribbean is attracting Chinese companies into the region. The main focus of the Initiative is infrastructure development, which is crucial for fostering sustainable and inclusive development in Latin America and the Caribbean.",Sep-20,"Latin America, the Caribbean, Gulf Cooperation Council, Chinese companies","Latin America, the Caribbean","economic development in Latin America and the Caribbean, Belt and Road Initiative","economic investments, foreign investments, digital economy",,
+131,https://www.rfa.org/english/news/cambodia/sanctions-09152020113052.html,"US Treasury Sanctions Chinese Developer For Land Seizure, Graft in Cambodia Project
+The U.S. Department of Treasury on Tuesday sanctioned a Chinese developer for the “seizure and demolition of local Cambodians’ land” during construction of the Dara Sakor project in Cambodia, which has been touted by Beijing as one of the key pieces in its Belt and Road infrastructure initiative.
+
+The sanctions by the Treasury’s Office of Foreign Assets Control (OFAC), which target perpetrators of serious human rights abuse and corruption under the Global Magnitsky Human Rights Accountability Act, prohibit Union Development Group (UDG) from conducting business with any U.S. citizen and cuts it off from the U.S. financial system, the agency said in a statement.
+
+Additionally, land granted to UDG as part of a lease by the Cambodian government extends into Botum Sakor National Park, a protected area which can only be handed over by royal decree. The Treasury Department said that in order to obtain the land, UDG falsified its registration to hide its Chinese ownership.
+
+“After falsely registering as a Cambodian-owned entity in order to receive land for the Dara Sakor development project, UDG reverted to its true ownership and continued to operate without repercussions,” said Secretary Steven Mnuchin.
+
+“The United States is committed to using the full range of its authorities to target these practices wherever they occur.”
+
+The Treasury Department said that it had designated UDG for “acting for or on behalf of a current or former government official, who is responsible for or complicit in, or has directly or indirectly engaged in corruption”—in this case, a Chinese-owned company acting on behalf of a Chinese official.
+
+Tuesday’s action was not the first taken by the Treasury Department against entities in connection with the U.S. $3.8 billion-dollar Dara Sakor project, which includes an airport, deep water seaport, and casino resort as part of an investment zone in the middle of the jungle in Koh Kong province.
+
+In December last year, the agency sanctioned former senior Royal Cambodian Armed Forces (RCAF) general Kun Kim for corruption, noting that he was “instrumental in a development in Koh Kong province and had reaped significant financial benefit from his relationships with a People’s Republic of China (PRC) state-owned entity.”
+
+On Tuesday, the Treasury confirmed that some of UDG’s “seizure and demolition” of land for the Dara Sakor project was conducted through Kun Kim.
+
+“Specifically, with the assistance of Cambodian military forces provided through Kim, UDG prevented local villagers from planting rice paddy fields on the disputed land and was also accused of burning down the houses of villagers with whom it had conflicts, and of using private security and Cambodian military forces to control the movements of local villagers,” the statement said.
+
+“Cambodia’s Council of Ministers issued a directive ordering UDG to stop destroying villagers’ property; however, UDG ignored the directive and continued the destruction.”
+
+Controversial project
+
+The Dara Sakor project has been mired in controversy ever since UDG’s parent company, Tianjin Wanlong Group, was granted a 99-year lease to 90,000 acres along 20 percent of Cambodia’s coastline in May 2008. The lease, which was handed to Tianjin Wanlong without an open bidding process, provided the company with more than triple the size of any concession allowed under Cambodia’s land law and exempted it from any payments for a decade.
+
+UDG soon began clearing large swathes of forest from Botum Sakor National Park that was included as part of the land lease and forcing hundreds of families to relocate—many of which have yet to receive compensation they were promised as part of the deal 12 years ago.
+
+Meanwhile, much of the Dara Sakor project remains unfinished, and structures that are—such as the casino and hotel—have been largely left to rot. Few tourists visit the area and not many companies have signed deals to set up a presence in the investment zone.
+
+It is not entirely clear why Dara Sakor appeared to have been adopted as a Belt and Road project in 2017, when the China Development Bank told China’s official People’s Daily newspaper that it had underwritten a U.S. $15 million “Belt and Road” bond to support UDG’s building of a resort on Cambodia’s coast. The report did not mention Dara Sakor by name.
+
+The project was also included in a 2017 Belt and Road yearbook published by an affiliate of China’s Ministry of Commerce, describing it as “the biggest project of the Belt and Road initiative so far.”
+
+On Tuesday, the Treasury said that UDG-funded activities “have forced Cambodians from their land and devastated the environment, hurting the livelihoods of local communities, all under the guise of converting Cambodia into a regional logistics hub and tourist destination.”
+
+“As is too often the case with Beijing’s One Belt One Road initiative, these activities have disproportionately benefitted the PRC, at the expense of the Cambodian people.”
+Military use
+
+The opacity of the project has led to fears, particularly in Washington, that Beijing may secretly be building a deep-water port naval base and airstrip for military use there as part of a bid to secure its territorial claims in the disputed waters of the South China Sea.
+
+The Treasury said Tuesday that China “has used UDG’s projects in Cambodia to advance ambitions to project power globally,” noting that Cambodian government spokesperson Phay Siphan has said that Dara Sakor could be converted to host military assets.
+
+“A permanent PRC military presence in Cambodia could threaten regional stability and undermine the prospects for the peaceful settlement of disputes, the promotion of maritime safety and security, and the freedom of navigation and overflight,” it said.
+
+Vice President Mike Pence in 2018 wrote a letter to Prime Minister Hun Sen expressing fears that Cambodia might be planning to host Chinese military equipment at the Ream Naval Base in the coastal city of Sihanoukville, but Hun Sen dismissed the concerns.
+
+Ream base was at the center of controversy last year after The Wall Street Journal in July cited U.S. and allied officials as confirming a secret deal to allow the Chinese to use part of the base for 30 years—with automatic renewals every 10 years after that—and to post military personnel, store weapons and berth warships.
+
+The reported deal, which would provide China with its first naval staging facility in Southeast Asia and allow it to significantly expand patrols on the South China Sea, was vehemently denied at the time by Prime Minister Hun Sen, who said permitting foreign use of a military base in the country would “be in full contradiction to Cambodia’s constitution.”
+
+Pivot to China
+
+Increased ties between the militaries of Cambodia and China, which now include annual joint military exercises, come as Phnom Penh has increasingly pivoted towards Beijing since finding itself ostracized by Western governments over significant rollbacks on democratic freedoms.
+
+In November 2017, Cambodia’s Supreme Court ruled to ban the main opposition Cambodia National Rescue Party (CNRP), months after its president, Kem Sokha, was arrested for an alleged plot to overthrow the government.
+
+The dissolution of the CNRP was part of a wider crackdown by Hun Sen on the opposition, NGOs and the independent media, which paved the way for his ruling Cambodian People’s Party (CPP) to win all 125 seats in parliament in the country’s July 2018 general election.
+
+While relations with the West have increasingly soured in the aftermath of the ballot, Cambodia’s government has since touted improved ties with China, which typically offers funding without many of the prerequisites that the U.S. and EU place on donations, such as improvements to human rights and rule of law.
+
+Chinese investment now flows into Cambodian real estate, agriculture and entertainment—particularly to the port city of Sihanoukville—but Cambodians regularly chafe at what they say are unscrupulous business practices and unbecoming behavior by Chinese residents and worry that their country is increasingly bending to Beijing’s will.
+
+In a statement, U.S. Secretary of State Mike Pompeo slammed UDG for its deceptive practices.
+
+""Today’s action demonstrates how the Chinese Communist Party coopts companies to expand its influence, including by working through corrupt officials to use military force against innocent people in a blatant attempt to secure illicit financial gains,"" he said.
+
+""There are credible reports that the coastal development project at Dara Sakor could be used to host PRC military assets, and if so would go against Cambodia’s Constitution and could threaten Indo-Pacific stability, possibly impacting Cambodia’s sovereignty and the security of our allies.""
+
+Sophal Ear, an associate professor of diplomacy and world affairs at Occidental College in California, called Tuesday's sanctions ""huge.""
+
+""The press release is so detailed and extensive that it really sheds light on the shenanigans of UDG in Cambodia,"" he said, lauding the Treasury Department for having ""stepped up in this way.""
+
+""It also means UDG is screwed. It's now marked and really can't do any business with U.S. banks or in U.S. dollars. Kind of hard in a country like Cambodia, which is so dollarized.""",2020.09.15,"US Department of Treasury, Union Development Group, China","Cambodia, Dara Sakor","political corruption in Cambodia, Belt and Road Initiative, Chinese military expansion","political unrest, human rights violations, economic sanctions, corruption",,
+133,https://www.hellenicshippingnews.com/chinas-belt-and-road-initiative-is-creating-a-new-continent-eurasia-says-veteran-lankan-communist-leader/,"China’s Belt and Road Initiative is creating a new continent ‘Eurasia’ says veteran Lankan communist leader
+
+China’s Belt and Road Initiative (BRI), of which Sri Lanka is an early participant, is beneficial to developing countries and creates multi-polarity in world affairs.
+
+Former General Secretary of the Communist Party of Sri Lanka (CPSL) D.E.W. Gunasekera told Xinhua that the China-Sri Lanka ties have reached a new high due to the implementation of the BRI and massive Chinese investment in infrastructure and energy projects in the island country.
+
+BRI, a reference to the Silk Road Economic Belt and the 21st Century Maritime Silk Road, is aimed at building a trade, investment and infrastructure network that connects Asia with Europe and Africa along the ancient trade routes.
+
+Gunasekera, who served as the general secretary of the CPSL for 16 years until his resignation in August, said China’s development has enabled a multipolar world with new economic centers emerging in Africa, Latin America and Eurasia.
+
+“A new continent called Eurasia is emerging due to the Belt and Road Initiative,” Gunasekera said. “The Asian economy is the vanguard of the world economy.”
+
+Cooperation with China is imperative for developing countries like Sri Lanka so as to safeguard national interests and make use of China’s massive market, Gunasekera said.
+
+He said that the CPSL played a significant role in convincing the then government of Sri Lanka to sign the Rubber-Rice Pact with China in 1952, and establish the formal diplomatic ties with China in 1957.
+
+Commenting on China’s development, Gunasekera recalled that he was part of a CPSL delegation to visit Shenzhen in 1980s, when only basic infrastructure had been built in the fishing village in south China, which has now been transformed into a global technology hub.
+Source: Xinhua",15/09/2020,"China, Sri Lanka","China, Sri Lanka","Belt and Road Initiative, economic growth in Asia","foreign investments, economic growth",,
+135,https://www.thesundaily.my/business/us-imposes-sanctions-on-china-firm-over-port-airport-and-resort-project-in-cambodia-YD4072809,"US imposes sanctions on China firm over port, airport and resort project in Cambodia
+
+WASHINGTON/PHNOM PENH: The United States has blacklisted a Chinese developer of a port, airport and resort complex in Cambodia, saying it was built on land seized from local people and there were ""credible reports"" it could be used to host Chinese military assets.
+
+Union Development Group Co Ltd is building the Dara Sakor complex in a national park on the Cambodian coast, with a runway capable of taking some of the world's biggest planes.
+
+The Chinese real-estate development company describes it as the largest regional development project in China's global Belt and Road infrastructure initiative. The company and the Cambodian government have repeatedly denied Western media reports that the project has military aims.
+
+US Secretary of State Mike Pompeo said there were ""credible reports"" that Dara Sakor ""could be used to host (Chinese) military assets"".
+
+""If so, (this) would go against Cambodia's constitution and could threaten Indo-Pacific stability, possibly impacting Cambodia's sovereignty and the security of our allies,"" he added in a statement on Tuesday.
+
+The US Treasury Department described the company as a Chinese state-owned entity, and said it had at one point falsely registered as Cambodian-owned to get land for the project, had forced Cambodians from their land and devastated the environment.
+
+China's embassy in Cambodia condemned the US sanctions.
+
+""It not only undermines legitimate business interests, but is a complete violation of Cambodia's sovereignty,"" it said on its Facebook page.
+
+Union Development Group did not respond to requests for comment. It is registered in Cambodia as a private limited company. Its website says Union Group was formerly known as Tianjin Wanlong Group, a Chinese real estate developer.
+
+Southeast Asia has become one front of growing tensions between the United States and China, with the rivals at odds over Beijing's territorial claims in the South China Sea and upstream damming of the Mekong River.
+
+The US Treasury Department statement cited Cambodian government spokesman Phay Siphan as having said Dara Sakor could be converted to host military assets.
+
+It did not say when he said this. In a 2019 Bloomberg News article, Phay Siphan said: ""Dara Sakor is civilian - there is no base at all. ... It could be converted, yes, but you could convert anything.""
+
+Phay Siphan said he had been misquoted by the Treasury Department. ""It's fabricated information and is unacceptable,"" he said on Facebook, adding that UDG's project was legal and beneficial.
+
+Cambodia's government has repeatedly said the country will not serve as a base for any foreign army. It has become one of China's closest regional allies in recent years.
+
+The US sanctions were imposed under the Global Magnitsky Act, which allows the US government to target human rights violators worldwide by freezing assets and prohibiting Americans from doing business with them.
+
+The Belt and Road initiative is China's flagship campaign to build infrastructure across Asia, linking it to Europe. Work began on the Dara Sakor project in 2008 after Cambodia leased 45,000 hectares in a national park to the Chinese company for 99 years.
+
+The company said it planned to invest US$3.8 billion, building a resort with residential areas, businesses and industry. – Reuters",17-09- 2020 12:09 AM,"United States, US Department of Treasury, Union Development Group, China","Cambodia, Dara Sakor","Belt and Road Initiative, Chinese military expansion","human rights violations, economic sanctions",,
+149,https://www.reuters.com/article/indonesia-economy-idUSL4N2GD2HL,"Construction of China-funded railway in Indonesia seen completed in 2023 amid delays
+
+JAKARTA (Reuters) - Indonesia expects its $6 billion high-speed railway project connecting its capital Jakarta to the city of Bandung to be completed about two years later than initially scheduled, a deputy minister said on Wednesday.
+The project, part of Beijing's Belt and Road Initiative (BRI) that is being built by a consortium of Chinese and Indonesian state companies, has faced labour challenges due to travel restrictions during the coronavirus pandemic.
+The new timeline by Deputy State-Owned Enterprises Minister Kartika Wirjoatmodjo presented an even longer delay than previously anticipated. Officials previously expected a year delay from the 2021 target for operational debut due to the pandemic.
+""The development has reached 56%,"" Kartika told a virtual seminar.
+""It is hoped to be completed at the end of 2022 or at the beginning of 2023,"" the deputy minister said in an online seminar.
+President Joko Widodo has recently suggested bringing in Japanese investors to the railway project, which will be the first such train line in the Southeast Asian country, and for it to be extended to Surabaya, Indonesia's second largest city that is about 760 km (472 miles) to the east of Jakarta.
+Kartika said the toll road connecting cities on Indonesia's Sumatra island has also faced financial and logistical hurdles due to coronavirus containment measures which will set the project back up to two years from its 2024 target. However, a rail line in Greater Jakarta remains on schedule and ready to operate by next year.","September 16, 20207:23 AM EDT","Indonesia, China","Indonesia, Jakarta","Belt and Road Initiative, construction delays due to coronavirus pandemic","infrastructure development, coronavirus pandemic",,
+153,http://www.xinhuanet.com/english/2020-09/16/c_139373399.htm,"Chinese ambassador highlights China-Hungary solidarity in overcoming difficulties
+
+BUDAPEST, Sept. 16 (Xinhua) -- Chinese Ambassador to Hungary Duan Jielong on Wednesday highlighted the solidarity between China and Hungary in fighting the COVID-19 pandemic and overcoming current difficulties while working together for common development under the Belt and Road Initiative (BRI).
+
+Although the pandemic has brought temporary difficulties to bilateral exchanges, especially in terms of economic and trade cooperation and personnel exchanges, the consensus on forging closer bilateral remains firm and the conviction to deepen cooperation remains unshaken, Duan told Xinhua.
+
+According to the ambassador, trade between China and Hungary remained strong despite the outbreak of COVID-19, registering 5.35 billion U. S. dollars in the first half of 2020, up 9.8 percent year-on-year,
+
+Hungary is the first European country to sign an intergovernmental cooperation agreement with China over the BRI and the Hungarian government has always actively supported and participated in the BRI, Duan said.
+
+Hungarian Foreign Minister Peter Szijjarto visited China in August, the first foreign minister of a European Union country to do so since the outbreak of COVID-19. Duan said the visit not only showed the strong resilience of Sino-Hungarian relations but also reflected the strong desire to speed up cooperation on both sides.
+
+All these efforts have ushered in a new chapter in the friendly exchanges between the two countries, the ambassador noted. Enditem",9/16/2020 21:50,"Hungary, China","Hungary, China",Belt and Road Initiative,"intergovernment cooperation, coronavirus pandemic, international trade",,
+154,https://www.hellenicshippingnews.com/china-europe-cargo-trains-drive-belt-and-road-cooperation/,"China-Europe cargo trains drive Belt and Road cooperation
+
+After a China-Europe cargo train left east China’s Jinhua for Baku in Azerbaijan on Thursday, an inbound train carrying 50 containers of polyethylene arrived in the coastal city of Xiamen the next day.
+
+With the new Jinhua-Baku route, the number of China-Europe (Central Asia) freight train routes starting in Jinhua, Zhejiang province, has increased to 12. The train from Russia’s Tobolsk was the first return train fully loaded with bonded cargo to Xiamen, Fujian province.
+
+As the coronavirus pandemic severely hits international transport, the China-Europe freight trains play a pivotal role in land transport among countries, as shown by the rising number of trains, opening of new routes, and the volume of goods.
+
+The China-Europe freight trains, first launched in 2011 in the southwestern Chinese metropolis of Chongqing, are running more frequently than ever this year ensuring trade and transport of epidemic prevention materials in both directions. They have been an important part of the Belt and Road Initiative proposed by China in 2013.
+
+By the end of July, the China-Europe cargo train service had delivered 39,000 tonnes of goods for epidemic prevention, providing strong support to international COVID-19 control efforts, data from the China State Railway Group Co Ltd showed.
+
+The number of China-Europe freight trains hit a record high of 1,247 in August, up 62 percent year on year, transporting 113,000 TEUs of goods, an increase of 66 percent.
+
+Outbound trains carry goods like daily necessities, equipment, medical supplies and vehicles while inbound trains transport milk powder, wine and automobile parts among other products.
+
+By Aug 20, Xi’an, a major city on the Silk Road Economic Belt, had launched 2,305 freight trains this year, transporting a total of 1.79 million tonnes of goods, 1.9 times and 1.8 times the number and volume respectively of the same period last year.
+
+Xi’an, the provincial capital of Shaanxi province, has 15 international trunk freight train lines, covering 45 countries and regions in central Asia, western Asia and Europe.
+
+During the epidemic, the China-Europe freight train service showed how it could promote win-win situation that would be mutually beneficial. It also highlighted the principle of extensive consultation, joint contribution and shared benefits embodied by the Belt and Road Initiative, said Chinese foreign ministry spokesman Zhao Lijian on Thursday.
+
+The China-Europe freight train has not only delivered to European countries anti-epidemic materials and daily necessities that are in short supply, but also shipped a large number of quality foreign products to China.
+
+“This is conducive to the resumption of production and the rapid economic restart of countries along the Belt and Road, providing a strong impetus to the stability of global industrial and supply chains, and bringing new opportunities for the recovery and development of the global economy,” Zhao said.
+
+A number of Chinese provinces and regions have reported growth in foreign trade with Belt and Road countries.
+
+The China-Europe trains have accelerated the city’s opening up, said Li Mingyuan, mayor of Xi’an. In the first half of this year, Xi’an’s foreign trade grew 2.9 percent to reach 166.15 billion yuan (about $24.3 billion).
+
+In the first seven months, central China’s Henan province saw its trade with Belt and Road countries increase by 28.8 percent year on year to reach 76 billion yuan. Trade between the eastern province of Shandong and countries along the Belt and Road hit 346.3 billion yuan, up 5.5 percent year on year, accounting for 30.4 percent of the province’s total foreign trade.
+
+“Good connectivity is a hugely important factor facilitating growth in international trade. We believe that much of China’s experience in terms of improving connectivity can be replicated elsewhere, to the benefit of trade, companies and local economies,” said Jens Eskelund, vice chairman of European Chamber of Commerce in China and managing director of Maersk China Limited.
+
+According to China’s Ministry of Commerce, from January to July, the non-financial direct investment of Chinese companies in countries along the Belt and Road reached $10.27 billion, up 28.9 percent year on year.
+Source: Xinhua",15/09/2020,"Europe, China","Europe, China","Belt and Road Initiative, expansion of freight train routes","international trade, economic growth, coronavirus pandemic",,
+161,https://www.eureporter.co/economy/2020/09/15/bank-embraces-blockchain-to-facilitate-belt-and-road-trade/,"Bank embraces blockchain to facilitate Belt and Road trade
+China and the European Union have both said they will accelerate negotiations in order to conclude a China-EU investment agreement by the end of this year, with its colossal infrastructure project “Belt and Road” at the centre of an era of trade and growth for economies in Asia and beyond.
+
+China’s Belt and Road Initiative (BRI), sometimes referred to as the New Silk Road, is one of the most ambitious infrastructure projects ever conceived. Launched in 2013 by President Xi Jinping, the vast collection of development and investment initiatives would stretch from East Asia to Europe.
+
+The original Silk Road arose during the westward expansion of China’s Han Dynasty (206 BCE–220 CE), which forged trade networks throughout what are today the Central Asian countries of Afghanistan, Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, and Uzbekistan, as well as modern-day India and Pakistan to the south. Those routes extended more than four thousand miles to Europe.
+
+The Belt and Road Initiative (BRI) is today’s new Silk Road,  a trans-continental passage that links China with south east Asia, south Asia, Central Asia, Russia and Europe by land – and a 21st century Maritime Silk Road, a sea route connecting China’s coastal regions with south east and south Asia, the South Pacific, the Middle East and Eastern Africa, all the way to Europe.
+
+One of the greatest challenges to its success will be to overcome the complexity of multi-commodity trading - there are a number of stakeholders, intermediaries and banks operating together to make deals happen. These deals are massive in value and happen very frequently, with huge amounts of money are being transferred across borders to different parties that all use different systems and have different compliance requirements, data storage systems, currencies, and so on.  The current system is expensive, slow and provides customers with almost no transparency.
+
+Innovative digital systems using the “Blockchain” are being developed to facilitate fast and secure methods of enabling these trades to take place.
+
+LGR Global  is a leader in b2b digital money movement and end-to-end trade finance, and has launched blockchain based digital system to support supply chain finance in the Silk Road economies. LGR has also launched a new “Silk Road Coin” cryptocurrency to enable seamless and instant trade along the Belt and Road.
+
+“I think something that we are going to continue to see is the impact of emerging technologies on the industry. Things like blockchain infrastructure and digital currencies will be used to bring added transparency and speed to transactions. Government-issued central bank digital currencies are also being created, and this is also going to have an interesting impact on cross-border money movement.” said Ali Amirliravi, Chief Executive of LGR Global
+
+“We’re looking at how digital smart contracts can be used in trade finance to create new automated letters-of-credit, and this gets really interesting once you incorporate IoT technology. Our system is able to trigger transactions and payments automatically based on incoming data from supply chain. This means, for example, that we could create a smart contract for a letter of credit which automatically releases payment once a shipping vessel reaches a certain location. Or, a simpler example, payments could be triggered once a set of compliance documents are uploaded to the system and verified by LGR. Furthermore, the letter of credit related documents can be shared with different trading partnership using blockchain platform which further improves transparencies and reduces trading risks. Automation is such a huge trend - we’re going to see more and more traditional processes being disrupted.” he said.
+
+“Data is going to continue to play a huge role in shaping the future of supply chain finance. In the current system, documents are paper based, data is siloed, and the lack of standardization really interferes with overall data collection opportunities. However, once this problem is solved, an end-to-end digital trade finance system would be able to generate big data sets that could be used to create all kinds of predictive models and industry insights. Of course, the quality and sensitivity of this data means that data management and security will be incredibly important for the industry of tomorrow.”
+
+Ali Amirliravi is positive about the opportunities that the Belt and Road Initiative will bring.
+
+“For me, the future for the money movement and trade finance industry is bright. We’re entering the new digital era, and this is going to mean all kinds of new business opportunities, particularly for the companies that embrace next generation technologies.”",15-Sep-20,"European Union, China, LGR Global","China, Asia, Europe","use of the blockchain and cryptocurrency in international trade, Belt and Road Initiative","international trade, blockchain, cryptocurrency",,
+162,https://timesofindia.indiatimes.com/world/china/china-pakistan-jointly-testing-deadly-pathogens/articleshow/78124334.cms,"China, Pakistan jointly testing deadly pathogens
+NEW DELHI/BEIJING: Under the garb of Xi Jinping's Belt and Road Initiative (BRI), China's Wuhan Institute of Virology and Pakistan Army's Defense Science & Technology Organization are conducting experiments on deadly pathogens to expand potential bio-warfare capabilities.
+An Australian investigative media group The Klaxon, in an exclusive report in August this year, revealed that the two countries have been carrying out extensive research operations on deadly 'animal to human' pathogens in Pakistan involving more than 7000 Pakistani farmers, herders and others and over 2800 camels and other animals.
+The Wuhan scientists have been conducting tests in collaboration with Rawalpindi in Pakistan since 2015, the Klaxon reported. The programme is funded by China under Xi's ambitious BRI project.
+The results of at least five studies conducted on some of the world's deadliest and most contagious pathogens -- West Nile Virus; MERS-Coronavirus; Crimean-Congo Hemorrhagic Fever Virus; the Thrombocytopenia Syndrome Virus; and the Chikungunya Virus -- have been published in scientific papers between December 2017 and March 9, 2020.
+The China-Pakistan research involves experiments and genome sequencing of the deadly viruses. One of the studies thanked Wuhan's National Virus Resource Centre for ""providing the virus-infected Vero cells"".
+In its comprehensive investigative report, the Klaxon reported that each of the five studies stated it was ""supported"" by the ""International Cooperation on Key Technologies of Biosafety along the China-Pakistan Economic Corridor"".
+
+The Klaxon said ""international cooperation on key technologies program"" has not been formally announced, and the only public references to it appear to be in the acknowledgements sections inside the five scientific papers it obtained.
+The China-Pakistan Economic Corridor, or CPEC, is the flagship component of China's Belt and Road infrastructure programme, both of which were announced in 2015.
+""The Belt and Road program has been widely criticised as being a veil for Chinese colonial expansion, which lumps poor countries with unsustainable amounts of debt and so undermining their sovereignty, enabling China to exert control and influence over them,"" the Klaxon reported.
+As recently as late 2018, Pakistan's Government publicly attempted to push back against the China-Pakistan Economic Corridor, declaring it a bad deal, but it was almost immediately overruled by Pakistan's powerful military, which has said it would defend the programme ""at all costs"".
+In a previous report published in July, The Klaxon quoting ""highly credible intelligence sources"" claimed that Wuhan Institute of Virology, was testing lethal biological agents in Pakistan and providing ""extensive training on manipulation of pathogens and bio-informatics"" to Pakistani scientists, which could ""enrich a potential offensive biological program"".
+The Wuhan Institute of Virology, according to the Klaxon recently signed a secret three-year deal with Pakistan military's Defense Science and Technology Organisation to collaborate research in ""emerging infectious diseases"" and the ""biological control of transmitted diseases"".
+Strangely, the Wuhan-Pakistan military tie-up has never been publicly announced or disclosed before, the Klaxon said adding that the key concerns are that Pakistan could use the technology in bio-warfare, or that deadly pathogens could accidentally escape from inadequately equipped facilities.
+Both China and Pakistan have denied the claims. However, the Pakistan government has confirmed the existence of a deal between its military and the Wuhan lab.
+""There is nothing secret about the Bio-Safety Level-3 (BSL-3) laboratory of Pakistan referred to in the report. Pakistan has been sharing information about the facility with the States parties to the biological and toxins weapons convention (BTWC) in its submission of confidence building measures,"" Pakistan's foreign office said in July. Islamabad did not identify the location of the BSL-3 laboratory.
+Incidentally, Pakistan's sharp decline in Covid-19 cases just two months after the mid-June peak of around 6800 cases in a day, has been widely referred to as a mystery. One of the ministers Asad Umar, who was at the forefront of the battle against Covid-19, had warned that around 1.2 million people could be infected in Pakistan by the end of July. However, the spread was so low that Pakistan lifted most restrictions by mid-August. Even scientists in Pakistan are unable to explain the drop in the cases.",15-Sep-20,"China, Wuhan Institute of Virology, Pakistan army","China, Pakistan","Belt and Road Initiative, research on deadly pathogens","bio-warfare, infectious diseases",,
+872,https://reliefweb.int/report/afghanistan/2020-afghanistan-conference-and-path-peace-prosperity-and-self-reliance,"2020 Afghanistan conference and the path to peace, prosperity and self-reliance
+KABUL - The 2020 Afghanistan Conference scheduled for 23-24 November 2020 in Geneva is a milestone event in Afghanistan’s journey to peace, prosperity and self-reliance.
+
+The quadrennial ministerial level pledging conference is jointly organized by the Government of the Islamic Republic of Afghanistan, the Government of Finland and the United Nations.
+
+The aim of the conference is to renew international and Afghan commitments to the development and stability of Afghanistan, to agree to joint development goals for 2021-24 and to coordinate development cooperation regarding financial support for Afghanistan.
+
+The conference takes place at a historic moment. The commencement of Afghanistan Peace Negotiations affords new opportunities for development. Strengthened partnership and sustained international support are pivotal as Afghanistan and the Afghan people take on the challenging task of building and sustaining peace after four decades of war and suffering.
+
+”Afghanistan is at a critical juncture. On peace, we have moved from desirability to feasibility and credibility due, largely, to the sacrifices made by the Afghan people and the unmatched confidence building measures taken by the Afghan government. When we look into the future, we must remain united in our vision and ambition to realize a progressive, prosperous, democratic, free and stable Afghanistan in peace with itself, its neighbors and the world. On development, while maintaining emphasis on high-level planning, the focus must shift to delivery and implementation. The Afghan government and its international development partners must work together on a vision for demonstrable reduction in poverty that is realistic and well-targeted. Investment in peace and development must provide sufficient guarantees for gender equity, protection of human rights, women’s rights and the rights of minorities as well as democratic principles. The Republic is a true embodiment of Afghanistan’s diversity and must be strengthened. Corruption, which drains Afghanistan’s valuable resources and interrupts the process of realizing self-reliance, must be fought in all its forms,” said Afghanistan’s Acting Minister of Finance, H.E. Abdul Hadi Arghandiwal.
+
+“For the first time in decades there is a real chance for peace. Finland stands firmly with other development partners in supporting Afghanistan and the Afghan people towards sustainable development, prosperity and a lasting peace. Inclusivity and women's meaningful participation at all stages of the peace process are vital for peace and development,” states Pekka Haavisto, Minister for Foreign Affairs of Finland.
+
+Progress since 2001 has improved the political, social and economic outlook in Afghanistan. Yet decisive efforts are required for Afghanistan to reach its potential as a stable, peaceful and self-reliant society during the last years of its Transformation Decade (2015-2024).
+
+“This is a critical moment for Afghanistan, as it embarks upon Afghanistan Peace Negotiations to end the decades-long conflict. I hope the international community uses this occasion in Geneva to reaffirm its steadfast support to Afghanistan's development, in parallel with the peace process. The UN is committed to working with the Afghan Government, Finland, and the donor community to deliver the best possible outcome for the benefit of all Afghans,” said Deborah Lyons, the UN Secretary-General’s Special Representative for Afghanistan.
+
+“Finland is looking forward to co-hosting the pledging conference together with the Government of Afghanistan and the UN. Solving the complex challenges in Afghanistan require joint efforts and long-term commitment from Afghanistan and the international community. Together with our partners we are committed to reshaping the aid architecture while ensuring that it will preserve the progress achieved over the past decades and strengthen the further realization of human rights and democratic principles,” said Ville Skinnari, Finland’s Minister for Development Cooperation and Foreign Trade.
+
+The event will take place at the Palais des Nations in Geneva, in a hybrid format where delegates may also participate virtually. More than 70 countries, international organizations and Afghan Government officials, as well as civil society representatives are expected to participate in the conference.
+
+In view of ongoing travel and gathering restrictions related to the COVID-19 pandemic, further information about Conference logistics and the agenda will be made available closer to the date of the event.
+
+Media accreditation to the Conference will start in late October. More information on the format of media events will be announced in due course.
+
+Questions on technical preparations for the conference can be directed to the Finnish 2020 Afghanistan Conference Task Force.",15-Sep-20,"Afghanistan, Finland, United Nations",Afghanistan,"peace in Afghanistan, gender equality and human rights","international development, human rights, peace",,
+884,https://tolonews.com/afghanistan-166366,"Afghan Civil Society Groups Call for Inclusivity in Talks
+EU special envoy for Afghanistan Roland Kobia also stressed the need for the inclusivity of the talks.
+
+
+Afghan civil society institutions on Wednesday called for more inclusive peace negotiation talks so that the voice of all Afghans from every layer of the society can be heard in the Afghan peace negotiation talks.
+
+The civil society organizations gathered under the name “Afghanistan Mechanism for Inclusive Peace.""
+
+“Over 500 participants from 34 provinces were brought together by AMIP at the National Summit of Civil Society and Media to discuss various thematic areas as part of their working groups and jointly develop key recommendations for the negotiating parties,” the Afghanistan Mechanism for Inclusive Peace wrote on Twitter.
+
+According to the members of Afghanistan Mechanism for Inclusive Peace, the Afghan people have been the main victims of four decades of war, but they do not direct representation in the peace talks.
+
+Meanwhile, EU special envoy for Afghanistan Roland Kobia also stressed the need for the inclusivity of the talks.
+
+“Launch today of #amip2020 for inclusivity & diversity in #IAN, to reflect & represent all voices of Afghan society & ensure sustainable peace. #EU calls on both parties to embrace the Afghan-owned & non partisan #AMIP to ensure that the diversity of #Afghanistan is heard,” Tweeted Kobia.
+
+“One of the vital components that can better define our objectives or validate our claim is the structure or formation of the same mechanism or institution or action that we take. There are members of the leadership committee from the civil society institutions, secretariat and then the regional groups and experts within the framework of this structure,” said Roshan Mashal, member of Afghanistan Mechanism for Inclusive Peace.
+
+One of the objectives behind the formation of Afghanistan Mechanism for Inclusive Peace is to ensure the protection of the gains the country has made over the past 20 years.
+
+“If negotiators from either side need the suggestions or advice or information from the civil society institutions or the public on certain topics, the mechanism will swiftly act to gather information inside Afghanistan and then dispatch it to the negotiators,” said Ibrahim Tawalud, a member of Afghanistan Mechanism for Inclusive Peace.
+
+In addition, Ole Andreas Lindeman, the Norwegian ambassador to Afghanistan, said that the intra-Afghan talks have created a platform to end the four decades of war.
+
+“""The world is drastically hopeful about the peace negotiation process. This mechanism is making us hopeful to reach peace after four decades of war,” said ambassador Ole Andreas Lindeman at the launching ceremony of Afghanistan Mechanism for Inclusive Peace.
+
+Addressing the ceremony virually, Habiba Sarabi, a member of the peace negotiating team of the Islamic Republic of Afghanistan, said that the Afghanistan Mechanism for Inclusive Peace has also established contact offices in eight zones of the country. 
+
+“Peace negotiation between the Afghan government and Taliban is unprecedented in the history of Afghanistan. As the peace negotiation has started, Sweden would like to see Afghans developing this mechanism and amplifying the peace process engagement,” said Chrisitina Dahlman, deputy Swedish ambassador to Afghanistan.
+
+Afghanistan Mechanism for Inclusive Peace (AMIP) is a new, innovative, independent, inclusive peace-support mechanism built by civil society, for civil society and It seeks to promote the Afghan people’s active engagement in the Intra Afghan Talks and to ensure that their voices are heard,” said Lailuma Nasiri, a member of Afghanistan Mechanism for Inclusive Peace.",16-Sep-20,"Afghanistan, Afghanistan Mechanism for Inclusive Peace",Afghanistan,peace in Afghanistan,"inclusivity, representation, peace, civil society",,
