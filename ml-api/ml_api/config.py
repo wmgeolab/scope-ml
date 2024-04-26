@@ -9,6 +9,7 @@ load_dotenv()
 
 class Config:
     TOGETHER_LLM_MODEL = "mistralai/Mixtral-8x7B-Instruct-v0.1"
+    # meta-llama/Llama-3-70b-chat-hf
 
     # Secrets
     TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
