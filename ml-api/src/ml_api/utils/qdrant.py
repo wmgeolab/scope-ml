@@ -2,12 +2,11 @@
 This file is responsible for providing utilities to send requests to Qdrant.
 """
 
-from qdrant_client import QdrantClient
 from llama_index.vector_stores.qdrant import QdrantVectorStore
-from qdrant_client.http.models import VectorParams, Distance
-from qdrant_client.http import models as qdrant_models
-
 from ml_api.config import settings
+from qdrant_client import QdrantClient
+from qdrant_client.http import models as qdrant_models
+from qdrant_client.http.models import Distance, VectorParams
 
 
 def get_qdrant_vector_store(

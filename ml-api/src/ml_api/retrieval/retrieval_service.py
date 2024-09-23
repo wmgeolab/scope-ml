@@ -8,10 +8,9 @@ returning the results.
 
 from llama_index.core.schema import NodeWithScore
 from llama_index.core.vector_stores.types import VectorStoreQuery, VectorStoreQueryMode
+from ml_api.config import settings
 from ml_api.utils.embeddings import get_embed_model
 from ml_api.utils.qdrant import get_qdrant_project_id_filter, get_qdrant_vector_store
-
-from ml_api.config import settings
 
 
 def retrieve_points_by_project_id(query: str, project_id: str) -> list[NodeWithScore]:

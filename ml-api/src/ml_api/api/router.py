@@ -1,8 +1,9 @@
-from fastapi import APIRouter
-from .schemas import GEFRagRequest, GEFRagResponse
 import asyncio
 
+from fastapi import APIRouter
 from ml_api.rag_inference.rag_service import generate_rag_response
+
+from .schemas import GEFRagRequest, GEFRagResponse
 
 router = APIRouter()
 
