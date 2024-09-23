@@ -2,14 +2,14 @@ import csv
 import logging
 import os
 
-from ml_api.ml_algorithms.extract import doc_extract_actors, doc_extract_locations
-from ml_api.models.extraction import (
+from api.ml_algorithms.extract import doc_extract_actors, doc_extract_locations
+from api.models.extraction import (
     Actor,
     ExtractedActors,
     ExtractedLocations,
     Location,
 )
-from ml_api.scope_db.crud import get_document, get_sourcing_source, get_sourcing_sources
+from api.scope_db.crud import get_document, get_sourcing_source, get_sourcing_sources
 
 logging.basicConfig(level=logging.INFO)
 
