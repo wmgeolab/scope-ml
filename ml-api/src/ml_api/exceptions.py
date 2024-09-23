@@ -1,0 +1,2 @@
+class MLAPIException(Exception):
+    pass
