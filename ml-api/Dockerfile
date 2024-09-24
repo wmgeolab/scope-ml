@@ -1,33 +1,54 @@
-# Use the official Python base image
-FROM python:3.11
+# Build stage
+FROM python:3.11-slim AS builder
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONPYCACHEPREFIX=/var/cache/python
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPYCACHEPREFIX=/var/cache/python \
+    POETRY_VERSION=1.5.1 \
+    POETRY_HOME="/opt/poetry" \
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    POETRY_NO_INTERACTION=1
+
+# Install system dependencies and Poetry
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir "poetry==$POETRY_VERSION" \
+    && poetry --version
+
+# Set the working directory
+WORKDIR /app
+
+# Copy only the files needed for installation
+COPY pyproject.toml poetry.lock ./
+
+# Install dependencies
+RUN poetry install --no-root --no-dev
+
+# Copy the project files
+COPY . .
+
+# Production stage
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPYCACHEPREFIX=/var/cache/python
 
 # Create and set permissions for Python cache directory
 RUN mkdir -p /var/cache/python && chmod -R 777 /var/cache/python
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
+# Copy only the necessary files from the builder stage
+COPY --from=builder /app/.venv /app/.venv
+COPY --from=builder /app/src /app/src
 
-# Install Poetry & Configure poetry
-RUN pip install --no-cache-dir poetry
-RUN poetry config virtualenvs.create false
-
-# Copy poetry files & install dependencies
-COPY pyproject.toml poetry.lock poetry.toml ./
-RUN poetry install --no-interaction --no-root
-RUN poetry install --no-interaction
-
-# Copy the project files to the container
-COPY . .
+# Set the PATH to include the virtual environment
+ENV PATH="/app/.venv/bin:$PATH"
 
 WORKDIR /app/src
 
@@ -35,4 +56,4 @@ WORKDIR /app/src
 EXPOSE 8000
 
 # Start the FastAPI server
-CMD ["poetry", "run", "uvicorn", "ml_api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload", "--log-level", "debug"]
+CMD ["uvicorn", "ml_api.main:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info"]
