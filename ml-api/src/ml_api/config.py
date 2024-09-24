@@ -17,8 +17,8 @@ class Settings(BaseSettings):
     EMBEDDING_SIZE: int = 768
 
     # Retrieval
-    RETRIEVAL_TOP_K = 20
-    RETRIEVAL_MMR_THRESHOLD = 0.7
+    RETRIEVAL_TOP_K: int = 20
+    RETRIEVAL_MMR_THRESHOLD: float = 0.7
 
 
 settings = Settings()
