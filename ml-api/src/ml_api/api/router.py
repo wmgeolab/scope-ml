@@ -8,6 +8,17 @@ from .schemas import GEFRagRequest, GEFRagResponse
 router = APIRouter()
 
 
+@router.get("/healthcheck")
+async def healthcheck():
+    return {"status": "ok"}
+
+
+@router.get("/healthcheck/{sleep_time}")
+async def healthcheck_sleep(sleep_time: int):
+    await asyncio.sleep(sleep_time)
+    return {"status": "ok"}
+
+
 @router.get("/generate_rag_response")
 async def generate_rag_response_request(request: GEFRagRequest) -> GEFRagResponse:
     """Generates a RAG response for a single question in a specific GEF project."""

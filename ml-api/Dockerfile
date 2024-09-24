@@ -24,6 +24,7 @@ RUN poetry config virtualenvs.create false
 # Copy poetry files & install dependencies
 COPY pyproject.toml poetry.lock poetry.toml ./
 RUN poetry install --no-interaction --no-root
+RUN poetry install --no-interaction
 
 # Copy the project files to the container
 COPY . .
