@@ -10,17 +10,10 @@ from bs4 import BeautifulSoup
 from dask.base import compute
 from dask.delayed import delayed
 
-
-# # Add the project root to the Python path
-# project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-# sys.path.insert(0, project_root)
-
 # Constants
 PROJECTS_CSV_PATH = os.getenv("PROJECTS_CSV_PATH", "/app/data/projects.csv")
 OUTPUT_PATH = os.getenv("OUTPUT_PATH", "/app/data/output")
-# JSON_PATH = os.getenv(
-#     "JSON_PATH", os.path.join(project_root, "data", "project_ids.json")
-# )
+
 BASE_URL = os.getenv("BASE_URL", "https://www.thegef.org/projects-operations/projects/")
 
 VALID_EXTENSIONS = [".pdf", ".doc", ".docx", ".txt"]
@@ -33,16 +26,6 @@ def setup_logging():
     logging.basicConfig(
         level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
     )
-
-
-# def get_ids_from_json(list_name: str, path: str = JSON_PATH) -> list[str]:
-#     project_ids = []
-#     with open(path, "r") as f:
-#         data = json.load(f)
-#         for project_id in data[list_name]:
-#             project_ids.append(project_id)
-#     return project_ids
-
 
 def get_project_ids_from_csv(path, interested_years=None) -> list[str]:
     project_ids = []
