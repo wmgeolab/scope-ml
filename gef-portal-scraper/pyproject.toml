@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "gef-portal-scraper"
+version = "0.1.0"
+description = ""
+authors = ["Sawyer <sawyerczupka@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+dask = "^2024.9.1"
+beautifulsoup4 = "^4.12.3"
+selenium = "^4.25.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
