@@ -1,18 +1,18 @@
-name: Build ML-API Docker Image
+name: Build get_project_ids Docker Image
 
 on:
   push:
     branches:
       - main
     paths:
-      - ".github/workflows/build_image.yml"
-      - "ml-api/**"
+      - ".github/workflows/build_ids_image.yml"
+      - "gef-portal-scraper/get_project_ids.py"
   pull_request:
     branches:
       - main
     paths:
-      - ".github/workflows/build_image.yml"
-      - "ml-api/**"
+      - ".github/workflows/build_ids_image.yml"
+      - "gef-portal-scraper/get_project_ids.py"
     # these path settings ensure this workflow only executes on a push
     # to this YML itself, or any file in the ml-api folder
 
@@ -49,6 +49,7 @@ jobs:
         with:
           # this sets the build context to the ml-api folder. It will by default
           # build from whatever Dockerfile it finds here
-          context: ./ml-api
+          context: ./gef-portal-scraper
+          file: Dockerfile.get_project_ids
           push: true
-          tags: ghcr.io/${{ env.REPO_OWNER_LC }}/ml-api:latest
+          tags: ghcr.io/${{ env.REPO_OWNER_LC }}/get_project_ids:latest
