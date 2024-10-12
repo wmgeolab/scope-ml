@@ -4,7 +4,8 @@ import logging
 from datetime import datetime
 
 import requests
-from dask import compute, delayed
+from bs4 import BeautifulSoup
+from dask import compute, delayed  # type: ignore
 from dask.distributed import Client
 
 # Set up logging
@@ -15,6 +16,35 @@ logging.basicConfig(
 # Constants
 ID_START = 1
 ID_END = 10000
+
+
+def get_highest_project_id():
+    url = "https://www.thegef.org/projects-operations/database"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, "html.parser")
+
+        # Find the table with project data
+        table = soup.find("table", class_="table-hover")
+
+        if table:
+            # Find all rows in the table body
+            rows = table.find("tbody").find_all("tr")  # type: ignore
+
+            if rows:
+                # Get the ID from the second column of the first row
+                highest_id = int(rows[0].find_all("td")[1].text.strip())
+                return highest_id
+
+        logging.error("Could not find the project ID table or data.")
+        return None
+    except requests.RequestException as e:
+        logging.error(f"Error fetching the webpage: {e}")
+        return None
+    except Exception as e:
+        logging.error(f"Error parsing the webpage: {e}")
+        return None
 
 
 def check_project_id(project_id):
@@ -40,17 +70,23 @@ def save_to_csv(data, filename):
 
 
 def main():
-    # Set up logging
+    # Get the highest project ID
+    highest_id = get_highest_project_id()
+    if highest_id is None:
+        logging.error("Could not get the highest project ID.")
+        return
+
+    logging.info(f"Highest project ID: {highest_id}")
 
     # Set up Dask client
     client = Client()  # This will use all available cores by default
     logging.info(f"Dask dashboard available at: {client.dashboard_link}")
 
-    logging.info(f"Checking project IDs from {ID_START} to {ID_END}...")
+    logging.info(f"Checking project IDs from {ID_START} to {highest_id}...")
 
     # Create delayed objects for each project ID check
     delayed_results = [
-        delayed(check_project_id)(i) for i in range(ID_START, ID_END + 1)
+        delayed(check_project_id)(i) for i in range(ID_START, highest_id + 1)
     ]
 
     # Compute all results
