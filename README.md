@@ -5,3 +5,7 @@ This repository contains the code for the machine learning backend of the SCOPE 
 ## /ml-api
 
 Contains code for the ml-backend api that responds to requests for summarization and question answering from the scope backend.
+
+## /gef-portal-scraper
+
+Contains code for scraping the GEF portal for project data.
