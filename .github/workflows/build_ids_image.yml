@@ -50,6 +50,6 @@ jobs:
           # this sets the build context to the ml-api folder. It will by default
           # build from whatever Dockerfile it finds here
           context: ./gef-portal-scraper
-          file: Dockerfile.get_project_ids
+          file: ./Dockerfile.get_project_ids
           push: true
           tags: ghcr.io/${{ env.REPO_OWNER_LC }}/get_project_ids:latest
