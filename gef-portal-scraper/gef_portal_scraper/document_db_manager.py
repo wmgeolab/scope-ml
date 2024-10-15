@@ -5,22 +5,24 @@ from sqlmodel import Field, Session, SQLModel, create_engine, select
 class Document(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     original_filename: str
-    download_url: Optional[str] = None
+    download_url: str = Field(index=True)
     document_type: Optional[str] = None
+    project_id: Optional[str] = None
     last_updated: datetime = Field(default_factory=datetime.utcnow)
 
 # SQLite database URL
-sqlite_url = "sqlite:///document_database.db"
+sqlite_url = "sqlite:///data/document_database.db"
 engine = create_engine(sqlite_url, echo=True)
 
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
-def add_document(original_filename: str, download_url: str = None, document_type: str = None):
+def add_document(original_filename: str, download_url: str = None, document_type: str = None, project_id = None):
     document = Document(
         original_filename=original_filename,
         download_url=download_url,
-        document_type=document_type
+        document_type=document_type,
+        project_id=project_id
     )
     with Session(engine) as session:
         session.add(document)
@@ -33,6 +35,13 @@ def get_all_documents():
         documents = session.exec(select(Document)).all()
     return documents
 
+def document_exists(download_url: str):
+    with Session(engine) as session:
+        document = session.exec(select(Document).where(Document.download_url == download_url)).first()
+        if document is not None:
+            return True
+    return False
+
 def main():
     create_db_and_tables()
     
@@ -40,7 +49,8 @@ def main():
     new_doc = add_document(
         "example_doc.pdf",
         "https://example.com/docs/example_doc.pdf",
-        "PDF"
+        ".pdf",
+        "12345"
     )
     print(f"Added document: {new_doc}")
     
@@ -49,6 +59,10 @@ def main():
     print("All documents:")
     for doc in all_docs:
         print(f"- {doc.original_filename} ({doc.document_type})")
+
+    # Example: test if documents exist
+    print(document_exists("notAfile"))
+    print(document_exists("https://example.com/docs/example_doc.pdf"))
 
 if __name__ == "__main__":
     main()

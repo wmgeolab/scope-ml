@@ -4,6 +4,7 @@ import logging
 import os
 import sys
 from urllib.parse import unquote, urlparse
+import document_db_manager
 
 import requests
 from bs4 import BeautifulSoup
@@ -74,6 +75,9 @@ def download_file(href, project_id, idx):
             file.write(file_response.content)
         os.chmod(file_path, 0o666)  # Ensure the file is writable
         logging.info(f"Downloaded file: {file_path}")
+        # store document info in db
+        filename, extension = os.path.splitext(href)
+        document_db_manager.add_document(original_filename, href, extension, project_id)
         return file_path
     except requests.RequestException as e:
         logging.error(f"Failed to download file from: {href}. Error: {e}")
@@ -99,6 +103,9 @@ def download_files_from_project_page(project_id):
         if href:
             file_extension = os.path.splitext(href)[1]
             if file_extension in VALID_EXTENSIONS:
+                if document_db_manager.document_exists(href):
+                    logging.info(f"Document already in database, skipping: {href}")
+                    continue
                 downloaded_file = download_file(href, project_id, idx)
                 if downloaded_file:
                     downloaded_files.append(downloaded_file)
@@ -119,6 +126,9 @@ def download_project_ids(project_ids: list[str]):
 
 def main():
     setup_logging()
+
+    document_db_manager.create_db_and_tables()
+
     create_directory(OUTPUT_PATH)
 
     project_ids = get_project_ids_from_csv(PROJECTS_CSV_PATH, INTERESTED_YEARS)
@@ -126,7 +136,7 @@ def main():
 
     # project_ids = get_ids_from_json("gef_7_project_ids")
 
-    download_project_ids(project_ids)
+    download_project_ids(project_ids[0:10])
 
 
 if __name__ == "__main__":
