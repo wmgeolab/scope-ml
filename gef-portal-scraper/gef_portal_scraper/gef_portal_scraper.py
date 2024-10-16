@@ -3,6 +3,7 @@ import json
 import logging
 import os
 import sys
+import glob
 from urllib.parse import unquote, urlparse
 import document_db_manager
 
@@ -13,6 +14,7 @@ from dask.delayed import delayed
 
 # Constants
 PROJECTS_CSV_PATH = os.getenv("PROJECTS_CSV_PATH", "/app/data/projects.csv")
+PROJECTS_JSON_PATTERN = os.getenv("PROJECTS_JSON_PATTERN", "/app/data/project_ids*.json")
 OUTPUT_PATH = os.getenv("OUTPUT_PATH", "/app/data/output")
 
 BASE_URL = os.getenv("BASE_URL", "https://www.thegef.org/projects-operations/projects/")
@@ -45,6 +47,22 @@ def get_project_ids_from_csv(path, interested_years=None) -> list[str]:
                     logging.warning(f"Invalid year value: {row[9]}")
     except FileNotFoundError:
         logging.error(f"CSV file not found at path: {path}")
+    return project_ids
+
+def get_project_ids_from_json(pattern) -> list[str]:
+    # Because the json file may have a timestamp we use a pattern to try and find the correct file
+    try:
+        path = glob.glob(pattern)[0]
+    except IndexError:
+        logging.error(f"No JSON file found that matches the pattern: {pattern}")
+    
+    project_ids = []
+    try:
+        with open(path, "r") as file:
+            data = json.load(file)
+            project_ids = data['valid_project_ids']
+    except FileNotFoundError:
+        logging.error(f"JSON file not found at path: {path}")
     return project_ids
 
 
@@ -131,8 +149,10 @@ def main():
 
     create_directory(OUTPUT_PATH)
 
-    project_ids = get_project_ids_from_csv(PROJECTS_CSV_PATH, INTERESTED_YEARS)
+    # project_ids = get_project_ids_from_csv(PROJECTS_CSV_PATH, INTERESTED_YEARS)
     # project_ids = gef6_project_ids
+
+    project_ids = get_project_ids_from_json(PROJECTS_JSON_PATTERN)
 
     # project_ids = get_ids_from_json("gef_7_project_ids")
 

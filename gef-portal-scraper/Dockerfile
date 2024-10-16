@@ -24,7 +24,7 @@ RUN mkdir -p /app/data/output
 # Set environment variables
 ENV PROJECTS_CSV_PATH=/app/data/projects.csv
 ENV OUTPUT_PATH=/app/data/output
-ENV JSON_PATH=/app/data/project_ids.json
+ENV PROJECTS_JSON_PATTERN=/app/data/project_ids*.json
 ENV DB_PATH=/app/data/scraper.db
 
 # Run the script when the container launches
