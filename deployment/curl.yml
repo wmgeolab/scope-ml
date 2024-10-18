@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: sawyer-nfs
+  name: sawyer-curl
 spec:
   containers:
     - image: curlimages/curl:latest
