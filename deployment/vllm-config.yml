@@ -34,7 +34,7 @@ spec:
               nvidia.com/gpu: "1"
           volumeMounts:
             - name: cache-volume
-              mountPath: /root/.cache/huggingface
+              mountPath: /hf_cache
             - name: shm
               mountPath: /dev/shm
           env:
@@ -43,6 +43,8 @@ spec:
                 secretKeyRef:
                   name: huggingface-secret
                   key: token
+            - name: HF_HOME
+              value: "/hf_cache"
           securityContext:
             runAsUser: 237827
             runAsGroup: 50036
@@ -50,7 +52,7 @@ spec:
         - name: cache-volume
           nfs:
             server: 128.239.59.144
-            path: /sciclone/geograd/scope/vllm/cache
+            path: /sciclone/geograd/scope/vllm/hf_cache
         - name: shm
           emptyDir:
             medium: Memory
