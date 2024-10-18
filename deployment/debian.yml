@@ -12,6 +12,9 @@ spec:
         - /bin/sh
         - -c
         - |
+          apt-get update &&
+          apt-get install -y nano curl &&
+          apt-get clean &&
           sleep 604800
       imagePullPolicy: IfNotPresent
       name: container-name
@@ -21,14 +24,6 @@ spec:
       securityContext:
         runAsUser: 237827
         runAsGroup: 50036
-  initContainers:
-    - name: install-tools
-      image: debian:bookworm
-      command: ["/bin/sh", "-c"]
-      args:
-        - apt-get update &&
-          apt-get install -y nano curl &&
-          apt-get clean
   volumes:
     - name: scopenfs
       nfs:
