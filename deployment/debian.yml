@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: sawyer-curl
+  name: sawyer-deb
 spec:
   containers:
-    - image: curlimages/curl:latest
+    - image: debian:bookworm
       volumeMounts:
         - name: scopenfs
           mountPath: /scope # Any path you want to mount to.
