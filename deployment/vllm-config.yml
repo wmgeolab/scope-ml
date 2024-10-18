@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vllm-deployment
+  name: llama-3-8b
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: vllm
+      app: llama-3-8b
   template:
     metadata:
       labels:
-        app: vllm
+        app: llama-3-8b
     spec:
       containers:
-        - name: vllm-container
+        - name: llama-3-8b
           image: vllm/vllm-openai:latest
           imagePullPolicy: IfNotPresent
           command: ["/bin/sh", "-c"]
@@ -33,13 +33,11 @@ spec:
               memory: 6G
               nvidia.com/gpu: "1"
           volumeMounts:
-            - name: model-volume
-              mountPath: /models
             - name: cache-volume
-              mountPath: /cache
+              mountPath: /root/.cache/huggingface
+            - name: shm
+              mountPath: /dev/shm
           env:
-            - name: TRANSFORMERS_CACHE
-              value: /cache
             - name: HUGGING_FACE_HUB_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -49,23 +47,23 @@ spec:
             runAsUser: 237827
             runAsGroup: 50036
       volumes:
-        - name: model-volume
-          nfs:
-            server: 128.239.59.144
-            path: /sciclone/geograd/scope/vllm/models
         - name: cache-volume
           nfs:
             server: 128.239.59.144
             path: /sciclone/geograd/scope/vllm/cache
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: "2Gi"
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: vllm-service
+  name: llama-3-8b-service
 spec:
   selector:
-    app: vllm
+    app: llama-3-8b
   ports:
     - protocol: TCP
       port: 8000
