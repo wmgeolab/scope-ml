@@ -4,7 +4,7 @@ metadata:
   name: sawyer-nfs
 spec:
   containers:
-    - image: alpine:latest
+    - image: curlimages/curl:latest
       volumeMounts:
         - name: scopenfs
           mountPath: /scope # Any path you want to mount to.
