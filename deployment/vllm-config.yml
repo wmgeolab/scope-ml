@@ -40,6 +40,11 @@ spec:
           env:
             - name: TRANSFORMERS_CACHE
               value: /cache
+            - name: HUGGING_FACE_HUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: huggingface-secret
+                  key: token
           securityContext:
             runAsUser: 237827
             runAsGroup: 50036
