@@ -8,18 +8,14 @@ spec:
       volumeMounts:
         - name: scopenfs
           mountPath: /scope # Any path you want to mount to.
-      command:
-        - /bin/sh
-        - -c
-        - |
-          apt-get update &&
-          apt-get install -y nano curl &&
-          apt-get clean &&
-          sleep 604800
+      command: ["/bin/sh", "-c"]
+      args: ["apt-get update && apt-get install -y nano curl && sleep infinity"]
       imagePullPolicy: IfNotPresent
-      name: container-name
+      name: debian
       resources:
         limits:
+          cpu: 2 # Total 32 cores.
+        requests:
           cpu: 2 # Total 32 cores.
       securityContext:
         runAsUser: 237827
