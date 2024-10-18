@@ -35,6 +35,11 @@ spec:
           volumeMounts:
             - name: model-volume
               mountPath: /models
+            - name: cache-volume
+              mountPath: /cache
+          env:
+            - name: TRANSFORMERS_CACHE
+              value: /cache
           securityContext:
             runAsUser: 237827
             runAsGroup: 50036
@@ -42,7 +47,11 @@ spec:
         - name: model-volume
           nfs:
             server: 128.239.59.144
-            path: /sciclone/geograd/scope/models
+            path: /sciclone/geograd/scope/vllm/models
+        - name: cache-volume
+          nfs:
+            server: 128.239.59.144
+            path: /sciclone/geograd/scope/vllm/cache
 
 ---
 apiVersion: v1
