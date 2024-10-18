@@ -8,8 +8,14 @@ spec:
   containers:
     - name: alpine
       image: alpine:latest
+      volumeMounts:
+        - name: scopenfs
+          mountPath: /scope # Any path you want to mount to.
       command: ["/bin/sh"]
       args: ["-c", "apk add --no-cache nano curl && sleep infinity"]
+      securityContext:
+        runAsUser: 237827
+        runAsGroup: 50036
       resources:
         limits:
           cpu: "0.5"
@@ -17,3 +23,8 @@ spec:
         requests:
           cpu: "0.2"
           memory: "128Mi"
+  volumes:
+    - name: scopenfs
+      nfs:
+        server: 128.239.59.144 # NFS Server address.
+        path: /sciclone/geograd/scope
