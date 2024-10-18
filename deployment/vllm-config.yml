@@ -19,7 +19,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             [
-              "vllm serve mistralai/Mistral-7B-Instruct-v0.3 --trust-remote-code --enable-chunked-prefill --max_num_batched_tokens 1024",
+              "vllm serve meta-llama/Meta-Llama-3-8B-Instruct --trust-remote-code --enable-chunked-prefill --max_num_batched_tokens 1024",
             ]
           ports:
             - containerPort: 8000
