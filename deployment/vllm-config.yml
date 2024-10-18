@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: llama-3-8b
+  name: llama-3-1b
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: llama-3-8b
+      app: llama-3-1b
   template:
     metadata:
       labels:
-        app: llama-3-8b
+        app: llama-3-1b
     spec:
       containers:
-        - name: llama-3-8b
+        - name: llama-3-1b
           image: vllm/vllm-openai:latest
           imagePullPolicy: IfNotPresent
           command: ["/bin/sh", "-c"]
           args:
             [
-              "vllm serve meta-llama/Meta-Llama-3-8B-Instruct --trust-remote-code --enable-chunked-prefill --max_num_batched_tokens 1024",
+              "vllm serve meta-llama/Llama-3.2-1B-Instruct --trust-remote-code --enable-chunked-prefill --max_num_batched_tokens 1024",
             ]
           ports:
             - containerPort: 8000
@@ -60,10 +60,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: llama-3-8b-service
+  name: llama-3-1b-service
 spec:
   selector:
-    app: llama-3-8b
+    app: llama-3-1b
   ports:
     - protocol: TCP
       port: 8000
