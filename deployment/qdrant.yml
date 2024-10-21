@@ -38,7 +38,7 @@ spec:
         - name: scopenfs-qdrant
           nfs:
             server: 128.239.59.144 # NFS Server address
-            path: /sciclone/geograd/scope/qdrant
+            path: /sciclone/geograd/scope/k8s-storage/qdrant
 ---
 apiVersion: v1
 kind: Service

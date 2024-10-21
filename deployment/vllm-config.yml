@@ -48,7 +48,7 @@ spec:
         - name: cache-volume
           nfs:
             server: 128.239.59.144
-            path: /sciclone/geograd/scope/vllm/hf_cache
+            path: /sciclone/geograd/scope/k8s-storage/vllm/hf_cache
         - name: shm
           emptyDir:
             medium: Memory
