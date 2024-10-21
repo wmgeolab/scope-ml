@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qdrant
+  labels:
+    app: qdrant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qdrant
+  template:
+    metadata:
+      labels:
+        app: qdrant
+    spec:
+      containers:
+        - name: qdrant
+          image: qdrant/qdrant
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 6333
+            - containerPort: 6334
+          volumeMounts:
+            - name: scopenfs-qdrant
+              mountPath: /qdrant/storage
+          securityContext:
+            runAsGroup: 50036
+          resources:
+            requests:
+              cpu: "2"
+              memory: 4Gi
+            limits:
+              cpu: "4"
+              memory: 8Gi
+      volumes:
+        - name: scopenfs-qdrant
+          nfs:
+            server: 128.239.59.144 # NFS Server address
+            path: /sciclone/geograd/scope/qdrant
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qdrant-svc
+spec:
+  selector:
+    app: qdrant
+  ports:
+    - name: http
+      port: 6333
+      targetPort: 6333
+    - name: grpc
+      port: 6334
+      targetPort: 6334
+  type: ClusterIP
