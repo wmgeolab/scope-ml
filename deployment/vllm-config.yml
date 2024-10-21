@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,27 +15,25 @@ spec:
     spec:
       containers:
         - name: vllm
-          image: vllm/vllm-openai:latest
+          image: vllm/vllm-openai:v0.6.3
           imagePullPolicy: IfNotPresent
           command: ["/bin/sh", "-c"]
           args:
-            [
-              "vllm serve mistralai/Mistral-7B-Instruct-v0.3 --trust-remote-code --enable-chunked-prefill --max_num_batched_tokens 1024",
-            ]
+            - "vllm serve mistralai/Mistral-7B-Instruct-v0.3 --trust-remote-code --enable-chunked-prefill --max_num_batched_tokens 1024"
           ports:
             - containerPort: 8000
           resources:
             limits:
               cpu: "10"
-              memory: "16Gi"
+              memory: 16Gi
               nvidia.com/gpu: "1"
             requests:
-              cpu: "2"
-              memory: 6G
+              cpu: "8"
+              memory: 16Gi
               nvidia.com/gpu: "1"
           volumeMounts:
             - name: cache-volume
-              mountPath: /hf_cache
+              mountPath: /root/.cache/huggingface
             - name: shm
               mountPath: /dev/shm
           env:
@@ -43,10 +42,7 @@ spec:
                 secretKeyRef:
                   name: huggingface-secret
                   key: token
-            - name: HF_HOME
-              value: "/hf_cache"
           securityContext:
-            runAsUser: 237827
             runAsGroup: 50036
       volumes:
         - name: cache-volume
@@ -56,13 +52,12 @@ spec:
         - name: shm
           emptyDir:
             medium: Memory
-            sizeLimit: "2Gi"
-
+            sizeLimit: 2Gi
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: vllm-service
+  name: vllm-svc
 spec:
   selector:
     app: vllm
