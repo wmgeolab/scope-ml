@@ -1,24 +1,28 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: sawyer-deb
+  name: deb-tools
 spec:
   containers:
     - image: debian:bookworm
       volumeMounts:
         - name: scopenfs
           mountPath: /scope # Any path you want to mount to.
-      command: ["/bin/sh", "-c"]
-      args: ["apt-get update && apt-get install -y nano curl && sleep infinity"]
+      command: ["/bin/bash", "-c"]
+      args:
+        [
+          "apt-get update && apt-get install -y nano curl make jq && sleep infinity",
+        ]
       imagePullPolicy: IfNotPresent
       name: debian
       resources:
         limits:
           cpu: 2 # Total 32 cores.
+          memory: "4Gi"
         requests:
           cpu: 2 # Total 32 cores.
+          memory: "4Gi"
       securityContext:
-        runAsUser: 237827
         runAsGroup: 50036
   volumes:
     - name: scopenfs
