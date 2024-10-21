@@ -1,0 +1,38 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: scraper-ids
+spec:
+  template:
+    metadata:
+      labels:
+        name: scraper-ids
+    spec:
+      containers:
+        - name: scraper-ids
+          image: ghcr.io/wmgeolab/get_project_ids:latest
+          volumeMounts:
+            - name: scopenfs-scopedata
+              mountPath: /scope/scope-data
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "2"
+          env:
+            - name: OUTPUT_DIR
+              value: "/scope/scope-data/gef/"
+            - name: RATE_LIMIT
+              value: "100"
+            - name: BATCH_SIZE
+              value: "250"
+            - name: USE_FILE_TIMESTAMPS
+              value: "false"
+      imagePullSecrets:
+        - name: github-registry-secret
+      volumes:
+        - name: scopenfs-scopedata
+          nfs:
+            server: 128.239.59.144
+            path: /sciclone/geograd/scope/scope-data
+      restartPolicy: OnFailure
