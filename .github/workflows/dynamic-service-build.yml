@@ -30,6 +30,13 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v40
 
+      - name: Display all changed files
+        run: |
+          echo "🔍 Changed files in this push/PR:"
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "  → $file"
+          done
+
       - name: Set up build matrix
         id: set-matrix
         run: |
