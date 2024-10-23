@@ -30,41 +30,72 @@ jobs:
         with:
           files: deployment/images/**
 
+      - name: Display all changed files
+        run: |
+          echo "🔍 Changed files in this push/PR:"
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "  → $file"
+          done
+
       - name: Set up build matrix
         id: set-matrix
         run: |
           cd deployment/images
+          echo "📁 Scanning directory: $(pwd)"
+
           # Initialize an empty array for the matrix
           MATRIX="["
           SEPARATOR=""
 
-          # Find all Dockerfiles
+          # Find and display all Dockerfiles first
+          echo "🐳 Found Dockerfiles:"
+          find . -type f -name "Dockerfile.*" | while read -r dockerfile; do
+            echo "  → $dockerfile"
+          done
+
+          # Process each Dockerfile
           for dockerfile in $(find . -type f -name "Dockerfile.*"); do
             image_name=$(echo $dockerfile | sed 's/.*Dockerfile\.//')
             context_dir=$(dirname $dockerfile)
             
+            echo "⚡ Processing $dockerfile"
+            echo "  • Image name: $image_name"
+            echo "  • Context directory: $context_dir"
+            
             # Check if Dockerfile or any files in its context directory changed
             CHANGED=false
+            echo "  • Checking for changes in context..."
+            
             for changed_file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               if [[ $changed_file == deployment/images/$context_dir/* ]] || [[ $changed_file == $dockerfile ]]; then
                 CHANGED=true
+                echo "    ✓ Found change in: $changed_file"
                 break
               fi
             done
             
             # If changed, add to matrix
             if [ "$CHANGED" = true ]; then
+              echo "  ✅ Changes detected - adding to build matrix"
               MATRIX="${MATRIX}${SEPARATOR}{\"image\": \"${image_name}\", \"dockerfile\": \"${dockerfile}\", \"context\": \"${context_dir}\"}"
               SEPARATOR=","
+            else
+              echo "  ⏭️ No changes detected - skipping"
             fi
           done
+
           MATRIX="${MATRIX}]"
+
+          # Display final matrix
+          echo "📊 Final build matrix:"
+          echo "$MATRIX" | jq '.'
 
           # If matrix is empty (just []), set to empty list to skip builds
           if [ "$MATRIX" = "[]" ]; then
-            echo "No changes detected in any Docker contexts"
+            echo "⚠️ No changes detected in any Docker contexts - skipping builds"
             echo "matrix=[]" >> $GITHUB_OUTPUT
           else
+            echo "🚀 Changes detected - proceeding with builds"
             echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
           fi
 
@@ -94,7 +125,16 @@ jobs:
 
       - name: Define lowercase repository owner
         id: repo
-        run: echo "REPO_OWNER_LC=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+        run: |
+          echo "Converting ${{ github.repository_owner }} to lowercase..."
+          echo "REPO_OWNER_LC=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+      - name: Display build information
+        run: |
+          echo "🏗️ Building image: ${{ matrix.image }}"
+          echo "  • Dockerfile: ${{ matrix.dockerfile }}"
+          echo "  • Context: ${{ matrix.context }}"
+          echo "  • Full image name: ghcr.io/${{ env.REPO_OWNER_LC }}/${{ matrix.image }}:latest"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
@@ -103,3 +143,7 @@ jobs:
           file: "./deployment/images/${{ matrix.dockerfile }}"
           push: true
           tags: ghcr.io/${{ env.REPO_OWNER_LC }}/${{ matrix.image }}:latest
+
+      - name: Build status
+        run: |
+          echo "✅ Successfully built and pushed: ghcr.io/${{ env.REPO_OWNER_LC }}/${{ matrix.image }}:latest"
