@@ -7,5 +7,3 @@ RUN wget -O /usr/local/bin/kubectl https://dl.k8s.io/release/v1.28.0/bin/linux/a
 
 # Create directory for scripts
 RUN mkdir /scripts && chmod 755 /scripts
-
-# TEST 1
