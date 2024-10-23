@@ -1,4 +1,4 @@
-# autoscaler deployment with environment configuration
+# Autoscaler deployment with environment configuration
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -62,7 +62,7 @@ metadata:
 data:
   nginx.conf: |
     worker_processes  1;
-    error_log  /dev/stderr notice;
+    error_log  /dev/stderr info;
     pid        /tmp/nginx.pid;
 
     events {
@@ -78,13 +78,25 @@ data:
     env VLLM_DEPLOYMENT_NAME;
 
     http {
-      access_log /dev/stdout combined;
+      log_format detailed escape=json '{'
+        '"timestamp":"$time_iso8601",'
+        '"client":"$remote_addr",'
+        '"method":"$request_method",'
+        '"uri":"$request_uri",'
+        '"status":$status,'
+        '"response_time":$request_time,'
+        '"upstream_time":"$upstream_response_time",'
+        '"error":"$http_x_error"'
+      '}';
+      
+      access_log /dev/stdout detailed;
       
       lua_package_path '/usr/local/openresty/lualib/?.lua;;';
       
       init_by_lua_block {
         backend_host = os.getenv("VLLM_SERVICE_HOST")
         backend_port = os.getenv("VLLM_SERVICE_PORT")
+        ngx.log(ngx.INFO, "Initializing with backend: ", backend_host, ":", backend_port)
       }
       
       server {
@@ -93,8 +105,18 @@ data:
         
         location / {
           access_by_lua_block {
+            local function log(level, message)
+              ngx.log(level, string.format("[%s] %s", os.date("%Y-%m-%d %H:%M:%S"), message))
+            end
+            
             local function activate_vllm()
-              os.execute("/scripts/activate.sh &")
+              log(ngx.INFO, "Activating VLLM deployment...")
+              local ok = os.execute("/scripts/activate.sh &")
+              if ok then
+                log(ngx.INFO, "VLLM activation triggered successfully")
+              else
+                log(ngx.ERR, "Failed to trigger VLLM activation")
+              end
             end
             
             local function check_vllm_ready()
@@ -106,21 +128,30 @@ data:
               local handle = io.popen(cmd)
               local result = handle:read("*a")
               handle:close()
+              if result == "Running" then
+                log(ngx.INFO, "VLLM pod is running")
+              else
+                log(ngx.INFO, "VLLM pod status: " .. (result or "unknown"))
+              end
               return result == "Running"
             end
             
             if not check_vllm_ready() then
+              log(ngx.INFO, "VLLM pod not ready, starting activation sequence")
               activate_vllm()
               local timeout = tonumber(os.getenv("ACTIVATION_TIMEOUT"))
               local start = ngx.now()
               while not check_vllm_ready() do
                 if ngx.now() - start > timeout then
+                  log(ngx.ERR, "VLLM activation timed out after " .. timeout .. " seconds")
                   ngx.status = 503
+                  ngx.header["X-Error"] = "VLLM service activation timeout"
                   ngx.say("VLLM service activation timeout")
                   ngx.exit(503)
                 end
                 ngx.sleep(1)
               end
+              log(ngx.INFO, "VLLM pod is now ready")
             end
             
             os.execute("/scripts/reset_timer.sh &")
@@ -136,6 +167,9 @@ data:
         }
         
         location /health {
+          access_by_lua_block {
+            ngx.log(ngx.INFO, "Health check requested")
+          }
           return 200 'healthy\n';
         }
       }
@@ -149,23 +183,31 @@ metadata:
 data:
   activate.sh: |
     #!/bin/sh
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Scaling up VLLM deployment in namespace $KUBERNETES_NAMESPACE" >&2
     kubectl scale deployment -n $KUBERNETES_NAMESPACE $VLLM_DEPLOYMENT_NAME --replicas=1
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Scale up command completed" >&2
 
   deactivate.sh: |
     #!/bin/sh
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Scaling down VLLM deployment in namespace $KUBERNETES_NAMESPACE" >&2
     kubectl scale deployment -n $KUBERNETES_NAMESPACE $VLLM_DEPLOYMENT_NAME --replicas=0
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Scale down command completed" >&2
 
   reset_timer.sh: |
     #!/bin/sh
     TIMER_FILE="/tmp/inactivity_timer"
     echo $(date +%s) > $TIMER_FILE
 
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting inactivity timer" >&2
     while true; do
       sleep 60
       if [ -f $TIMER_FILE ]; then
         last_activity=$(cat $TIMER_FILE)
         now=$(date +%s)
-        if [ $((now - last_activity)) -gt $INACTIVITY_TIMEOUT ]; then
+        inactive_time=$((now - last_activity))
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] Checking inactivity: ${inactive_time}s elapsed" >&2
+        if [ $inactive_time -gt $INACTIVITY_TIMEOUT ]; then
+          echo "[$(date '+%Y-%m-%d %H:%M:%S')] Inactivity timeout reached (${INACTIVITY_TIMEOUT}s), triggering shutdown" >&2
           /scripts/deactivate.sh
           rm $TIMER_FILE
           break
