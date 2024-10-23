@@ -42,55 +42,70 @@ jobs:
         run: |
           cd deployment/images
           echo "📁 Scanning directory: $(pwd)"
-
-          # Initialize an empty array for the matrix
+          
+          # Initialize matrix
           MATRIX="["
           SEPARATOR=""
-
-          # Find and display all Dockerfiles first
+          
+          # Find and display all Dockerfiles
           echo "🐳 Found Dockerfiles:"
           find . -type f -name "Dockerfile.*" | while read -r dockerfile; do
             echo "  → $dockerfile"
           done
-
+          
           # Process each Dockerfile
           for dockerfile in $(find . -type f -name "Dockerfile.*"); do
-            image_name=$(echo $dockerfile | sed 's/.*Dockerfile\.//')
-            context_dir=$(dirname $dockerfile)
+            # Remove leading ./ if present
+            dockerfile_clean=$(echo "$dockerfile" | sed 's|^./||')
+            image_name=$(echo "$dockerfile_clean" | sed 's/.*Dockerfile\.//')
+            context_dir=$(dirname "$dockerfile_clean")
+            if [ "$context_dir" = "." ]; then
+              context_path="deployment/images"
+            else
+              context_path="deployment/images/$context_dir"
+            fi
             
-            echo "⚡ Processing $dockerfile"
+            echo "⚡ Processing $dockerfile_clean"
             echo "  • Image name: $image_name"
             echo "  • Context directory: $context_dir"
+            echo "  • Full context path: $context_path"
             
-            # Check if Dockerfile or any files in its context directory changed
+            # Check for changes
             CHANGED=false
             echo "  • Checking for changes in context..."
             
-            for changed_file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-              if [[ $changed_file == deployment/images/$context_dir/* ]] || [[ $changed_file == $dockerfile ]]; then
-                CHANGED=true
-                echo "    ✓ Found change in: $changed_file"
-                break
-              fi
-            done
+            # First, check if the Dockerfile itself changed
+            if [[ "${{ steps.changed-files.outputs.all_changed_files }}" == *"deployment/images/$dockerfile_clean"* ]]; then
+              CHANGED=true
+              echo "    ✓ Dockerfile changed"
+            fi
+            
+            # Then check context directory
+            if [ ! "$CHANGED" = true ] && [ "$context_dir" != "." ]; then
+              for changed_file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+                if [[ $changed_file == $context_path/* ]]; then
+                  CHANGED=true
+                  echo "    ✓ Found change in context: $changed_file"
+                  break
+                fi
+              done
+            fi
             
             # If changed, add to matrix
             if [ "$CHANGED" = true ]; then
               echo "  ✅ Changes detected - adding to build matrix"
-              MATRIX="${MATRIX}${SEPARATOR}{\"image\": \"${image_name}\", \"dockerfile\": \"${dockerfile}\", \"context\": \"${context_dir}\"}"
+              MATRIX="${MATRIX}${SEPARATOR}{\"image\": \"${image_name}\", \"dockerfile\": \"${dockerfile_clean}\", \"context\": \"${context_dir}\"}"
               SEPARATOR=","
             else
               echo "  ⏭️ No changes detected - skipping"
             fi
           done
-
+          
           MATRIX="${MATRIX}]"
-
-          # Display final matrix
+          
           echo "📊 Final build matrix:"
           echo "$MATRIX" | jq '.'
-
-          # If matrix is empty (just []), set to empty list to skip builds
+          
           if [ "$MATRIX" = "[]" ]; then
             echo "⚠️ No changes detected in any Docker contexts - skipping builds"
             echo "matrix=[]" >> $GITHUB_OUTPUT
