@@ -13,9 +13,11 @@ spec:
       labels:
         app: vllm-autoscaler
     spec:
+      imagePullSecrets:
+        - name: github-registry-secret
       containers:
         - name: autoscaler
-          image: openresty/openresty:alpine
+          image: ghcr.io/wmgeolab/nginx_kubectl:latest
           resources:
             requests:
               memory: "64Mi"

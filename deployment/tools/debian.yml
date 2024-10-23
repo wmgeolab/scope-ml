@@ -17,10 +17,10 @@ spec:
       name: debian
       resources:
         limits:
-          cpu: 2 # Total 32 cores.
+          cpu: "2" # Total 32 cores.
           memory: "4Gi"
         requests:
-          cpu: 2 # Total 32 cores.
+          cpu: "2" # Total 32 cores.
           memory: "4Gi"
       securityContext:
         runAsGroup: 50036
