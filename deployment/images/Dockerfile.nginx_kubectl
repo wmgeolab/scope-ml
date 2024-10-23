@@ -1,0 +1,9 @@
+# First, create a Dockerfile to build the custom image
+FROM openresty/openresty:alpine
+
+# Install kubectl
+RUN wget -O /usr/local/bin/kubectl https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl && \
+    chmod +x /usr/local/bin/kubectl
+
+# Create directory for scripts
+RUN mkdir /scripts && chmod 755 /scripts
