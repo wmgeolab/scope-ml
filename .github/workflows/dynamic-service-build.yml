@@ -46,11 +46,19 @@ jobs:
           # List of directories to exclude (space-separated)
           EXCLUDED_DIRS="deployment resources gef-portal-scraper"
 
+          echo "🔍 Changed files in this push/PR:"
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "  → $file"
+          done
+
           # Find all Dockerfiles in service directories
           for dockerfile in $(find . -name "Dockerfile" -not -path "*/\.*"); do
             # Get service directory (parent of Dockerfile)
             service_dir=$(dirname "$dockerfile")
             service_name=$(basename "$service_dir")
+            
+            echo "📦 Checking service: $service_name"
+            echo "  • Directory: $service_dir"
             
             # Skip if directory is in excluded list
             skip=false
@@ -66,10 +74,17 @@ jobs:
             # Check for changes in service directory
             CHANGED=false
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-              if [[ $file == $service_dir/* ]]; then
+              # Remove leading ./ from paths for consistent comparison
+              clean_file=$(echo "$file" | sed 's|^\./||')
+              clean_dir=$(echo "$service_dir" | sed 's|^\./||')
+              
+              echo "  • Comparing changed file: $clean_file"
+              echo "  • With service dir: $clean_dir"
+              
+              if [[ "$clean_file" == "$clean_dir"* ]]; then
                 CHANGED=true
                 echo "✨ Found changes in service: $service_name"
-                echo "  Changed file: $file"
+                echo "  Changed file: $clean_file"
                 break
               fi
             done
@@ -77,7 +92,9 @@ jobs:
             # If changes detected, add to build matrix
             if [ "$CHANGED" = true ]; then
               echo "🔨 Adding $service_name to build matrix"
-              MATRIX="${MATRIX}${SEPARATOR}{\"service\": \"${service_name}\", \"context\": \"${service_dir#./}\"}"
+              # Remove leading ./ from context path
+              context_path=$(echo "$service_dir" | sed 's|^\./||')
+              MATRIX="${MATRIX}${SEPARATOR}{\"service\": \"${service_name}\", \"context\": \"${context_path}\"}"
               SEPARATOR=","
             else
               echo "⏭️ No changes detected for $service_name - skipping"
