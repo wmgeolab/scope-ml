@@ -18,7 +18,7 @@ spec:
       containers:
         - name: ml-api
           image: ghcr.io/wmgeolab/ml-api:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           volumeMounts:
             - name: scopenfs
               mountPath: /scope  # Any path you want to mount to.
@@ -33,7 +33,7 @@ spec:
           securityContext:
             runAsGroup: 50036
           ports:
-            - containerPort: 80
+            - containerPort: 8000
       imagePullSecrets:
         - name: github-registry-secret
       volumes:
@@ -52,6 +52,6 @@ spec:
     app: ml-api
   ports:
     - name: service-port
-      port: 8080
-      targetPort: 80
+      port: 8000
+      targetPort: 8000
   type: ClusterIP
