@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-api
+  labels:
+    app: ml-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ml-api
+  template:
+    metadata:
+      labels:
+        app: ml-api
+    spec:
+      containers:
+        - name: ml-api
+          image: ghcr.io/wmgeolab/ml-api:latest
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: scopenfs
+              mountPath: /scope  # Any path you want to mount to.
+          command:
+            - /bin/sh
+            - -c
+            - |
+              sleep 604800
+          resources:
+            limits:
+              cpu: 8
+          securityContext:
+            runAsGroup: 50036
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: github-registry-secret
+      volumes:
+        - name: scopenfs
+          nfs:
+            server: 128.239.59.144  # NFS Server address.
+            path: /sciclone/geograd/scope
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ml-api-svc
+spec:
+  selector:
+    app: ml-api
+  ports:
+    - name: service-port
+      port: 8080
+      targetPort: 80
+  type: ClusterIP
