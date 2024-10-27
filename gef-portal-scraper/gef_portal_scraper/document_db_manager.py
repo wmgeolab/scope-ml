@@ -1,6 +1,7 @@
 from typing import Optional
 from datetime import datetime
 from sqlmodel import Field, Session, SQLModel, create_engine, select
+import os
 
 class Document(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -10,8 +11,11 @@ class Document(SQLModel, table=True):
     project_id: Optional[str] = None
     last_updated: datetime = Field(default_factory=datetime.utcnow)
 
+DB_PATH = os.getenv("DB_PATH", "data/gef_document_database.db")
+
 # SQLite database URL
-sqlite_url = "sqlite:///data/document_database.db"
+sqlite_url = "sqlite:///" + DB_PATH
+print(sqlite_url)
 engine = create_engine(sqlite_url, echo=True)
 
 def create_db_and_tables():
