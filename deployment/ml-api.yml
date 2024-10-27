@@ -22,11 +22,6 @@ spec:
           volumeMounts:
             - name: scopenfs
               mountPath: /scope  # Any path you want to mount to.
-          command:
-            - /bin/sh
-            - -c
-            - |
-              sleep 604800
           resources:
             limits:
               cpu: 8
