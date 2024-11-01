@@ -1,0 +1,39 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gef-scraper
+spec:
+  template:
+    metadata:
+      labels:
+        name: gef-scraper
+    spec:
+      containers:
+        - name: gef-scraper
+          image: ghcr.io/wmgeolab/gef-portal-scraper:latest
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: scopenfs-scopedata
+              mountPath: /app/data
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "2"
+          env:
+            - name: OUTPUT_PATH
+              value: "/app/data/output"
+            - name: PROJECTS_JSON_PATTERN
+              value: "/app/data/project_ids*.json"
+            - name: DB_PATH
+              value: "data/gef_document_database.db"
+            - name: PROJECTS_CSV_PATH
+              value: "/app/data/projects.csv"
+      imagePullSecrets:
+        - name: github-registry-secret
+      volumes:
+        - name: scopenfs-scopedata
+          nfs:
+            server: 128.239.59.144
+            path: /sciclone/geograd/scope/scope-data/gef
+      restartPolicy: OnFailure
