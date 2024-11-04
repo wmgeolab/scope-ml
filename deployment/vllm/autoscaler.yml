@@ -17,16 +17,19 @@ spec:
         - name: github-registry-secret
       containers:
         - name: autoscaler
-          image: ghcr.io/wmgeolab/nginx_kubectl:latest
+          image: ghcr.io/wmgeolab/vllm-autoscaler:latest # Update this to your image
+          securityContext:
+            runAsGroup: 50036
+            runAsUser: 237827
           resources:
             requests:
-              memory: "64Mi"
-              cpu: "50m"
-            limits:
-              memory: "128Mi"
+              memory: "128Mi" # Increased slightly for Python runtime
               cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
           ports:
-            - containerPort: 80
+            - containerPort: 8000
           env:
             - name: VLLM_SERVICE_HOST
               value: "vllm-svc"
@@ -38,184 +41,22 @@ spec:
               value: "120"
             - name: VLLM_DEPLOYMENT_NAME
               value: "vllm"
-            - name: VLLM_POD_LABEL
-              value: "app=vllm"
             - name: KUBERNETES_NAMESPACE
               value: "scope-dsmr"
-          volumeMounts:
-            - name: nginx-config
-              mountPath: /usr/local/openresty/nginx/conf/nginx.conf
-              subPath: nginx.conf
-            - name: scripts
-              mountPath: /scripts
-      volumes:
-        - name: nginx-config
-          configMap:
-            name: autoscaler-config
-        - name: scripts
-          configMap:
-            name: autoscaler-scripts
----
-# ConfigMap for nginx configuration
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: autoscaler-config
-data:
-  nginx.conf: |
-    worker_processes  1;
-    error_log  /dev/stderr info;
-    pid        /tmp/nginx.pid;
-
-    events {
-      worker_connections  1024;
-    }
-
-    env VLLM_SERVICE_HOST;
-    env VLLM_SERVICE_PORT;
-    env KUBERNETES_NAMESPACE;
-    env VLLM_POD_LABEL;
-    env ACTIVATION_TIMEOUT;
-    env INACTIVITY_TIMEOUT;
-    env VLLM_DEPLOYMENT_NAME;
-
-    http {
-      log_format detailed escape=json '{'
-        '"timestamp":"$time_iso8601",'
-        '"client":"$remote_addr",'
-        '"method":"$request_method",'
-        '"uri":"$request_uri",'
-        '"status":$status,'
-        '"response_time":$request_time,'
-        '"upstream_time":"$upstream_response_time",'
-        '"error":"$http_x_error"'
-      '}';
-      
-      access_log /dev/stdout detailed;
-      
-      lua_package_path '/usr/local/openresty/lualib/?.lua;;';
-      
-      init_by_lua_block {
-        backend_host = os.getenv("VLLM_SERVICE_HOST")
-        backend_port = os.getenv("VLLM_SERVICE_PORT")
-        ngx.log(ngx.INFO, "Initializing with backend: ", backend_host, ":", backend_port)
-      }
-      
-      server {
-        listen 80;
-        server_name localhost;
-        
-        location / {
-          access_by_lua_block {
-            local function log(level, message)
-              ngx.log(level, string.format("[%s] %s", os.date("%Y-%m-%d %H:%M:%S"), message))
-            end
-            
-            local function activate_vllm()
-              log(ngx.INFO, "Activating VLLM deployment...")
-              local ok = os.execute("/scripts/activate.sh &")
-              if ok then
-                log(ngx.INFO, "VLLM activation triggered successfully")
-              else
-                log(ngx.ERR, "Failed to trigger VLLM activation")
-              end
-            end
-            
-            local function check_vllm_ready()
-              local cmd = string.format(
-                "kubectl get pods -n %s -l %s -o jsonpath='{.items[0].status.phase}'",
-                os.getenv("KUBERNETES_NAMESPACE"),
-                os.getenv("VLLM_POD_LABEL")
-              )
-              local handle = io.popen(cmd)
-              local result = handle:read("*a")
-              handle:close()
-              if result == "Running" then
-                log(ngx.INFO, "VLLM pod is running")
-              else
-                log(ngx.INFO, "VLLM pod status: " .. (result or "unknown"))
-              end
-              return result == "Running"
-            end
-            
-            if not check_vllm_ready() then
-              log(ngx.INFO, "VLLM pod not ready, starting activation sequence")
-              activate_vllm()
-              local timeout = tonumber(os.getenv("ACTIVATION_TIMEOUT"))
-              local start = ngx.now()
-              while not check_vllm_ready() do
-                if ngx.now() - start > timeout then
-                  log(ngx.ERR, "VLLM activation timed out after " .. timeout .. " seconds")
-                  ngx.status = 503
-                  ngx.header["X-Error"] = "VLLM service activation timeout"
-                  ngx.say("VLLM service activation timeout")
-                  ngx.exit(503)
-                end
-                ngx.sleep(1)
-              end
-              log(ngx.INFO, "VLLM pod is now ready")
-            end
-            
-            os.execute("/scripts/reset_timer.sh &")
-          }
-          
-          set_by_lua_block $backend_url {
-            return "http://" .. backend_host .. ":" .. backend_port
-          }
-          
-          proxy_pass $backend_url;
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-        }
-        
-        location /health {
-          access_by_lua_block {
-            ngx.log(ngx.INFO, "Health check requested")
-          }
-          return 200 'healthy\n';
-        }
-      }
-    }
----
-# ConfigMap for activation/deactivation scripts
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: autoscaler-scripts
-data:
-  activate.sh: |
-    #!/bin/sh
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Scaling up VLLM deployment in namespace $KUBERNETES_NAMESPACE" >&2
-    kubectl scale deployment -n $KUBERNETES_NAMESPACE $VLLM_DEPLOYMENT_NAME --replicas=1
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Scale up command completed" >&2
-
-  deactivate.sh: |
-    #!/bin/sh
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Scaling down VLLM deployment in namespace $KUBERNETES_NAMESPACE" >&2
-    kubectl scale deployment -n $KUBERNETES_NAMESPACE $VLLM_DEPLOYMENT_NAME --replicas=0
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Scale down command completed" >&2
-
-  reset_timer.sh: |
-    #!/bin/sh
-    TIMER_FILE="/tmp/inactivity_timer"
-    echo $(date +%s) > $TIMER_FILE
-
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting inactivity timer" >&2
-    while true; do
-      sleep 60
-      if [ -f $TIMER_FILE ]; then
-        last_activity=$(cat $TIMER_FILE)
-        now=$(date +%s)
-        inactive_time=$((now - last_activity))
-        echo "[$(date '+%Y-%m-%d %H:%M:%S')] Checking inactivity: ${inactive_time}s elapsed" >&2
-        if [ $inactive_time -gt $INACTIVITY_TIMEOUT ]; then
-          echo "[$(date '+%Y-%m-%d %H:%M:%S')] Inactivity timeout reached (${INACTIVITY_TIMEOUT}s), triggering shutdown" >&2
-          /scripts/deactivate.sh
-          rm $TIMER_FILE
-          break
-        fi
-      fi
-    done
+            - name: PROXY_TIMEOUT # New setting for HTTP client timeout
+              value: "30.0"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
 ---
 # Service for the autoscaler
 apiVersion: v1
@@ -226,6 +67,6 @@ spec:
   selector:
     app: vllm-autoscaler
   ports:
-    - port: 80
-      targetPort: 80
+    - port: 8000
+      targetPort: 8000
   type: ClusterIP
