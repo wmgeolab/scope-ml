@@ -16,6 +16,14 @@ RUN poetry install --no-root && rm -rf $POETRY_CACHE_DIR
 
 FROM python:3.11-slim as runtime
 
+RUN apt-get update && \
+    apt-get install -y curl ca-certificates && \
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+    chmod +x kubectl && \
+    mv kubectl /usr/local/bin/ && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 ENV VIRTUAL_ENV=/app/.venv \
