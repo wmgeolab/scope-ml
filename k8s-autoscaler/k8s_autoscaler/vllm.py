@@ -20,6 +20,10 @@ class VLLMManager:
     async def ensure_running(self) -> bool:
         """Ensure vLLM is running, scaling up if necessary."""
         async with self.state.scaling_lock:
+            if not await self.kube.deployment_exists():
+                logger.info(f"Deployment {self.settings.vllm_deployment} not found")
+                return False
+            
             phase = await self.kube.get_pod_phase()
             if phase == PodPhase.RUNNING:
                 return True
@@ -49,6 +53,9 @@ class VLLMManager:
         try:
             while True:
                 await asyncio.sleep(60)
+                if not await self.kube.deployment_exists():
+                    break
+                
                 current_replicas, _ = await self.kube.get_replicas()
                 if (
                     time.time() - self.state.last_activity

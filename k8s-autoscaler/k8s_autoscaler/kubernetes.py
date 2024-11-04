@@ -16,6 +16,7 @@ class KubeCommand:
     async def execute(self, cmd: str) -> tuple[bool, str]:
         """Execute a kubectl command and return success status and output."""
         full_cmd = f"{self.settings.kubectl_base_cmd} {cmd}"
+        logger.debug(f"Executing kubectl command: {full_cmd}")
         try:
             process = await asyncio.create_subprocess_shell(
                 full_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE
@@ -34,13 +35,24 @@ class KubeCommand:
     async def get_pod_phase(self) -> PodPhase:
         """Get the phase of the vLLM pod."""
         success, output = await self.execute(
-            "get pods -l app=vllm -o jsonpath='{.items[0].status.phase}'"
+            "get pods -l app=vllm -o jsonpath='{.items[*].status.phase}'"
         )
-        try:
-            return PodPhase(output) if success and output else PodPhase.UNKNOWN
-        except ValueError:
-            logger.warning(f"Unknown pod phase: {output}")
+        
+        if not success or not output:
+            logger.info("No vLLM pods found")
             return PodPhase.UNKNOWN
+            
+        # If multiple pods exist, get the first non-failed one
+        phases = output.split()
+        for phase in phases:
+            try:
+                pod_phase = PodPhase(phase)
+                if pod_phase != PodPhase.FAILED:
+                    return pod_phase
+            except ValueError:
+                logger.warning(f"Unknown pod phase: {phase}")
+                
+        return PodPhase.UNKNOWN
 
     async def scale_deployment(self, replicas: int) -> bool:
         """Scale vLLM deployment to specified replicas."""
@@ -69,3 +81,9 @@ class KubeCommand:
             except ValueError:
                 logger.error(f"Failed to parse replica counts: {output}")
         return -1, -1
+
+    async def deployment_exists(self) -> bool:
+        """Check if the vLLM deployment exists."""
+        cmd = f"get deployment {self.settings.vllm_deployment} --no-headers"
+        success, _ = await self.execute(cmd)
+        return success
