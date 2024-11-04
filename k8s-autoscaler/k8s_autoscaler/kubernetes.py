@@ -27,6 +27,8 @@ class KubeCommand:
             output = stdout.decode().strip() if success else stderr.decode().strip()
             if not success:
                 logger.error(f"kubectl command failed: {output}")
+            
+            logger.debug(f"Command output: `{output}`")
             return success, output
         except Exception as e:
             logger.error(f"kubectl command failed: {e}")
@@ -60,27 +62,31 @@ class KubeCommand:
             logger.error(f"Invalid replica count: {replicas}")
             return False
 
+        # success, output = await self.execute(
+        #     f"scale deployment {self.settings.vllm_deployment} --replicas={replicas}"
+        # )
+        
         success, output = await self.execute(
-            f"scale deployment {self.settings.vllm_deployment} --replicas={replicas}"
+            f"patch deployment {self.settings.vllm_deployment} -p '{{\"spec\":{{\"replicas\":{replicas}}}}}'"
         )
+        
         if success:
             logger.info(f"Successfully scaled deployment to {replicas} replicas")
         return success
 
-    async def get_replicas(self) -> tuple[int, int]:
-        """Get current and desired replica counts."""
+    async def get_replicas(self) -> int:
+        """Get desired replica count."""
         cmd = (
             f"get deployment {self.settings.vllm_deployment} "
-            "-o jsonpath='{.status.replicas} {.spec.replicas}'"
+            "-o jsonpath='{.spec.replicas}'"
         )
         success, output = await self.execute(cmd)
         if success and output:
             try:
-                current, desired = map(int, output.split())
-                return current, desired
+                return int(output)
             except ValueError:
-                logger.error(f"Failed to parse replica counts: {output}")
-        return -1, -1
+                logger.error(f"Failed to parse replica count: {output}")
+        return -1
 
     async def deployment_exists(self) -> bool:
         """Check if the vLLM deployment exists."""

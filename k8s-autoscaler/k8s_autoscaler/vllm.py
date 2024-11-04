@@ -56,7 +56,7 @@ class VLLMManager:
                 if not await self.kube.deployment_exists():
                     break
                 
-                current_replicas, _ = await self.kube.get_replicas()
+                current_replicas = await self.kube.get_replicas()
                 if (
                     time.time() - self.state.last_activity
                     > self.settings.inactivity_timeout

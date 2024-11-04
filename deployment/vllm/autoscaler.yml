@@ -18,6 +18,7 @@ spec:
       containers:
         - name: autoscaler
           image: ghcr.io/wmgeolab/k8s-autoscaler:latest # Update this to your image
+          imagePullPolicy: Always
           securityContext:
             runAsGroup: 50036
             runAsUser: 237827
@@ -38,6 +39,10 @@ spec:
           env:
             - name: KUBECONFIG
               value: /app/.kube/config
+            - name: UVICORN_LOG_LEVEL
+              value: "debug"
+            - name: LOG_LEVEL
+              value: "debug"
             - name: VLLM_SERVICE_HOST
               value: "vllm-svc"
             - name: VLLM_SERVICE_PORT

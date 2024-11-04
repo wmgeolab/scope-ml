@@ -39,13 +39,13 @@ async def health_check(
 ):
     """Health check endpoint."""
     phase = await kube.get_pod_phase()
-    current_replicas, desired_replicas = await kube.get_replicas()
+    current_replicas = await kube.get_replicas()
     return {
         "status": "healthy",
         "vllm_status": phase,
         "vllm_running": phase == PodPhase.RUNNING,
         "current_replicas": current_replicas,
-        "desired_replicas": desired_replicas,
+        # "desired_replicas": desired_replicas,
         "last_activity": time.strftime(
             "%Y-%m-%d %H:%M:%S", time.localtime(state.last_activity)
         ),
