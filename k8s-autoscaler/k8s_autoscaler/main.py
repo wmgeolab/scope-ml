@@ -11,7 +11,8 @@ import asyncio
 # Configure logging
 app_log_level = os.getenv("LOG_LEVEL", "info").upper()
 logging.basicConfig(
-    level=getattr(logging, app_log_level), format="%(asctime)s - %(levelname)s - %(message)s"
+    level=getattr(logging, app_log_level),
+    format="%(asctime)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
 
@@ -51,7 +52,7 @@ app.include_router(routes.router)
 
 if __name__ == "__main__":
     import uvicorn
-    
-    uvicorn_log_level = os.getenv("UVICORN_LOG_LEVEL", "info").upper()
+
+    uvicorn_log_level = os.getenv("UVICORN_LOG_LEVEL", "debug")
 
     uvicorn.run(app, host="0.0.0.0", port=8000, log_level=uvicorn_log_level)

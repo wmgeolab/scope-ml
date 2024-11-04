@@ -34,8 +34,6 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 # Copy application code
 COPY k8s_autoscaler/ ./k8s_autoscaler/
 
-ENV UVICORN_LOG_LEVEL=${UVICORN_LOG_LEVEL:-info}
-ENV LOG_LEVEL=${LOG_LEVEL:-info}
-
 # Run the application
-CMD ["uvicorn", "k8s_autoscaler.main:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "${UVICORN_LOG_LEVEL}"]
+# CMD ["uvicorn", "k8s_autoscaler.main:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "${UVICORN_LOG_LEVEL}"]
+CMD ["python", "-m", "k8s_autoscaler.main"]
