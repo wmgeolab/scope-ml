@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 import httpx
+import os
 import logging
 from .config import Settings
 from .types import AutoscalerState
@@ -8,8 +9,9 @@ from .api import routes
 import asyncio
 
 # Configure logging
+app_log_level = os.getenv("LOG_LEVEL", "info").upper()
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+    level=getattr(logging, app_log_level), format="%(asctime)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
 
@@ -49,5 +51,7 @@ app.include_router(routes.router)
 
 if __name__ == "__main__":
     import uvicorn
+    
+    uvicorn_log_level = os.getenv("UVICORN_LOG_LEVEL", "info").upper()
 
-    uvicorn.run(app, host="0.0.0.0", port=80)
+    uvicorn.run(app, host="0.0.0.0", port=8000, log_level=uvicorn_log_level)
