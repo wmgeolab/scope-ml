@@ -23,6 +23,8 @@ ENV VIRTUAL_ENV=/app/.venv \
 
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
-COPY gef_portal_scraper/get_project_ids.py ./src/
+# Copy application code
+COPY k8s_autoscaler/ ./k8s_autoscaler/
 
-CMD ["python", "./k8s_autoscaler/main.py"]
+# Run the application
+CMD ["uvicorn", "k8s_autoscaler.main:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info"]
