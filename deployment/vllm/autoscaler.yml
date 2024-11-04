@@ -17,10 +17,15 @@ spec:
         - name: github-registry-secret
       containers:
         - name: autoscaler
-          image: ghcr.io/wmgeolab/vllm-autoscaler:latest # Update this to your image
+          image: ghcr.io/wmgeolab/k8s-autoscaler:latest # Update this to your image
           securityContext:
             runAsGroup: 50036
             runAsUser: 237827
+            # runAsNonRoot: true
+          volumeMounts:
+            - name: kube-config
+              mountPath: /app/.kube
+              readOnly: true
           resources:
             requests:
               memory: "128Mi" # Increased slightly for Python runtime
@@ -31,6 +36,8 @@ spec:
           ports:
             - containerPort: 8000
           env:
+            - name: KUBECONFIG
+              value: /app/.kube/config
             - name: VLLM_SERVICE_HOST
               value: "vllm-svc"
             - name: VLLM_SERVICE_PORT
@@ -57,6 +64,10 @@ spec:
               port: 8000
             initialDelaySeconds: 5
             periodSeconds: 10
+      volumes:
+        - name: kube-config
+          secret:
+            secretName: kube-certs
 ---
 # Service for the autoscaler
 apiVersion: v1
