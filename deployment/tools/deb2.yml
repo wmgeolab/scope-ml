@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deb-tools2
+spec:
+  imagePullSecrets:
+    - name: github-registry-secret
+  containers:
+    - image: ghcr.io/wmgeolab/deb-tools:latest
+      volumeMounts:
+        - name: scopenfs
+          mountPath: /scope # Any path you want to mount to.
+        - name: kube-config
+          mountPath: /app/.kube
+          readOnly: true
+        - name: 237827-home
+          mountPath: /home/237827
+      env:
+        - name: KUBECONFIG
+          value: /app/.kube/config
+        - name: HOME
+          value: /home/237827
+      command: ["/bin/bash", "-c"]
+      args: ["sleep infinity"]
+      imagePullPolicy: Always
+      name: debian
+      resources:
+        limits:
+          cpu: "2" # Total 32 cores.
+          memory: "4Gi"
+        requests:
+          cpu: "2" # Total 32 cores.
+          memory: "4Gi"
+      securityContext:
+        runAsGroup: 50036
+        runAsUser: 237827
+  volumes:
+    - name: scopenfs
+      nfs:
+        server: 128.239.59.144 # NFS Server address.
+        path: /sciclone/geograd/scope
+    - name: kube-config
+      secret:
+        secretName: kube-certs
+    - name: 237827-home
+      nfs:
+        server: 128.239.59.144
+        path: /sciclone/geograd/scope/user-data/237827
