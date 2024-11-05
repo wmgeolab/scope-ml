@@ -1,5 +1,5 @@
 # app/dependencies.py
-from fastapi import Depends
+from fastapi import Depends, Request
 from .config import Settings
 from .types import AutoscalerState
 from .kubernetes import KubeCommand
@@ -10,8 +10,8 @@ def get_settings() -> Settings:
     return Settings()
 
 
-def get_state() -> AutoscalerState:
-    return AutoscalerState()
+def get_state(request: Request) -> AutoscalerState:
+    return request.app.state.state
 
 
 def get_kube(settings: Settings = Depends(get_settings)) -> KubeCommand:
