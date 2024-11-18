@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: text-embedding
+  labels:
+    app: text-embedding
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: text-embedding
+  template:
+    metadata:
+      labels:
+        app: text-embedding
+    spec:
+      containers:
+        - name: text-embedding
+          image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.5
+          imagePullPolicy: Always
+          env:
+            - name: MODEL_ID
+              value: "nomic-ai/nomic-embed-text-v1.5"
+          volumeMounts:
+            - name: scopenfs-tei
+              mountPath: /data  # Any path you want to mount to.
+          resources:
+            limits:
+              cpu: "8"
+              memory: 8Gi
+          securityContext:
+            runAsGroup: 50036
+          ports:
+            - containerPort: 80
+      volumes:
+        - name: scopenfs-tei
+          nfs:
+            server: 128.239.59.144  # NFS Server address.
+            path: /sciclone/geograd/scope/k8s-storage/text-embedding
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: text-embedding-svc
+spec:
+  selector:
+    app: text-embedding
+  ports:
+    - name: service-port
+      port: 8080
+      targetPort: 80
+  type: ClusterIP
