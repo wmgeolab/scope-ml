@@ -29,10 +29,16 @@ scaler-down:
 
 generate-tokens:
 	@echo "Generating tokens..."
-	@echo "curl -s -X POST \"$(SERVICE_URL)/v1/completions\" -H \"Content-Type: $(CONTENT_TYPE)\" -d '{\"model\": \"$(MODEL_NAME)\", \"prompt\": $(PROMPT), \"max_tokens\": 10, \"temperature\": 0}'"
+	@echo "curl -s -X POST \"$(SERVICE_URL)/v1/completions\" -H \"Content-Type: $(CONTENT_TYPE)\" -d '{\"model\": \"$(MODEL_NAME)\", \"prompt\": $(PROMPT), \"max_tokens\": $(NUM_TOKENS), \"temperature\": 0}'"
 	@curl -s -X POST "$(SERVICE_URL)/v1/completions" \
 		-H "Content-Type: $(CONTENT_TYPE)" \
 		-d '{"model": "$(MODEL_NAME)", "prompt": "$(PROMPT)", "max_tokens": $(NUM_TOKENS), "temperature": 0}' | jq
+
+generate-proxy:
+	@echo "Generating tokens using proxy..."
+	@curl -s -X POST "$(AUTOSCALER_URL)/v1/completions" \
+		-H "Content-Type: $(CONTENT_TYPE)" \
+		-d '{"model": "$(MODEL_NAME)", "prompt": $(PROMPT), "max_tokens": $(NUM_TOKENS), "temperature": 0}' | jq
 
 help:
 	@echo "Available commands:"
