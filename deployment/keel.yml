@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keel
+  labels:
+    app: keel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keel
+  template:
+    metadata:
+      labels:
+        app: keel
+    spec:
+      containers:
+        - name: keel
+          image: keelhq/keel:latest
+          imagePullPolicy: Always
+          command: ["/bin/keel"]
+          ports:
+            - containerPort: 9300
+          env:
+            - name: KEEL_WEBHOOK_URL
+              value: "http://keel-webhook-service:9300"
+            - name: KEEL_WEBHOOK_SECRET
+              value: "my-webhook-secret"
