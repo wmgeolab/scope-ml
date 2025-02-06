@@ -1,0 +1,44 @@
+{
+  "pif_review": {
+    "review_sections": {
+      "Project Design": {
+        "questions": [
+          {
+            "text": "drivers² of global environmental degradation, issues of sustainability, market transformation, scaling, and innovation?",
+            "secretariat_comment": {
+              "date": "",
+              "comment": "Yes, on pages 4, 13-14."
+            },
+            "agency_response": ""
+          },
+          {
+            "number": "4",
+            "text": "Is the project designed with sound incremental reasoning?",
+            "secretariat_comment": {
+              "date": "4/18/2018 MY:",
+              "comment": "Yes. It is shown on pages 12 and 13."
+            },
+            "agency_response": ""
+          },
+          {
+            "number": "5",
+            "text": "Are the components in Table B sound and sufficiently clear and appropriate to achieve project objectives and the GEBs?",
+            "secretariat_comment": {
+              "date": "4/18/2018 MY:",
+              "comment": "Not completed at this time. The Table is well designed, but the PM would propose to add one more task in the Table and in the text of the PIF as well. Per the PIF, the key driver of power generation capacity shortage is that the tariffs in the power system are government controlled and are generally low. The private sector does not have incentive to invest in power supply side under the low electricity prices/tariffs. In the meantime, many commercial firms (electricity end users) cannot get sufficient power supply. Can the Agency help the government to develop a national policy to resolve this issue via this GEF project? For example, a policy can require a power utility company to accept electricity with high tariffs from a power generation company and provide the electricity to a commercial end-user with high tariffs."
+            },
+            "agency_response": ""
+          }
+        ]
+      }
+    }
+  },
+  "footnotes": {
+    "1": "For BD projects: has the project explicitly articulated which Aichi Target(s) the project will help achieve and are SMART indicators identified, that will be used to track the project's contribution toward achieving the Aichi Target(s)?",
+    "2": "Need not apply to LDCF/SCCF projects."
+  },
+  "footer": {
+    "template_info": "GEF-6 FSP/MSP Review Template January2015",
+    "page_number": "2"
+  }
+}

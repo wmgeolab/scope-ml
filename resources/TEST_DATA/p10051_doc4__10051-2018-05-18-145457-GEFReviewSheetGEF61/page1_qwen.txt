@@ -1,0 +1,56 @@
+```json
+{
+  "document_title": "gef-6 gef secretariat review for full-sized/medium-sized projects the gef/lDCF/SCCF trust fund",
+  "project_details": {
+    "gef_id": "10051",
+    "country_region": "djibouti",
+    "project_title": "promoting a better access to modern energy services through sustainable mini-grids and hybrid technologies in djibouti",
+    "gef_agency": "undp",
+    "type_of_trust_fund": "gef trust fund",
+    "gef_focal_area": "climate change",
+    "gef_6_focal_area_lDCF_SCCF_objective": "ccm-1 program 1",
+    "anticipated_financing_PPG": "$50,000",
+    "co_financing": "$4,000,000",
+    "PIF_approval": "may 18, 2018",
+    "ceo_endorsement_approval": "",
+    "program_manager": "ming yang",
+    "agency_contact_person": "saliou toure"
+  },
+  "pif_review": {
+    "review_sections": {
+      "project_consistency": {
+        "questions": [
+          {
+            "number": "1",
+            "text": "is the project aligned with the relevant gef strategic objectives and results framework?",
+            "secretariat_comment": {
+              "date": "4/18/2018",
+              "comment": "yes, it is aligned with ccm-1: technology transfer, and supportive policies and strategies; program 1: promote timely development, demonstration and financing of low-carbon technologies and mitigation options"
+            }
+          },
+          {
+            "number": "2",
+            "text": "is the project consistent with the recipient country's national strategies and plans or reports and assessments under relevant conventions?",
+            "secretariat_comment": {
+              "date": "4/18/2018",
+              "comment": "yes, it is stated on pages 17-18"
+            }
+          }
+        ]
+      },
+      "project_design": {
+        "questions": [
+          {
+            "number": "3",
+            "text": "does the PIF sufficiently indicate the",
+            "secretariat_comment": {
+              "date": "4/18/2018",
+              "comment": ""
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+```

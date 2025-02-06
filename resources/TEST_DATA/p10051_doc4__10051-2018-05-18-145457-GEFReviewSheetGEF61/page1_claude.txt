@@ -1,0 +1,61 @@
+{
+  "document_title": "GEF-6 GEF SECRETARIAT REVIEW FOR FULL-SIZED/MEDIUM-SIZED PROJECTS THE GEF/LDCF/SCCF TRUST FUND",
+  "project_details": {
+    "GEF ID": "10051",
+    "Country/Region": "Djibouti",
+    "Project Title": "Promoting a Better Access to Modern Energy Services through Sustainable Mini-grids and Hybrid Technologies in Djibouti",
+    "GEF Agency": "UNDP",
+    "GEF Agency Project ID": "6202 (UNDP)",
+    "Type of Trust Fund": "GEF Trust Fund",
+    "GEF Focal Area (s)": "Climate Change",
+    "GEF-6 Focal Area/ LDCF/SCCF Objective (s)": "CCM-1 Program 1;",
+    "Anticipated Financing PPG": "$50,000",
+    "Project Grant": "$863,242",
+    "Co-financing": "$4,000,000",
+    "Total Project Cost": "$4,913,242",
+    "PIF Approval": "May 18, 2018",
+    "Council Approval/Expected": "",
+    "CEO Endorsement/Approval": "",
+    "Expected Project Start Date": "",
+    "Program Manager": "Ming Yang",
+    "Agency Contact Person": "Saliou Toure"
+  },
+  "pif_review": {
+    "review_sections": {
+      "Project Consistency": {
+        "questions": [
+          {
+            "number": "1",
+            "text": "Is the project aligned with the relevant GEF strategic objectives and results framework?",
+            "secretariat_comment": {
+              "date": "4/18/2018 MY:",
+              "comment": "Yes, it is aligned with CCM-1: Technology Transfer, and Supportive Policies and Strategies; Program 1: Promote timely development, demonstration and financing of low-carbon technologies and mitigation options"
+            }
+          },
+          {
+            "number": "2",
+            "text": "Is the project consistent with the recipient country's national strategies and plans or reports and assessments under relevant conventions?",
+            "secretariat_comment": {
+              "date": "4/18/2018 MY:",
+              "comment": "Yes, it is stated on pages 17-18."
+            }
+          }
+        ]
+      },
+      "Project Design": {
+        "questions": [
+          {
+            "number": "3",
+            "text": "Does the PIF sufficiently indicate the",
+            "secretariat_comment": {
+              "date": "4/18/2018 MY:",
+              "comment": ""
+            }
+          }
+        ]
+      }
+    }
+  },
+  "footer": "GEF-6 FSP/MSP Review Template January2015",
+  "page_number": "1"
+}
