@@ -1,2 +1,15 @@
 FROM vllm/vllm-openai:v0.7.2
 RUN pip install git+https://github.com/huggingface/transformers.git
+
+# Use geolab group (50036) and sawyer's id (237827)
+RUN groupadd -g 50036 vllm_user && \
+    useradd -u 237827 -g vllm_user -m -s /bin/bash vllm_user
+
+RUN mkdir -p /home/vllm_user/.vllm && \
+    chown -R vllm_user:vllm_user /home/vllm_user
+
+ENV HOME=/home/vllm_user
+
+WORKDIR /home/vllm_user
+
+USER vllm_user
