@@ -156,7 +156,7 @@ def main():
 
     # project_ids = get_ids_from_json("gef_7_project_ids")
 
-    download_project_ids(project_ids[0:10])
+    download_project_ids(project_ids)
 
 
 if __name__ == "__main__":

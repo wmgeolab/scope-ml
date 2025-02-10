@@ -5,7 +5,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Install Poetry
-RUN pip install poetry
+RUN pip install poetry==1.8.3
 
 # Copy the pyproject.toml and poetry.lock files
 COPY pyproject.toml poetry.lock ./
