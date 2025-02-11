@@ -29,6 +29,7 @@ def setup_logging():
     logging.basicConfig(
         level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
     )
+    #logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO) # Uncomment to enable detailed sql logs
 
 def get_project_ids_from_csv(path, interested_years=None) -> list[str]:
     project_ids = []
