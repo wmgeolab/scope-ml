@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reranker
+  labels:
+    app: reranker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reranker
+  template:
+    metadata:
+      labels:
+        app: reranker
+    spec:
+      containers:
+        - name: reranker
+          image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.6
+          imagePullPolicy: Always
+          env:
+            - name: MODEL_ID
+              value: "BAAI/bge-reranker-large"
+          volumeMounts:
+            - name: scopenfs-tei
+              mountPath: /data  # Any path you want to mount to.
+          resources:
+            limits:
+              cpu: "8"
+              memory: 8Gi
+          securityContext:
+            runAsGroup: 50036
+          ports:
+            - containerPort: 80
+      volumes:
+        - name: scopenfs-tei
+          nfs:
+            server: 128.239.59.144  # NFS Server address.
+            path: /sciclone/geograd/scope/k8s-storage-new/text-embedding
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reranker-svc
+spec:
+  selector:
+    app: reranker
+  ports:
+    - name: service-port
+      port: 8080
+      targetPort: 80
+  type: ClusterIP
