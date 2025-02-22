@@ -35,7 +35,7 @@ def get_qdrant_vector_store(
             raise
 
     vector_store = QdrantVectorStore(
-        collection_name=collection_name, qdrant_client=qdrant_client
+        collection_name=collection_name, client=qdrant_client
     )
 
     return vector_store
