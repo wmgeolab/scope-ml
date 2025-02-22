@@ -12,7 +12,8 @@ from qdrant_client.http.models import Distance, VectorParams
 def get_qdrant_vector_store(
     collection_name: str = settings.QDRANT_COLLECTION_NAME,
     qdrant_client: QdrantClient | None = None,
-    recreate=False,
+    recreate_existing_collection=False,
+    create_missing_collection=True,
 ) -> QdrantVectorStore:
     """Get the Qdrant vector store."""
 
@@ -23,7 +24,7 @@ def get_qdrant_vector_store(
     try:
         qdrant_client.get_collection(collection_name)
     except Exception:
-        if recreate:
+        if create_missing_collection:
             qdrant_client.recreate_collection(
                 collection_name=collection_name,
                 vectors_config=VectorParams(

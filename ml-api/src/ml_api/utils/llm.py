@@ -4,7 +4,7 @@ from llama_index.llms.openai_like import OpenAILike
 from ml_api.config import settings
 
 
-def get_llm(model_name: str = settings.DEFAULT_LLM_NAME):
+def get_llm(model_name: str = settings.VLLM_LLM_MODEL_NAME):
     return OpenAILike(
         model=model_name,
         api_base=settings.VLLM_URL,

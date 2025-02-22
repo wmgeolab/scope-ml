@@ -3,10 +3,11 @@ from pathlib import Path
 
 
 class Settings(BaseSettings):
-    # vLLM
+    # vLLM / TEI
     VLLM_URL: str = ""
-    DEFAULT_LLM_NAME: str = ""
-    DEFAULT_EMBEDDING_MODEL: str = "TODO"
+    VLLM_LLM_MODEL_NAME: str = ""
+    TEI_URL: str = ""
+    TEI_EMBEDDING_MODEL_NAME: str = "TODO"
 
     # LLM
     LLM_CONTEXT_WINDOW: int = 32768
