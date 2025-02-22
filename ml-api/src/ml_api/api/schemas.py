@@ -8,3 +8,7 @@ class GEFRagRequest(BaseModel):
 
 class GEFRagResponse(BaseModel):
     answers: dict[str, str]
+
+
+class IngestionRequest(BaseModel):
+    project_ids: list[str]

@@ -1,9 +1,10 @@
 import asyncio
 
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
+from ml_api.ingestion.ingestion_service import IngestionService
 from ml_api.rag_inference.rag_service import generate_rag_response
 
-from .schemas import GEFRagRequest, GEFRagResponse
+from .schemas import GEFRagRequest, GEFRagResponse, IngestionRequest
 
 router = APIRouter()
 
@@ -37,3 +38,30 @@ async def generate_rag_response_request(request: GEFRagRequest) -> GEFRagRespons
     }
 
     return GEFRagResponse(answers=response_dict)
+
+
+def ingest_projects_background(project_ids: list[str], service: IngestionService):
+    """Ingests data into the system in the background."""
+
+    project_base_dir = service.data_base_dir
+    project_dirs = [project_base_dir / project_id for project_id in project_ids]
+
+    for project_dir in project_dirs:
+        service.ingest_directory(project_dir)
+
+
+@router.get("/ingestion/projects")
+async def ingest_data(request: IngestionRequest, background_tasks: BackgroundTasks):
+    """Ingests data into the system."""
+
+    service = IngestionService()
+
+    background_tasks.add_task(
+        ingest_projects_background,
+        request.project_ids,
+        service,
+    )
+
+    return {
+        "message": f"Ingestion service initialized and running in the background. Project IDs: {request.project_ids}"
+    }

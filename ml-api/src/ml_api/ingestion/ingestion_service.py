@@ -109,6 +109,9 @@ class IngestionService:
     def ingest_directory(self, directory: Path = settings.DATA_BASE_DIR):
         """Ingest all files in a directory.
 
+        This method will enumerate all files in the given directory and its subdirectories,
+        and ingest them in batches.
+
         TODO: Make this check the database for existing files and only ingest new ones.
         """
 
