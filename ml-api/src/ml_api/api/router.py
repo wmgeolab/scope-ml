@@ -20,7 +20,7 @@ async def healthcheck_sleep(sleep_time: int):
     return {"status": "ok"}
 
 
-@router.get("/generate_rag_response")
+@router.post("/generate_rag_response")
 async def generate_rag_response_request(request: GEFRagRequest) -> GEFRagResponse:
     """Generates a RAG response for a single question in a specific GEF project."""
 
@@ -50,7 +50,7 @@ def ingest_projects_background(project_ids: list[str], service: IngestionService
         service.ingest_directory(project_dir)
 
 
-@router.get("/ingestion/projects")
+@router.post("/ingestion/projects")
 async def ingest_data(request: IngestionRequest, background_tasks: BackgroundTasks):
     """Ingests data into the system."""
 
