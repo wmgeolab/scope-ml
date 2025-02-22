@@ -25,7 +25,7 @@ def get_qdrant_vector_store(
         qdrant_client.get_collection(collection_name)
     except Exception:
         if create_missing_collection:
-            qdrant_client.recreate_collection(
+            qdrant_client.create_collection(
                 collection_name=collection_name,
                 vectors_config=VectorParams(
                     size=settings.EMBEDDING_SIZE, distance=Distance.COSINE
