@@ -47,13 +47,14 @@ generate-proxy:
 
 ingest-projects:
 	@if [ -z "$(PROJECT_IDS)" ]; then \
-		echo "Error: PROJECT_IDS is required. Use: make ingest-projects PROJECT_IDS='[\"id1\",\"id2\"]'"; \
+		echo "Error: PROJECT_IDS is required. Use: make ingest-projects PROJECT_IDS=9467,9468"; \
 		exit 1; \
 	fi
 	@echo "Starting ingestion for projects: $(PROJECT_IDS)"
-	@curl -N -X POST "$(ML_API_URL)/ingestion/projects" \
+	@PROJECT_IDS_JSON=$$(echo "[\"$$(echo $(PROJECT_IDS) | sed 's/,/\",\"/g')\"]"); \
+	curl -N -X POST "$(ML_API_URL)/ingestion/projects" \
 		-H "Content-Type: $(CONTENT_TYPE)" \
-		-d "{\"project_ids\": $(PROJECT_IDS)}"
+		-d "{\"project_ids\": $$PROJECT_IDS_JSON}"
 
 help:
 	@echo "Available commands:"
