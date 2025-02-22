@@ -6,6 +6,10 @@ MODEL_NAME := mistralai/Mistral-7B-Instruct-v0.3
 PROMPT := \"Give a detailed summary of the various activities to do in San Francisco.\"
 NUM_TOKENS ?= 1024
 
+## ML API
+PROJECT_IDS ?=
+ML_API_URL := http://ml-api-svc:8000
+
 # Targets
 .PHONY: list-models generate-tokens auto help
 
@@ -39,6 +43,17 @@ generate-proxy:
 	@curl -s -X POST "$(AUTOSCALER_URL)/v1/completions" \
 		-H "Content-Type: $(CONTENT_TYPE)" \
 		-d '{"model": "$(MODEL_NAME)", "prompt": $(PROMPT), "max_tokens": $(NUM_TOKENS), "temperature": 0}' | jq
+
+
+ingest-projects:
+	@if [ -z "$(PROJECT_IDS)" ]; then \
+		echo "Error: PROJECT_IDS is required. Use: make ingest-projects PROJECT_IDS='[\"id1\",\"id2\"]'"; \
+		exit 1; \
+	fi
+	@echo "Starting ingestion for projects: $(PROJECT_IDS)"
+	@curl -N -X POST "$(ML_API_URL)/ingestion/projects" \
+		-H "Content-Type: $(CONTENT_TYPE)" \
+		-d "{\"project_ids\": $(PROJECT_IDS)}"
 
 help:
 	@echo "Available commands:"
