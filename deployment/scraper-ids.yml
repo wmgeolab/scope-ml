@@ -9,23 +9,35 @@ spec:
       labels:
         name: scraper-ids
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - gu14.sciclone.wm.edu
+                      - d3i01.sciclone.wm.edu
       containers:
         - name: scraper-ids
           image: ghcr.io/wmgeolab/get_project_ids:latest
+          securityContext:
+            runAsGroup: 50036
           volumeMounts:
             - name: scopenfs-scopedata
               mountPath: /scope/scope-data
           resources:
             limits:
-              memory: "2Gi"
-              cpu: "2"
+              memory: "4Gi"
+              cpu: "4"
           env:
             - name: OUTPUT_DIR
               value: "/scope/scope-data/gef/"
             - name: RATE_LIMIT
-              value: "100"
+              value: "125"
             - name: BATCH_SIZE
-              value: "250"
+              value: "500"
             - name: USE_FILE_TIMESTAMPS
               value: "false"
       imagePullSecrets:
