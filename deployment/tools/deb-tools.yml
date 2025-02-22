@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: deb-tools2
+  name: deb-tools
 spec:
   imagePullSecrets:
     - name: github-registry-secret
@@ -18,6 +18,8 @@ spec:
         - name: bash-config
           mountPath: /home/237827/.bashrc
           subPath: .bashrc
+        - name: sciclone-home
+          mountPath: /sciclone-home
       env:
         - name: KUBECONFIG
           value: /app/.kube/config
@@ -52,6 +54,10 @@ spec:
     - name: bash-config
       configMap:
         name: bash-config
+    - name: sciclone-home
+      nfs:
+        server: 128.239.56.166
+        path: /sciclone/home/sczupka/
 
 ---
 apiVersion: v1
