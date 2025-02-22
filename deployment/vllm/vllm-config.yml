@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: vllm
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: vllm
@@ -44,6 +44,7 @@ spec:
                   key: token
           securityContext:
             runAsGroup: 50036
+            runAsUser: 237827
       volumes:
         - name: cache-volume
           nfs:
