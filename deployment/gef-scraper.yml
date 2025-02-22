@@ -9,17 +9,29 @@ spec:
       labels:
         name: gef-scraper
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - gu14.sciclone.wm.edu
+                      - d3i01.sciclone.wm.edu
       containers:
         - name: gef-scraper
           image: ghcr.io/wmgeolab/gef-portal-scraper:latest
+          securityContext:
+            runAsGroup: 50036
           imagePullPolicy: Always
           volumeMounts:
             - name: scopenfs-scopedata
               mountPath: /app/data
           resources:
             limits:
-              memory: "2Gi"
-              cpu: "2"
+              memory: "10Gi"
+              cpu: "6"
           env:
             - name: OUTPUT_PATH
               value: "/app/data/output"
