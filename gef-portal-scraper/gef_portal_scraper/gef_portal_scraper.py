@@ -156,6 +156,8 @@ def main():
     project_ids = get_project_ids_from_json(PROJECTS_JSON_PATTERN)
 
     # project_ids = get_ids_from_json("gef_7_project_ids")
+    
+    logging.info(f"Collected {len(project_ids)} project IDs from json file")
 
     download_project_ids(project_ids)
 
