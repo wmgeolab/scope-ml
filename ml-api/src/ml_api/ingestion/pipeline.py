@@ -11,6 +11,16 @@ def get_pipeline(
     persist=settings.PIPELINE_PERSIST,
     persist_path: str = settings.PIPELINE_PERSIST_PATH,
 ) -> IngestionPipeline:
+    """
+    Gets an IngestionPipeline that reads files, splits text into chunks and embeds them with a model.
+
+    Args:
+        persist (bool, optional): Whether to persist the pipeline. Defaults to settings.PIPELINE_PERSIST.
+        persist_path (str, optional): The path where the pipeline should be persisted. Defaults to settings.PIPELINE_PERSIST_PATH.
+
+    Returns:
+        IngestionPipeline: The pipeline.
+    """
     qdrant = get_qdrant_vector_store()
     embed_model = get_embed_model()
 
