@@ -476,6 +476,16 @@ files = [
 ]
 
 [[package]]
+name = "docx2txt"
+version = "0.8"
+description = "A pure python-based utility to extract text and images from docx files."
+optional = false
+python-versions = "*"
+files = [
+    {file = "docx2txt-0.8.tar.gz", hash = "sha256:2c06d98d7cfe2d3947e5760a57d924e3ff07745b379c8737723922e7009236e5"},
+]
+
+[[package]]
 name = "fastapi"
 version = "0.115.8"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
@@ -3155,4 +3165,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.13"
-content-hash = "0ce9c69627b648a84cd664a6e7866c16b572f2fa12ed1e2a7a1da564c5b72fb0"
+content-hash = "20bf79262d9ee5d59ff8ad2c78adc457b30086d77846c31800707f55e351e20b"
