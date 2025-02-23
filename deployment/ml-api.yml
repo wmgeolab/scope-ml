@@ -23,6 +23,10 @@ spec:
             - name: scopenfs
               mountPath: /scope # Any path you want to mount to.
           env:
+            - name: LOGLEVEL
+              value: "DEBUG"
+            - name: UVICORN_LOGLEVEL
+              value: "debug"
             - name: QDRANT_URL
               value: "http://qdrant-svc:6333"
             - name: QDRANT_COLLECTION_NAME
