@@ -51,7 +51,7 @@ spec:
             - name: DATA_BASE_DIR
               value: "/scope/scope-data/gef/output"
             - name: PIPELINE_PERSIST
-              value: True
+              value: "true"
             - name: PIPELINE_PERSIST_DIR
               value: "/scope/k8s-storage/ml-api/ingestion"
           resources:
