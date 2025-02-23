@@ -27,7 +27,7 @@ spec:
             - name: LOGLEVEL
               value: "DEBUG"
             - name: UVICORN_LOGLEVEL
-              value: "debug"
+              value: "info"
 
             # Qdrant
             - name: QDRANT_URL
@@ -52,7 +52,7 @@ spec:
               value: "/scope/scope-data/gef/output"
             - name: PIPELINE_PERSIST
               value: "true"
-            - name: PIPELINE_PERSIST_DIR
+            - name: PIPELINE_PERSIST_PATH
               value: "/scope/k8s-storage/ml-api/ingestion"
           resources:
             limits:
