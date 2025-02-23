@@ -23,26 +23,37 @@ spec:
             - name: scopenfs
               mountPath: /scope # Any path you want to mount to.
           env:
+            # Logs
             - name: LOGLEVEL
               value: "DEBUG"
             - name: UVICORN_LOGLEVEL
               value: "debug"
+
+            # Qdrant
             - name: QDRANT_URL
               value: "http://qdrant-svc:6333"
             - name: QDRANT_COLLECTION_NAME
               value: "scope-gef"
+
+            # VLLM/TEI
             - name: VLLM_URL
               value: "http://vllm-svc:8000"
             - name: VLLM_MODEL_NAME
               value: "TODO"
             - name: TEI_URL
               value: "http://text-embedding-svc:8080"
-            - name: DATA_BASE_DIR
-              value: "/scope/scope-data/gef/output"
             - name: LLM_CONTEXT_WINDOW
               value: "32768"
             - name: LLM_NUM_OUTPUT
               value: "8192"
+
+            # Ingestion
+            - name: DATA_BASE_DIR
+              value: "/scope/scope-data/gef/output"
+            - name: PIPELINE_PERSIST
+              value: True
+            - name: PIPELINE_PERSIST_DIR
+              value: "/scope/k8s-storage/ml-api/ingestion"
           resources:
             limits:
               cpu: 8
