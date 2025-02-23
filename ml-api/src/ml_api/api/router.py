@@ -1,10 +1,13 @@
 import asyncio
+import logging
 
 from fastapi import APIRouter, BackgroundTasks
 from ml_api.ingestion.ingestion_service import IngestionService
 from ml_api.rag_inference.rag_service import generate_rag_response
 
 from .schemas import GEFRagRequest, GEFRagResponse, IngestionRequest
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -48,6 +51,8 @@ def ingest_projects_background(project_ids: list[str], service: IngestionService
 
     for project_dir in project_dirs:
         service.ingest_directory(project_dir)
+
+    logger.info("Ingestion task completed. Projects ingested: %s", project_ids)
 
 
 @router.post("/ingestion/projects")

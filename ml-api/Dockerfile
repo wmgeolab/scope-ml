@@ -56,7 +56,6 @@ WORKDIR /app/src
 EXPOSE 8000
 
 # Start the FastAPI server
-CMD ["uvicorn", "ml_api.main:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info"]
+# CMD ["uvicorn", "ml_api.main:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info"]
 
-
-# test 1
+CMD ["python", "-m", "ml_api.main"]
