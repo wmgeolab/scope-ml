@@ -34,6 +34,8 @@ class Settings(BaseSettings):
     # Single file
     READER_NUM_WORKERS_SINGLE: int = 4
     PIPELINE_NUM_WORKERS_SINGLE: int = 1
+    PIPELINE_PERSIST: bool = False
+    PIPELINE_PERSIST_PATH: str = ""  # Only used if PIPELINE_PERSIST is True
 
     # Multi-File
     READER_NUM_WORKERS_BATCH: int = 4

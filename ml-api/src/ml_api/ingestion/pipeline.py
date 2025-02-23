@@ -7,7 +7,10 @@ from ml_api.utils.qdrant import get_qdrant_vector_store
 from ml_api.utils.embeddings import get_embed_model
 
 
-def get_pipeline():
+def get_pipeline(
+    persist=settings.PIPELINE_PERSIST,
+    persist_path: str = settings.PIPELINE_PERSIST_PATH,
+) -> IngestionPipeline:
     qdrant = get_qdrant_vector_store()
     embed_model = get_embed_model()
 
@@ -21,5 +24,8 @@ def get_pipeline():
     ]
 
     pipeline = IngestionPipeline(transformations=transformations, vector_store=qdrant)
+
+    if persist and persist_path:
+        pipeline.persist(persist_dir=persist_path)
 
     return pipeline
