@@ -51,6 +51,8 @@ class IngestionService:
                 documents=docs,
                 num_workers=settings.PIPELINE_NUM_WORKERS_SINGLE,
             )
+            if settings.PIPELINE_PERSIST:
+                self.pipeline.persist(persist_dir=settings.PIPELINE_PERSIST_PATH)
 
             logger.info(
                 f"Processed & ingested {len(processed_nodes)} nodes from {file_path}"

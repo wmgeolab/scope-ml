@@ -35,6 +35,6 @@ def get_pipeline(
     pipeline = IngestionPipeline(transformations=transformations, vector_store=qdrant)
 
     if persist and persist_path:
-        pipeline.persist(persist_dir=persist_path)
+        pipeline.load(persist_dir=persist_path)
 
     return pipeline
