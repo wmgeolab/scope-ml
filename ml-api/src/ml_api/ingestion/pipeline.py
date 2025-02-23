@@ -1,10 +1,9 @@
 from llama_index.core.ingestion import IngestionPipeline
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.schema import TransformComponent
-
 from ml_api.config import settings
-from ml_api.utils.qdrant import get_qdrant_vector_store
 from ml_api.utils.embeddings import get_embed_model
+from ml_api.utils.qdrant import get_qdrant_vector_store
 
 
 def get_pipeline(
