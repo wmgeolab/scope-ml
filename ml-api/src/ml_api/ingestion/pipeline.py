@@ -1,9 +1,13 @@
+import logging
+
 from llama_index.core.ingestion import IngestionPipeline
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.schema import TransformComponent
 from ml_api.config import settings
 from ml_api.utils.embeddings import get_embed_model
 from ml_api.utils.qdrant import get_qdrant_vector_store
+
+logger = logging.getLogger(__name__)
 
 
 def get_pipeline(
@@ -35,6 +39,11 @@ def get_pipeline(
     pipeline = IngestionPipeline(transformations=transformations, vector_store=qdrant)
 
     if persist and persist_path:
-        pipeline.load(persist_dir=persist_path)
+        try:
+            pipeline.load(persist_dir=persist_path)
+        except Exception:
+            logger.warning(
+                f"Failed to load pipeline from {persist_path}, likely because it does not exist yet."
+            )
 
     return pipeline
