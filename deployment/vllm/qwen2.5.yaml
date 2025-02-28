@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm-qwen2-5
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vllm-qwen2-5
+  template:
+    metadata:
+      labels:
+        app: vllm-qwen2-5
+    spec:
+      # imagePullSecrets:
+      #   - name: github-registry-secret
+      nodeSelector:
+        nvidia.com/gpu.product: NVIDIA-A40
+      containers:
+        - name: vllm
+          image: vllm/vllm-openai:latest
+          # image: ghcr.io/wmgeolab/vllm-qwen
+          imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          args: # --kv-cache-dtype fp8_e5m2
+            - |
+              vllm serve Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4 --quantization gptq --max-model-len 16384 --gpu-memory-utilization 0.9 --enable-chunked-prefill --kv-cache-dtype fp8_e5m2
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              cpu: "8"
+              memory: 16Gi
+              nvidia.com/gpu: "1"
+            requests:
+              cpu: "6"
+              memory: 8Gi
+              nvidia.com/gpu: "1"
+          env:
+            - name: HUGGING_FACE_HUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: huggingface-secret
+                  key: token
+            - name: HOME
+              value: /home/vllm_user
+            - name: HF_HOME
+              value: /home/vllm_user/.cache/huggingface
+            - name: VLLM_CONFIG_ROOT
+              value: /home/vllm_user/.vllm/config
+            - name: VLLM_CACHE_ROOT
+              value: /home/vllm_user/.vllm/cache
+            - name: VLLM_ASSETS_CACHE
+              value: /home/vllm_user/.vllm/assets
+            - name: VLLM_XLA_CACHE_PATH
+              value: /home/vllm_user/.vllm/xla_cache
+          volumeMounts:
+            - name: hf-cache-volume
+              mountPath: /home/vllm_user/.cache/huggingface
+            - name: shm
+              mountPath: /dev/shm
+          securityContext:
+            runAsGroup: 50036
+            runAsUser: 237827
+      volumes:
+        - name: hf-cache-volume
+          nfs:
+            server: 128.239.59.144
+            path: /sciclone/geograd/scope/k8s-storage/vllm/hf_cache
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 2Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vllm-qwen2-5-svc
+spec:
+  selector:
+    app: vllm-qwen2-5
+  ports:
+    - protocol: TCP
+      port: 8001
+      targetPort: 8000
+  type: ClusterIP
