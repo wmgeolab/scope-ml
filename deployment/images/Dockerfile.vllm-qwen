@@ -1,5 +1,5 @@
-FROM vllm/vllm-openai:v0.7.2
-RUN pip install git+https://github.com/huggingface/transformers.git
+FROM vllm/vllm-openai:latest
+# RUN pip install git+https://github.com/huggingface/transformers.git
 
 # Use geolab group (50036) and sawyer's id (237827)
 RUN groupadd -g 50036 vllm_user && \
