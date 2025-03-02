@@ -15,16 +15,18 @@ spec:
       labels:
         app: text-embedding
     spec:
+      nodeSelector:
+        nvidia.com/gpu.product: NVIDIA-A40
       containers:
         - name: text-embedding
-          image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.5
+          image: ghcr.io/huggingface/text-embeddings-inference:1.6
           imagePullPolicy: Always
           env:
             - name: MODEL_ID
               value: "nomic-ai/nomic-embed-text-v1.5"
           volumeMounts:
             - name: scopenfs-tei
-              mountPath: /data # Any path you want to mount to.
+              mountPath: /data  # Any path you want to mount to.
           resources:
             limits:
               cpu: "8"
@@ -36,8 +38,8 @@ spec:
       volumes:
         - name: scopenfs-tei
           nfs:
-            server: 128.239.59.144 # NFS Server address.
-            path: /sciclone/geograd/scope/k8s-storage/text-embedding
+            server: 128.239.59.144  # NFS Server address.
+            path: /sciclone/geograd/scope/k8s-storage-new/text-embedding
 
 ---
 apiVersion: v1
