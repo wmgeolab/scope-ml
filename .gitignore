@@ -35,3 +35,5 @@ db_config.cnf
 .claudeignore
 CLAUDE.md
 .claudesync
+
+github_secret.yml
