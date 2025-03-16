@@ -31,3 +31,7 @@ env/
 db_config.cnf
 
 .pytest_cache/
+.aider*
+.claudeignore
+CLAUDE.md
+.claudesync
