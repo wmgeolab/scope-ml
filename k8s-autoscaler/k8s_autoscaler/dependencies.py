@@ -1,9 +1,10 @@
 # app/dependencies.py
 from fastapi import Depends, Request
+
 from .config import Settings
-from .types import AutoscalerState
 from .kubernetes import KubeCommand
-from .vllm import VLLMManager
+from .manager import ServiceManager
+from .types import AutoscalerState
 
 
 def get_settings() -> Settings:
@@ -18,9 +19,9 @@ def get_kube(settings: Settings = Depends(get_settings)) -> KubeCommand:
     return KubeCommand(settings)
 
 
-def get_vllm_manager(
+def get_service_manager(
     settings: Settings = Depends(get_settings),
     state: AutoscalerState = Depends(get_state),
     kube: KubeCommand = Depends(get_kube),
-) -> VLLMManager:
-    return VLLMManager(settings, state, kube)
+) -> ServiceManager:
+    return ServiceManager(settings, state, kube)

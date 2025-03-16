@@ -1,12 +1,13 @@
-from contextlib import asynccontextmanager
-from fastapi import FastAPI
-import httpx
-import os
 import logging
+import os
+from contextlib import asynccontextmanager
+
+import httpx
+from fastapi import FastAPI
+
+from .api import routes
 from .config import Settings
 from .types import AutoscalerState
-from .api import routes
-import asyncio
 
 # Configure logging
 app_log_level = os.getenv("LOG_LEVEL", "info").upper()
@@ -33,26 +34,31 @@ async def lifespan(app: FastAPI):
     # Shutdown
     if state.http_client:
         await state.http_client.aclose()
-    if state.shutdown_task:
-        state.shutdown_task.cancel()
-        try:
-            await state.shutdown_task
-        except asyncio.CancelledError:
-            pass
+
+    for state in state.services.values():
+        if state.inactivity_task:
+            # If there are any inactivity tasks, cancel them when the app is shutting down
+            state.inactivity_task.cancel()
 
 
-app = FastAPI(
-    title="vLLM Autoscaler",
-    description="Autoscaler and proxy for vLLM deployments in Kubernetes",
-    version="1.0.0",
-    lifespan=lifespan,
-)
+def create_app():
+    app = FastAPI(
+        title="vLLM Autoscaler",
+        description="Autoscaler and proxy for vLLM deployments in Kubernetes",
+        version="1.0.0",
+        lifespan=lifespan,
+    )
 
-app.include_router(routes.router)
+    app.include_router(routes.router)
+
+    return app
+
 
 if __name__ == "__main__":
     import uvicorn
 
     uvicorn_log_level = os.getenv("UVICORN_LOG_LEVEL", "debug")
+
+    app = create_app()
 
     uvicorn.run(app, host="0.0.0.0", port=8000, log_level=uvicorn_log_level)
