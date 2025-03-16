@@ -27,6 +27,8 @@ spec:
             - name: kube-config
               mountPath: /app/.kube
               readOnly: true
+            - name: autoscaler-services-config
+              mountPath: /app/services.yaml
           resources:
             requests:
               memory: "128Mi" # Increased slightly for Python runtime
@@ -43,16 +45,12 @@ spec:
               value: "debug"
             - name: LOG_LEVEL
               value: "debug"
-            - name: VLLM_SERVICE_HOST
-              value: "vllm-svc"
-            - name: VLLM_SERVICE_PORT
-              value: "8000"
-            - name: INACTIVITY_TIMEOUT
-              value: "900"
-            - name: ACTIVATION_TIMEOUT
-              value: "120"
-            - name: VLLM_DEPLOYMENT_NAME
-              value: "vllm"
+            # - name: DEFAULT_INACTIVITY_TIMEOUT
+            #   value: "900"
+            # - name: DEFAULT_ACTIVATION_TIMEOUT
+            #   value: "120"
+            - name: SERVICES_CONFIG_PATH
+              value: "/app/services.yaml"
             - name: KUBERNETES_NAMESPACE
               value: "scope-dsmr"
             - name: PROXY_TIMEOUT # New setting for HTTP client timeout
@@ -86,3 +84,30 @@ spec:
     - port: 8000
       targetPort: 8000
   type: ClusterIP
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: autoscaler-services-config
+data:
+  services.yaml: |
+    services:
+      qwen2.5vl:
+        deployment_name: vllm-qwen2-5vl
+        selector_label: app
+        selector_value: vllm-qwen2-5vl
+        service_host: vllm-svc
+        service_port: 8000
+        namespace: scope-dsmr
+        inactivity_timeout: 900
+        activation_timeout: 120
+      
+      vllm-qwen2-5:
+        deployment_name: vllm-qwen2-5
+        selector_label: app
+        selector_value: vllm-qwen2-5
+        service_host: vllm-qwen2-5-svc
+        service_port: 8001
+        namespace: scope-dsmr
+        inactivity_timeout: 900
+        activation_timeout: 120
