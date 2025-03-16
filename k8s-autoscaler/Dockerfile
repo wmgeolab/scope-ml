@@ -1,4 +1,4 @@
-FROM python:3.11-slim as builder
+FROM python:3.13-slim as builder
 
 RUN pip install poetry==1.8.3
 
@@ -14,7 +14,7 @@ RUN touch README.md
 
 RUN poetry install --no-root && rm -rf $POETRY_CACHE_DIR
 
-FROM python:3.11-slim as runtime
+FROM python:3.13-slim as runtime
 
 RUN apt-get update && \
     apt-get install -y curl ca-certificates && \
