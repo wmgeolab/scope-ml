@@ -30,6 +30,7 @@ spec:
           args:
             - |
               vllm serve OpenGVLab/InternVL2_5-26B-MPO-AWQ \
+              --trust-remote-code \
               --quantization awq_marlin \
               --enable-chunked-prefill \
               --gpu-memory-utilization 0.9 \
