@@ -14,6 +14,16 @@ spec:
       labels:
         app: vllm-internvl25
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - gu14.sciclone.wm.edu
+                      - d3i01.sciclone.wm.edu
       imagePullSecrets:
         - name: github-registry-secret
       nodeSelector:
