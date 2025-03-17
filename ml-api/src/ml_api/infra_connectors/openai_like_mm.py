@@ -1,3 +1,10 @@
+"""This file implements a multi-modal LLM from an OpenAI compatible api.
+
+This is directly copied from the OpenAIMultiModal class and modified to inherit from OpenAILike instead of OpenAI
+so that it can be used with third party programs that implement the openai api interface.
+The only necessary changes were to complete methods to avoid conflicts with the method overrides from OpenAILike.
+"""
+
 from typing import Any, Optional, Sequence
 from pathlib import Path
 
@@ -121,4 +128,4 @@ class OpenAILikeMultiModal(OpenAILike):
 def test_model(model: OpenAILikeMultiModal, prompt: str, image_links: list[str]):
     image_documents = load_image_urls(image_links)
 
-    return model.complete_MM(prompt, [ImageNode(image_url=image_documents)])
+    return model.complete_MM(prompt, image_documents)  # type: ignore
