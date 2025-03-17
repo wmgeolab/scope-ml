@@ -1,0 +1,17 @@
+FROM openmmlab/lmdeploy:v0.7.1-cu12
+
+# Use geolab group (50036) and sawyer's id (237827)
+RUN groupadd -g 50036 lmdeploy_user && \
+    useradd -u 237827 -g lmdeploy_user -m -s /bin/bash lmdeploy_user
+
+# Create necessary directories and set permissions
+RUN mkdir -p /home/lmdeploy_user/.cache && \
+    mkdir -p /home/lmdeploy_user/.lmdeploy && \
+    chown -R lmdeploy_user:lmdeploy_user /home/lmdeploy_user
+
+# Set environment variables
+ENV HOME=/home/lmdeploy_user
+
+WORKDIR /home/lmdeploy_user
+
+USER lmdeploy_user
