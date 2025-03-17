@@ -86,6 +86,8 @@ spec:
             #   value: "900"
             # - name: DEFAULT_ACTIVATION_TIMEOUT
             #   value: "120"
+            - name: DEFAULT_KUBERNETES_NAMESPACE
+              value: "scope-dsmr"
             - name: SERVICES_CONFIG_PATH
               value: "/app/services.yaml"
             - name: KUBERNETES_NAMESPACE
