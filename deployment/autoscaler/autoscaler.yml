@@ -111,6 +111,9 @@ spec:
         - name: autoscaler-services-config
           configMap:
             name: autoscaler-services-config
+            items:
+              - key: services.yaml
+                path: services.yaml
 ---
 # Service for the autoscaler
 apiVersion: v1
