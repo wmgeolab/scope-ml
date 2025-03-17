@@ -65,6 +65,7 @@ spec:
               readOnly: true
             - name: autoscaler-services-config
               mountPath: /app/services.yaml
+              subPath: services.yaml
           resources:
             requests:
               memory: "128Mi" # Increased slightly for Python runtime
