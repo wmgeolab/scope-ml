@@ -107,6 +107,9 @@ spec:
         - name: kube-config
           secret:
             secretName: kube-certs
+        - name: autoscaler-services-config
+          configMap:
+            name: autoscaler-services-config
 ---
 # Service for the autoscaler
 apiVersion: v1
