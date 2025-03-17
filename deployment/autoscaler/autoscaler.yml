@@ -2,16 +2,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vllm-autoscaler
+  name: autoscaler
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: vllm-autoscaler
+      app: autoscaler
   template:
     metadata:
       labels:
-        app: vllm-autoscaler
+        app: autoscaler
     spec:
       imagePullSecrets:
         - name: github-registry-secret
@@ -76,10 +76,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: vllm-autoscaler-service
+  name: autoscaler-service
 spec:
   selector:
-    app: vllm-autoscaler
+    app: autoscaler
   ports:
     - port: 8000
       targetPort: 8000
@@ -92,6 +92,16 @@ metadata:
 data:
   services.yaml: |
     services:
+      internvl:
+        deployment_name: lmdeploy-internvl
+        selector_label: app
+        selector_value: lmdeploy-internvl
+        service_host: lmdeploy-internvl-svc
+        service_port: 23333
+        namespace: scope-dsmr
+        inactivity_timeout: 900
+        activation_timeout: 120
+
       qwen2.5vl:
         deployment_name: vllm-qwen2-5vl
         selector_label: app
