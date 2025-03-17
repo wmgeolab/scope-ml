@@ -1,5 +1,9 @@
 FROM openmmlab/lmdeploy:v0.7.1-cu12
 
+# Add 'timm'
+RUN apt-get update && apt-get install -y python3 python3-pip
+RUN pip3 install timm
+
 # Use geolab group (50036) and sawyer's id (237827)
 RUN groupadd -g 50036 lmdeploy_user && \
     useradd -u 237827 -g lmdeploy_user -m -s /bin/bash lmdeploy_user
