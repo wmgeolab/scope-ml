@@ -1,4 +1,40 @@
-# Autoscaler deployment with environment configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: autoscaler-services-config
+data:
+  services.yaml: |
+    services:
+      internvl:
+        deployment_name: lmdeploy-internvl
+        selector_label: app
+        selector_value: lmdeploy-internvl
+        service_host: lmdeploy-internvl-svc
+        service_port: 23333
+        namespace: scope-dsmr
+        inactivity_timeout: 900
+        activation_timeout: 120
+
+      qwen2.5vl:
+        deployment_name: vllm-qwen2-5vl
+        selector_label: app
+        selector_value: vllm-qwen2-5vl
+        service_host: vllm-svc
+        service_port: 8000
+        namespace: scope-dsmr
+        inactivity_timeout: 900
+        activation_timeout: 120
+      
+      vllm-qwen2-5:
+        deployment_name: vllm-qwen2-5
+        selector_label: app
+        selector_value: vllm-qwen2-5
+        service_host: vllm-qwen2-5-svc
+        service_port: 8001
+        namespace: scope-dsmr
+        inactivity_timeout: 900
+        activation_timeout: 120
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -84,40 +120,3 @@ spec:
     - port: 8000
       targetPort: 8000
   type: ClusterIP
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: autoscaler-services-config
-data:
-  services.yaml: |
-    services:
-      internvl:
-        deployment_name: lmdeploy-internvl
-        selector_label: app
-        selector_value: lmdeploy-internvl
-        service_host: lmdeploy-internvl-svc
-        service_port: 23333
-        namespace: scope-dsmr
-        inactivity_timeout: 900
-        activation_timeout: 120
-
-      qwen2.5vl:
-        deployment_name: vllm-qwen2-5vl
-        selector_label: app
-        selector_value: vllm-qwen2-5vl
-        service_host: vllm-svc
-        service_port: 8000
-        namespace: scope-dsmr
-        inactivity_timeout: 900
-        activation_timeout: 120
-      
-      vllm-qwen2-5:
-        deployment_name: vllm-qwen2-5
-        selector_label: app
-        selector_value: vllm-qwen2-5
-        service_host: vllm-qwen2-5-svc
-        service_port: 8001
-        namespace: scope-dsmr
-        inactivity_timeout: 900
-        activation_timeout: 120
