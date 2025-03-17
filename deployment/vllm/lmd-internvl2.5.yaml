@@ -1,0 +1,88 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lmdeploy-internvl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lmdeploy-internvl
+  template:
+    metadata:
+      labels:
+        app: lmdeploy-internvl
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - gu14.sciclone.wm.edu
+                      - d3i01.sciclone.wm.edu
+      imagePullSecrets:
+        - name: github-registry-secret
+      nodeSelector:
+        nvidia.com/gpu.product: NVIDIA-A40 # Adjust as needed for your GPU type
+      containers:
+        - name: lmdeploy
+          image: ghcr.io/wmgeolab/lmdeploy-nonroot
+          imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              lmdeploy serve api_server OpenGVLab/InternVL2_5-26B-MPO-AWQ --server-port 23333 --backend turbomind --model-format awq
+          ports:
+            - containerPort: 23333
+          resources:
+            limits:
+              cpu: "8"
+              memory: 16Gi
+              nvidia.com/gpu: "1"
+            requests:
+              cpu: "8"
+              memory: 16Gi
+              nvidia.com/gpu: "1"
+          env:
+            - name: HUGGING_FACE_HUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: huggingface-secret
+                  key: token
+            - name: HOME
+              value: /home/lmdeploy_user
+            - name: HF_HOME
+              value: /home/lmdeploy_user/.cache/huggingface
+          volumeMounts:
+            - name: hf-cache-volume
+              mountPath: /home/lmdeploy_user/.cache/huggingface
+            - name: shm
+              mountPath: /dev/shm
+          securityContext:
+            runAsGroup: 50036
+            runAsUser: 237827
+      volumes:
+        - name: hf-cache-volume
+          nfs:
+            server: 128.239.59.144
+            path: /sciclone/geograd/scope/k8s-storage/vllm/hf_cache
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 2Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lmdeploy-internvl-svc
+spec:
+  selector:
+    app: lmdeploy-internvl
+  ports:
+    - protocol: TCP
+      port: 23333
+      targetPort: 23333
+  type: ClusterIP
