@@ -15,7 +15,7 @@ class ServiceConfig(BaseModel):
     selector_label: str = "app"
     selector_value: str
     service_host: str
-    service_port: str
+    service_port: str | int
     namespace: str | None = None
     inactivity_timeout: int
     activation_timeout: int
