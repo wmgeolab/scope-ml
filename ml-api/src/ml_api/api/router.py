@@ -5,7 +5,7 @@ from fastapi import APIRouter, BackgroundTasks
 from ml_api.ingestion.ingestion_service import IngestionService
 from ml_api.rag_inference.rag_service import generate_rag_response
 
-from .schemas import GEFRagRequest, GEFRagResponse, IngestionRequest
+from .schemas import GEFRagRequestBatch, GEFRagResponse, IngestionRequest
 
 logger = logging.getLogger(__name__)
 
@@ -23,8 +23,8 @@ async def healthcheck_sleep(sleep_time: int):
     return {"status": "ok"}
 
 
-@router.post("/generate_rag_response")
-async def generate_rag_response_request(request: GEFRagRequest) -> GEFRagResponse:
+@router.post("/generate_rag_response_batch")
+async def generate_rag_response_request(request: GEFRagRequestBatch) -> GEFRagResponse:
     """Generates a RAG response for a single question in a specific GEF project."""
 
     # TODO: This will most likely timeout an HTTP request.

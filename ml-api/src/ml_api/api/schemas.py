@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class GEFRagRequest(BaseModel):
+class GEFRagRequestBatch(BaseModel):
     questions: list[str]
     project_id: str
 
