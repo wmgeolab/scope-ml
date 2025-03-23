@@ -4,13 +4,14 @@ import asyncio
 import logging
 import aiohttp
 
+from ml_api.config import settings
 from ml_api.rag_inference.rag_service import generate_rag_response
 
 logger = logging.getLogger(__name__)
 
 
 async def generate_rag_response_and_post(
-    question: str, project_id: str, source_id: str, workspace_id: str, external_api_url: str
+    question: str, project_id: str, source_id: str, workspace_id: str
 ):
     """Generates a RAG response and posts it to an external API."""
 
@@ -25,7 +26,7 @@ async def generate_rag_response_and_post(
         }
 
         async with aiohttp.ClientSession() as session:
-            async with session.post(external_api_url, json=payload) as resp:
+            async with session.post(settings.SCOPE_BACKEND_URL, json=payload) as resp:
                 if resp.status == 200:
                     logger.info("Successfully posted response to external API.")
                 else:
