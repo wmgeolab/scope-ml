@@ -100,8 +100,6 @@ class OpenAILikeMultiModal(OpenAILike):
         chat_response = self.stream_chat([chat_message], **kwargs)
         return stream_chat_response_to_completion_response(chat_response)
 
-    # ===== Async Endpoints =====
-
     async def acomplete_MM(
         self, prompt: str, image_documents: Sequence[ImageNode], **kwargs: Any
     ) -> CompletionResponse:
