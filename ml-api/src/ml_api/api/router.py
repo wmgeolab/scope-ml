@@ -4,6 +4,7 @@ import logging
 from fastapi import APIRouter, BackgroundTasks
 from ml_api.ingestion.ingestion_service import IngestionService
 from ml_api.rag_inference.rag_service import generate_rag_response
+from ml_api.api.tasks import generate_rag_response_and_post
 
 from .schemas import GEFRagRequestBatch, GEFRagResponse, IngestionRequest
 
