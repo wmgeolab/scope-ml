@@ -43,6 +43,19 @@ async def generate_rag_response_request(request: GEFRagRequestBatch) -> GEFRagRe
     return GEFRagResponse(answers=response_dict)
 
 
+@router.post("/generate_rag_response")
+async def generate_rag_response_single(
+    question: str, project_id: str, source_id: str, workspace_id: str, background_tasks: BackgroundTasks
+):
+    """Generates a RAG response for a single question and posts it to an external API in the background."""
+
+    background_tasks.add_task(generate_rag_response_and_post, question, project_id, source_id, workspace_id)
+
+    return {
+        "message": "RAG response generation and posting to external API initiated in the background."
+    }
+
+
 def ingest_projects_background(project_ids: list[str], service: IngestionService):
     """Ingests data into the system in the background."""
 
