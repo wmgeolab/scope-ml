@@ -2,9 +2,9 @@ import asyncio
 import logging
 
 from fastapi import APIRouter, BackgroundTasks
+from ml_api.api.tasks import generate_rag_response_and_post, ingest_projects_background
 from ml_api.ingestion.ingestion_service import IngestionService
 from ml_api.rag_inference.rag_service import generate_rag_response
-from ml_api.api.tasks import generate_rag_response_and_post
 
 from .schemas import GEFRagRequestBatch, GEFRagResponse, IngestionRequest
 
@@ -46,27 +46,21 @@ async def generate_rag_response_request(request: GEFRagRequestBatch) -> GEFRagRe
 
 @router.post("/generate_rag_response")
 async def generate_rag_response_single(
-    question: str, project_id: str, source_id: str, workspace_id: str, background_tasks: BackgroundTasks
+    question: str,
+    source: str,
+    workspace: str,
+    background_tasks: BackgroundTasks,
+    project_id: str = "9467",
 ):
     """Generates a RAG response for a single question and posts it to an external API in the background."""
 
-    background_tasks.add_task(generate_rag_response_and_post, question, project_id, source_id, workspace_id)
+    background_tasks.add_task(
+        generate_rag_response_and_post, question, project_id, source, workspace
+    )
 
     return {
         "message": "RAG response generation and posting to external API initiated in the background."
     }
-
-
-def ingest_projects_background(project_ids: list[str], service: IngestionService):
-    """Ingests data into the system in the background."""
-
-    project_base_dir = service.data_base_dir
-    project_dirs = [project_base_dir / project_id for project_id in project_ids]
-
-    for project_dir in project_dirs:
-        service.ingest_directory(project_dir)
-
-    logger.info("Ingestion task completed. Projects ingested: %s", project_ids)
 
 
 @router.post("/ingestion/projects")
