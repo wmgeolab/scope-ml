@@ -12,18 +12,16 @@ logger = logging.getLogger(__name__)
 
 
 async def generate_rag_response_and_post(
-    question: str, project_id: str, source_id: str, workspace_id: str
+    question: str, project_id: str, source: str, workspace: str
 ):
     """Generates a RAG response and posts it to an external API."""
 
     try:
         response = await generate_rag_response(question, project_id)
         payload = {
-            "question": question,
-            "project_id": project_id,
-            "source_id": source_id,
-            "workspace_id": workspace_id,
-            "response": response,
+            "source": source,
+            "workspace": workspace,
+            "summary": response,
         }
 
         async with aiohttp.ClientSession() as session:
