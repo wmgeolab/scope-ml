@@ -10,6 +10,9 @@ class Settings(BaseSettings):
     TEI_URL: str = ""
     TEI_EMBEDDING_MODEL_NAME: str = "TODO"
 
+    # Scope Backend
+    SCOPE_BACKEND_URL: str = ""
+
     # LLM
     LLM_CONTEXT_WINDOW: int = 32768
     LLM_NUM_OUTPUT: int = 8192
