@@ -22,6 +22,8 @@ async def generate_rag_response_and_post(
             "source": source,
             "workspace": workspace,
             "summary": response,
+            "entities": "",
+            "locations": ""
         }
 
         async with aiohttp.ClientSession() as session:
