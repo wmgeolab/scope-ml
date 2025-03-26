@@ -6,7 +6,7 @@ from ml_api.api.tasks import generate_rag_response_and_post, ingest_projects_bac
 from ml_api.ingestion.ingestion_service import IngestionService
 from ml_api.rag_inference.rag_service import generate_rag_response
 
-from .schemas import GEFRagRequestBatch, GEFRagResponse, IngestionRequest
+from .schemas import GEFRagRequest, GEFRagRequestBatch, GEFRagResponse, IngestionRequest
 
 logger = logging.getLogger(__name__)
 
@@ -46,16 +46,13 @@ async def generate_rag_response_request(request: GEFRagRequestBatch) -> GEFRagRe
 
 @router.post("/generate_rag_response")
 async def generate_rag_response_single(
-    question: str,
-    source: str,
-    workspace: str,
+    request: GEFRagRequest,
     background_tasks: BackgroundTasks,
-    project_id: str = "9467",
 ):
     """Generates a RAG response for a single question and posts it to an external API in the background."""
 
     background_tasks.add_task(
-        generate_rag_response_and_post, question, project_id, source, workspace
+        generate_rag_response_and_post, request.question, request.project_id, request.source, request.workspace
     )
 
     return {
