@@ -29,6 +29,10 @@ spec:
             - name: UVICORN_LOGLEVEL
               value: "info"
 
+            # Scope
+            - name: SCOPE_BACKEND_URL
+              value: "http://scope-backend-svc:8000" # TODO not sure if this is correct
+
             # Qdrant
             - name: QDRANT_URL
               value: "http://qdrant-svc:6333"
@@ -37,13 +41,13 @@ spec:
 
             # VLLM/TEI
             - name: VLLM_URL
-              value: "http://vllm-svc:8000"
+              value: "http://vllm-qwen2-5-svc:8001"
             - name: VLLM_MODEL_NAME
-              value: "TODO"
+              value: "Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4"
             - name: TEI_URL
               value: "http://text-embedding-svc:8080"
             - name: LLM_CONTEXT_WINDOW
-              value: "32768"
+              value: "16384"
             - name: LLM_NUM_OUTPUT
               value: "8192"
 
@@ -55,8 +59,12 @@ spec:
             - name: PIPELINE_PERSIST_PATH
               value: "/scope/k8s-storage/ml-api/ingestion"
           resources:
+            requests:
+              cpu: "2"
+              memory: 2Gi
             limits:
-              cpu: 8
+              cpu: "6"
+              memory: 6Gi
           securityContext:
             runAsGroup: 50036
           ports:
