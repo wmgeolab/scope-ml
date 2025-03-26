@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     # vLLM / TEI
     VLLM_URL: str = ""
     VLLM_LLM_MODEL_NAME: str = ""
+    VLLM_API_KEY: str = "None"
     TEI_URL: str = ""
     TEI_EMBEDDING_MODEL_NAME: str = "TODO"
 

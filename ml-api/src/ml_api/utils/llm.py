@@ -8,5 +8,5 @@ def get_llm(model_name: str = settings.VLLM_LLM_MODEL_NAME):
     return OpenAILike(
         model=model_name,
         api_base=settings.VLLM_URL,
-        api_key="",
+        api_key=settings.VLLM_API_KEY,
     )  # type: ignore
