@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     # LLM
     LLM_CONTEXT_WINDOW: int = 32768
     LLM_NUM_OUTPUT: int = 8192
+    LLM_TEMPERATURE: float = 0.7
 
     # Qdrant
     QDRANT_URL: str = "http://localhost:6333"
