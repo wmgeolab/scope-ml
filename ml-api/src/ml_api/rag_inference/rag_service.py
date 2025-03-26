@@ -1,17 +1,22 @@
-""" 
+"""
 This service is responsible for taking a query and generating an answer using Retrieval Augmented Generation (RAG)
 
 This includes interacting with the retrieval service to get relevant information and interacting with the
-vLLM service to generate an answer. 
+vLLM service to generate an answer.
 """
 
+import logging
+
 from llama_index.core import PromptHelper
+from llama_index.core.callbacks import LlamaDebugHandler, CallbackManager
 from llama_index.core.response_synthesizers import TreeSummarize
 from ml_api.config import settings
 from ml_api.retrieval.retrieval_service import retrieve_points_by_project_id
 from ml_api.utils.llm import get_llm
 
 from .exceptions import RAGNodesNotFoundException
+
+logger = logging.getLogger(__name__)
 
 
 async def generate_rag_response(query: str, project_id: str) -> str:
@@ -33,8 +38,13 @@ async def generate_rag_response(query: str, project_id: str) -> str:
         context_window=settings.LLM_CONTEXT_WINDOW, num_output=settings.LLM_NUM_OUTPUT
     )
 
+    llama_debug = LlamaDebugHandler(logger=logger)
+    callback_manager = CallbackManager([llama_debug])
     summarize = TreeSummarize(
-        llm=llm, prompt_helper=prompt_helper, verbose=True
+        llm=llm,
+        prompt_helper=prompt_helper,
+        verbose=True,
+        callback_manager=callback_manager,
     )  # Can also pass a pydantic object to this
 
     response = await summarize.asynthesize(query=query, nodes=nodes)
