@@ -16,8 +16,18 @@ async def generate_rag_response_and_post(
 ):
     """Generates a RAG response and posts it to an external API."""
 
+    
+    
     try:
         response = await generate_rag_response(question, project_id)
+        
+        logger.info(f"RAG response generated: {response}")
+        
+    except Exception as e:
+        logger.error(f"Error generating RAG response: {e}", stack_info=True)
+        return
+
+    try:        
         payload = {
             "source": source,
             "workspace": workspace,
@@ -36,7 +46,7 @@ async def generate_rag_response_and_post(
                     )
 
     except Exception as e:
-        logger.error(f"Error generating RAG response or posting to external API: {e}")
+        logger.error(f"Error posting to external API: {e}", stack_info=True)
 
 
 def ingest_projects_background(project_ids: list[str], service: IngestionService):
