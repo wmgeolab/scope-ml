@@ -10,5 +10,6 @@ def get_llm(model_name: str = settings.VLLM_LLM_MODEL_NAME):
         api_base=settings.VLLM_URL,
         api_key=settings.VLLM_API_KEY,
         context_window=settings.LLM_CONTEXT_WINDOW,
+        max_tokens=settings.LLM_MAX_OUTPUT_TOKENS,
         temperature=settings.LLM_TEMPERATURE,
-        )  # type: ignore
+    )  # type: ignore
