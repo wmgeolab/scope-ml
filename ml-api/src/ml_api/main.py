@@ -3,11 +3,13 @@ import os
 
 import uvicorn
 from fastapi import FastAPI
+from llama_index.core import set_global_handler
 from ml_api.api.router import router
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO").upper())
-
 logger = logging.getLogger(__name__)
+
+set_global_handler("simple")
 
 app = FastAPI()
 app.include_router(router)
