@@ -37,6 +37,7 @@ class Settings(BaseSettings):
         "/scope/scope-data/gef/output"
     )  # then /{project_id}/{document_id}.{extension}
     INGEST_BATCH_SIZE: int = 10
+
     # Single file
     READER_NUM_WORKERS_SINGLE: int = 4
     PIPELINE_NUM_WORKERS_SINGLE: int = 1
@@ -46,6 +47,10 @@ class Settings(BaseSettings):
     # Multi-File
     READER_NUM_WORKERS_BATCH: int = 4
     PIPELINE_NUM_WORKERS_BATCH: int = 4
+
+    # Logging
+    SUPPRESS_LOGGERS: list[str] = []
+    SUPPRESSED_LEVEL: str = "INFO"
 
 
 settings = Settings()

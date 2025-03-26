@@ -5,9 +5,13 @@ import uvicorn
 from fastapi import FastAPI
 from llama_index.core import set_global_handler
 from ml_api.api.router import router
+from ml_api.config import settings
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO").upper())
 logger = logging.getLogger(__name__)
+
+for logger_name in settings.SUPPRESS_LOGGERS:
+    suppress_logger = logging.getLogger(logger_name).setLevel(settings.SUPPRESSED_LEVEL)
 
 set_global_handler("simple")
 
