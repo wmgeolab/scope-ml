@@ -13,6 +13,10 @@ spec:
       labels:
         app: cloudflared
     spec:
+      securityContext:
+        sysctls:
+          - name: net.ipv4.ping_group_range
+            value: "65532 65532"
       containers:
         - name: cloudflared
           image: cloudflare/cloudflared:latest
