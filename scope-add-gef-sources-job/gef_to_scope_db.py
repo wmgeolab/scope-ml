@@ -236,10 +236,14 @@ def migrate_documents(
                 offset += batch_size
 
     except SQLAlchemyError as e:
-        logger.error(f"Database error during migration: {e}")
+        logger.error(
+            f"Database error during migration: {e}", exc_info=True, stack_info=True
+        )
         raise
     except Exception as e:
-        logger.error(f"Unexpected error during migration: {e}")
+        logger.error(
+            f"Unexpected error during migration: {e}", exc_info=True, stack_info=True
+        )
         raise
 
     return total_count, inserted_count, skipped_count
