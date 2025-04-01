@@ -63,7 +63,7 @@ def get_engines():
     )
 
     # Read-only engine for SQLite
-    sqlite_engine = create_engine(sqlite_url, connect_args={"mode": "ro"})
+    sqlite_engine = create_engine(sqlite_url)
     mysql_engine = create_engine(mysql_url)
 
     return sqlite_engine, mysql_engine
