@@ -27,7 +27,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: GEF_DB_PATH
-              value: "/scope/scope-data/gef/data/gef_document_database.db"
+              value: "/scope/scope-data/gef/gef_document_database.db"
             - name: MYSQL_HOST
               value: "mysql.scopedata.org"
             - name: MYSQL_DB
