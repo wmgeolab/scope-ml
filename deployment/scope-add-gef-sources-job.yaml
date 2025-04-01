@@ -46,7 +46,7 @@ spec:
                   key: password
           volumeMounts:
             - name: scopenfs-data
-              mountPath: /scope/scope-data
+              mountPath: /scope
           resources:
             limits:
               memory: "512Mi"
@@ -61,5 +61,5 @@ spec:
         - name: scopenfs-data
           nfs:
             server: 128.239.59.144
-            path: /sciclone/geograd/scope/scope-data
+            path: /sciclone/geograd/scope
       restartPolicy: OnFailure
