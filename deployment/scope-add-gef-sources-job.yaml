@@ -25,15 +25,15 @@ spec:
         - name: migration
           image: ghcr.io/wmgeolab/scope-add-gef-sources-job:latest
           imagePullPolicy: Always
-
-          args:
-            - "--gef-db-path=/scope/scope-data/gef/data/gef_document_database.db"
-            - "--mysql-host=mysql.scopedata.org"
-            - "--mysql-db=scopesql"
-            # - "--mysql-user=$(MYSQL_USER)"
-            # - "--mysql-password=$(MYSQL_PASSWORD)"
-            - "--batch-size=200"
           env:
+            - name: GEF_DB_PATH
+              value: "/scope/scope-data/gef/data/gef_document_database.db"
+            - name: MYSQL_HOST
+              value: "mysql.scopedata.org"
+            - name: MYSQL_DB
+              value: "scopesql"
+            - name: BATCH_SIZE
+              value: "200"
             - name: MYSQL_USER
               valueFrom:
                 secretKeyRef:

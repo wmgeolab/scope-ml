@@ -3,8 +3,8 @@
 Script to migrate GEF documents from SQLite to the Scope MySQL database source table.
 Ensures no duplicates are created and only creates the source type once.
 """
-import argparse
 import logging
+import os
 import sqlalchemy
 from sqlalchemy import (
     create_engine,
@@ -17,7 +17,6 @@ from sqlalchemy import (
     DateTime,
     select,
 )
-import os
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
 
@@ -31,35 +30,37 @@ logger = logging.getLogger(__name__)
 GEF_SOURCE_TYPE_NAME = "GEF Document"
 GEF_SOURCE_TYPE_DESC = "Documents from the Global Environment Facility portal"
 
-
-def get_args():
-    parser = argparse.ArgumentParser(
-        description="Migrate GEF documents to Scope database"
-    )
-    parser.add_argument(
-        "--gef-db-path", required=True, help="Path to the GEF document SQLite database"
-    )
-    parser.add_argument("--mysql-host", required=True, help="MySQL host")
-    parser.add_argument(
-        "--mysql-db", default="scopesql", help="MySQL database name (default: scopesql)"
-    )
-    # parser.add_argument("--mysql-user", required=True, help="MySQL username")
-    # parser.add_argument("--mysql-password", required=True, help="MySQL password")
-    parser.add_argument(
-        "--batch-size", type=int, default=100, help="Batch size for processing"
-    )
-    parser.add_argument("--dry-run", action="store_true", help="Perform a dry run")
-    return parser.parse_args()
+# Environment variables with defaults
+GEF_DB_PATH = os.environ.get(
+    "GEF_DB_PATH", "/scope/scope-data/gef/data/gef_document_database.db"
+)
+MYSQL_HOST = os.environ.get("MYSQL_HOST", "mysql.scopedata.org")
+MYSQL_DB = os.environ.get("MYSQL_DB", "scopesql")
+MYSQL_USER = os.environ.get("MYSQL_USER", "NO_USER_PROVIDED")
+MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "NO_PASSWORD_PROVIDED")
+BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "100"))
+DRY_RUN = os.environ.get("DRY_RUN", "").lower() in ["true", "1", "yes"]
 
 
-def get_engines(args):
+def get_engines():
     """Create SQLAlchemy engines for both databases"""
-    sqlite_url = f"sqlite:///{args.gef_db_path}"
+    sqlite_url = f"sqlite:///{GEF_DB_PATH}"
 
-    mysql_user = os.environ.get("MYSQL_USER", "USER_NOT_GIVEN")
-    mysql_password = os.environ.get("MYSQL_PASSWORD", "PASSWORD_NOT_GIVEN")
+    if not MYSQL_USER or not MYSQL_PASSWORD:
+        logger.error(
+            "MySQL credentials not provided. Set MYSQL_USER and MYSQL_PASSWORD environment variables"
+        )
+        raise ValueError("MySQL credentials not provided")
 
-    mysql_url = f"mysql+mysqlconnector://{mysql_user}:{mysql_password}@{args.mysql_host}/{args.mysql_db}"
+    logger.info(f"Connecting to MySQL as user: {MYSQL_USER}")
+    logger.info(f"Using GEF database at: {GEF_DB_PATH}")
+    logger.info(f"Batch size: {BATCH_SIZE}")
+    if DRY_RUN:
+        logger.info("Running in DRY RUN mode - no changes will be made")
+
+    mysql_url = (
+        f"mysql+mysqlconnector://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}/{MYSQL_DB}"
+    )
 
     # Read-only engine for SQLite
     sqlite_engine = create_engine(sqlite_url, connect_args={"mode": "ro"})
@@ -95,7 +96,7 @@ def define_tables():
 
     source_table = Table(
         "scopeBackend_source",
-        mysql_metadata,  # Note the correct table name here
+        mysql_metadata,
         Column("id", Integer, primary_key=True),
         Column("text", Text),
         Column("url", String(255)),
@@ -245,18 +246,16 @@ def migrate_documents(
 
 
 def main():
-    args = get_args()
-
     try:
         # Connect to databases
-        sqlite_engine, mysql_engine = get_engines(args)
+        sqlite_engine, mysql_engine = get_engines()
 
         # Define table structures
         document_table, source_type_table, source_table = define_tables()
 
         # Get or create source type
         source_type_id = get_or_create_source_type(
-            mysql_engine, source_type_table, args.dry_run
+            mysql_engine, source_type_table, DRY_RUN
         )
 
         # Migrate documents
@@ -266,8 +265,8 @@ def main():
             document_table,
             source_table,
             source_type_id,
-            args.batch_size,
-            args.dry_run,
+            BATCH_SIZE,
+            DRY_RUN,
         )
 
         logger.info(f"Migration summary:")
@@ -275,7 +274,7 @@ def main():
         logger.info(f"- Inserted: {inserted_docs}")
         logger.info(f"- Skipped: {skipped_docs}")
 
-        if args.dry_run:
+        if DRY_RUN:
             logger.info(
                 "This was a dry run. No changes were made to the MySQL database."
             )
