@@ -45,7 +45,7 @@ spec:
                   name: mysql-credentials
                   key: password
           volumeMounts:
-            - name: scopenfs-data
+            - name: scopenfs
               mountPath: /scope
           resources:
             limits:
@@ -58,8 +58,8 @@ spec:
             runAsGroup: 50036
 
       volumes:
-        - name: scopenfs-data
+        - name: scopenfs
           nfs:
-            server: 128.239.59.144
+            server: 128.239.59.144 # NFS Server address.
             path: /sciclone/geograd/scope
       restartPolicy: OnFailure
