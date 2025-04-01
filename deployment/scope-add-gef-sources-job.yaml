@@ -19,12 +19,13 @@ spec:
       #               values:
       #                 - gu14.sciclone.wm.edu
       #                 - d3i01.sciclone.wm.edu
+      imagePullSecrets:
+        - name: github-registry-secret
       containers:
         - name: migration
           image: ghcr.io/wmgeolab/scope-add-gef-sources-job:latest
           imagePullPolicy: Always
-          imagePullSecrets:
-            - name: github-registry-secret
+
           args:
             - "--gef-db-path=/scope/scope-data/gef/data/gef_document_database.db"
             - "--mysql-host=mysql.scopedata.org"
