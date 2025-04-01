@@ -27,7 +27,7 @@ spec:
             - name: github-registry-secret
           args:
             - "--gef-db-path=/scope/scope-data/gef/data/gef_document_database.db"
-            - "--mysql-host=mysql-host"
+            - "--mysql-host=mysql.scopedata.org"
             - "--mysql-db=scopesql"
             - "--mysql-user=$(MYSQL_USER)"
             - "--mysql-password=$(MYSQL_PASSWORD)"
