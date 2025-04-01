@@ -52,7 +52,7 @@ async def generate_rag_response_single(
     """Generates a RAG response for a single question and posts it to an external API in the background."""
 
     background_tasks.add_task(
-        generate_rag_response_and_post, request.question, request.project_id, request.source, request.workspace
+        generate_rag_response_and_post, request.question, "9467" , request.source, request.workspace
     )
 
     return {

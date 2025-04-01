@@ -9,7 +9,7 @@ class GEFRagRequest(BaseModel):
     question: str
     source: str
     workspace: str
-    project_id: str = "9467"
+    # project_id: str = "9467"
 
 
 class GEFRagResponse(BaseModel):
