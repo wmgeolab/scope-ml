@@ -17,6 +17,7 @@ from sqlalchemy import (
     DateTime,
     select,
 )
+import os
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
 
@@ -42,8 +43,8 @@ def get_args():
     parser.add_argument(
         "--mysql-db", default="scopesql", help="MySQL database name (default: scopesql)"
     )
-    parser.add_argument("--mysql-user", required=True, help="MySQL username")
-    parser.add_argument("--mysql-password", required=True, help="MySQL password")
+    # parser.add_argument("--mysql-user", required=True, help="MySQL username")
+    # parser.add_argument("--mysql-password", required=True, help="MySQL password")
     parser.add_argument(
         "--batch-size", type=int, default=100, help="Batch size for processing"
     )
@@ -54,7 +55,11 @@ def get_args():
 def get_engines(args):
     """Create SQLAlchemy engines for both databases"""
     sqlite_url = f"sqlite:///{args.gef_db_path}"
-    mysql_url = f"mysql+mysqlconnector://{args.mysql_user}:{args.mysql_password}@{args.mysql_host}/{args.mysql_db}"
+
+    mysql_user = os.environ.get("MYSQL_USER", "USER_NOT_GIVEN")
+    mysql_password = os.environ.get("MYSQL_PASSWORD", "PASSWORD_NOT_GIVEN")
+
+    mysql_url = f"mysql+mysqlconnector://{mysql_user}:{mysql_password}@{args.mysql_host}/{args.mysql_db}"
 
     # Read-only engine for SQLite
     sqlite_engine = create_engine(sqlite_url, connect_args={"mode": "ro"})
