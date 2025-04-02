@@ -45,7 +45,7 @@ async def generate_rag_response(query: str, project_id: str) -> str:
         llm=llm,
         prompt_helper=prompt_helper,
         verbose=True,
-        callback_manager=callback_manager,
+        # callback_manager=callback_manager,
     )  # Can also pass a pydantic object to this
 
     response: Response = await summarize.asynthesize(query=query, nodes=nodes)  # type: ignore

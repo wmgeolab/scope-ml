@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 for logger_name in settings.SUPPRESS_LOGGERS:
     suppress_logger = logging.getLogger(logger_name).setLevel(settings.SUPPRESSED_LEVEL)
 
-set_global_handler("simple")
+# set_global_handler("simple")
 
 weave.init("ml-api")
 
