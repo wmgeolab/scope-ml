@@ -16,11 +16,10 @@ spec:
     spec:
       containers:
         - name: mlflow
-          image: python:3.12-slim
+          image: ghcr.io/mlflow/mlflow:latest
           command: ["/bin/bash", "-c"]
           args:
             - |
-              pip install mlflow &&
               mlflow server \
                 --backend-store-uri file:///scope/k8s-storage/mlflow/mlruns \
                 --default-artifact-root file:///scope/k8s-storage/mlflow/artifacts \
@@ -40,6 +39,7 @@ spec:
               mountPath: /scope
           securityContext:
             runAsGroup: 50036
+            runAsUser: 237827
       volumes:
         - name: scopenfs
           nfs:
