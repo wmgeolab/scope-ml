@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     SCOPE_BACKEND_URL: str = ""
 
     # LLM
-    LLM_CONTEXT_WINDOW: int = 32768
+    LLM_CONTEXT_WINDOW: int = 16000
     LLM_MAX_OUTPUT_TOKENS: int = 8192  # Parameter for the OpenAILike llm
     LLM_NUM_OUTPUT: int = 8192  # parameter for the PromptHelper
     LLM_TEMPERATURE: float = 0.7
