@@ -16,28 +16,26 @@ async def generate_rag_response_and_post(
 ):
     """Generates a RAG response and posts it to an external API."""
 
-    
-    
     try:
         response = await generate_rag_response(question, project_id)
-        
+
         logger.info(f"RAG response generated: {response}")
-        
+
     except Exception as e:
         logger.error(f"Error generating RAG response: {e}", stack_info=True)
         return
 
-    try:        
+    try:
         payload = {
             "source": source,
             "workspace": workspace,
             "summary": response,
-            "entities": "",
-            "locations": ""
         }
 
         async with aiohttp.ClientSession() as session:
-            async with session.post(settings.SCOPE_BACKEND_URL, json=payload) as resp:
+            async with session.post(
+                f"{settings.SCOPE_BACKEND_URL}/api/ai_responses/", json=payload
+            ) as resp:
                 if resp.status == 200:
                     logger.info("Successfully posted response to external API.")
                 else:
