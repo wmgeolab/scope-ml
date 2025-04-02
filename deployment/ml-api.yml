@@ -55,7 +55,7 @@ spec:
             - name: LLM_CONTEXT_WINDOW
               value: "12288"
             - name: LLM_MAX_OUTPUT_TOKENS
-              value: "1024"
+              value: "512"
             - name: LLM_NUM_OUTPUT
               value: "1024"
 
