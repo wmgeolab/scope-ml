@@ -8,6 +8,7 @@ vLLM service to generate an answer.
 import logging
 
 from llama_index.core import PromptHelper
+from llama_index.core.response import Response
 from llama_index.core.callbacks import LlamaDebugHandler, CallbackManager
 from llama_index.core.response_synthesizers import TreeSummarize
 from ml_api.config import settings
@@ -47,6 +48,6 @@ async def generate_rag_response(query: str, project_id: str) -> str:
         callback_manager=callback_manager,
     )  # Can also pass a pydantic object to this
 
-    response = await summarize.asynthesize(query=query, nodes=nodes)
+    response: Response = await summarize.asynthesize(query=query, nodes=nodes)  # type: ignore
 
     return str(response)
