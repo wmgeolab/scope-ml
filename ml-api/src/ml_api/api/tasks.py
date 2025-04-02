@@ -32,6 +32,8 @@ async def generate_rag_response_and_post(
             "summary": response,
         }
 
+        logger.info(f"Posting response to external API: {payload}")
+
         async with aiohttp.ClientSession() as session:
             async with session.post(
                 f"{settings.SCOPE_BACKEND_URL}/api/ai_responses/", json=payload
