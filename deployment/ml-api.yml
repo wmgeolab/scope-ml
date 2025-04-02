@@ -31,7 +31,7 @@ spec:
 
             # Scope
             - name: SCOPE_BACKEND_URL
-              value: "http://scope-backend-svc:8000" # TODO not sure if this is correct
+              value: "http://scope-backend-svc:30445" # TODO not sure if this is correct
 
             # Qdrant
             - name: QDRANT_URL
@@ -40,14 +40,17 @@ spec:
               value: "scope-gef"
 
             # VLLM/TEI
-            - name: VLLM_URL
-              value: "http://vllm-qwen2-5-svc:8001/v1"
-            - name: VLLM_LLM_MODEL_NAME
-              value: "Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4"
             - name: TEI_URL
               value: "http://text-embedding-svc:8080"
+            - name: VLLM_URL
+              value: "http://vllm-qwen2-5-svc:8001"
+            - name: VLLM_LLM_MODEL_NAME
+              value: "Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4"
+
             - name: LLM_CONTEXT_WINDOW
-              value: "16000"
+              value: "16384"
+            - name: LLM_MAX_OUTPUT_TOKENS
+              value: "4096"
             - name: LLM_NUM_OUTPUT
               value: "4096"
 
