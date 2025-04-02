@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow-server
+  labels:
+    app: mlflow-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow-server
+  template:
+    metadata:
+      labels:
+        app: mlflow-server
+    spec:
+      containers:
+        - name: mlflow
+          image: python:3.12-slim
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              pip install mlflow==2.11.0 &&
+              mlflow server \
+                --backend-store-uri file:///scope/k8s-storage/mlflow/mlruns \
+                --default-artifact-root file:///scope/k8s-storage/mlflow/artifacts \
+                --host 0.0.0.0 \
+                --port 5000
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+            requests:
+              cpu: "0.5"
+              memory: "512Mi"
+          volumeMounts:
+            - name: scopenfs
+              mountPath: /scope
+          securityContext:
+            runAsGroup: 50036
+      volumes:
+        - name: scopenfs
+          nfs:
+            server: 128.239.59.144 # NFS Server address from your existing configs
+            path: /sciclone/geograd/scope # Base path from your existing configs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlflow-server-svc
+spec:
+  selector:
+    app: mlflow-server
+  ports:
+    - port: 5000
+      targetPort: 5000
+  type: ClusterIP
