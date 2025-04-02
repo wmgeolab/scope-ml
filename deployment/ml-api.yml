@@ -31,7 +31,7 @@ spec:
 
             # Scope
             - name: SCOPE_BACKEND_URL
-              value: "http://scope-backend-svc:30445" # TODO not sure if this is correct
+              value: "http://scope-backend-svc:8000" # TODO not sure if this is correct
 
             # Qdrant
             - name: QDRANT_URL
