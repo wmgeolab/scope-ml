@@ -49,7 +49,7 @@ async def generate_rag_response_and_post(
                     logger.info("Successfully posted response to external API.")
                 else:
                     logger.error(
-                        f"Failed to post response to external API. Status: {resp.status}",
+                        f"Failed to post response to external API. Response: {resp}",
                         stack_info=True,
                         exc_info=True,
                     )
