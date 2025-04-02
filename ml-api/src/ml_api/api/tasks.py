@@ -45,11 +45,20 @@ async def generate_rag_response_and_post(
                 json=payload,
                 headers=headers,
             ) as resp:
+
+                response_text = await resp.text()
+                try:
+                    response_json = await resp.json()
+                    logger.info(f"Response JSON: {response_json}")
+                    logger.info(f"Response text: {response_text}")
+                except:
+                    logger.info(f"Response text: {response_text}")
+
                 if resp.status == 200:
                     logger.info("Successfully posted response to external API.")
                 else:
                     logger.error(
-                        f"Failed to post response to external API. Response: {resp}"
+                        f"Failed to post response to external API. Status: {resp.status}"
                     )
 
     except Exception as e:
