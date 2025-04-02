@@ -61,6 +61,13 @@ spec:
               value: "true"
             - name: PIPELINE_PERSIST_PATH
               value: "/scope/k8s-storage/ml-api/ingestion"
+
+            # WandB API
+            - name: WANDB_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: wandb-secret
+                  key: WANDB_API_KEY
           resources:
             requests:
               cpu: "2"
