@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     VLLM_API_KEY: str = "None"
     TEI_URL: str = ""
     TEI_EMBEDDING_MODEL_NAME: str = "TODO"
+    LLM_TIMEOUT: int = 180  # seconds
 
     # Scope Backend
     SCOPE_BACKEND_URL: str = ""
