@@ -27,8 +27,8 @@ async def generate_rag_response_and_post(
 
     try:
         payload = {
-            "source": source,
-            "workspace": workspace,
+            "source_id": int(source),
+            "workspace": int(workspace),
             "summary": response,
         }
 
