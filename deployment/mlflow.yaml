@@ -20,7 +20,7 @@ spec:
           command: ["/bin/bash", "-c"]
           args:
             - |
-              pip install mlflow==2.11.0 &&
+              pip install mlflow &&
               mlflow server \
                 --backend-store-uri file:///scope/k8s-storage/mlflow/mlruns \
                 --default-artifact-root file:///scope/k8s-storage/mlflow/artifacts \
