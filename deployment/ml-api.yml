@@ -55,9 +55,9 @@ spec:
             - name: LLM_CONTEXT_WINDOW
               value: "12288"
             - name: LLM_MAX_OUTPUT_TOKENS
-              value: "2048"
+              value: "1024"
             - name: LLM_NUM_OUTPUT
-              value: "2048"
+              value: "1024"
 
             # Ingestion
             - name: DATA_BASE_DIR
