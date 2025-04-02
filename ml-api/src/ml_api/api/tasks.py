@@ -32,11 +32,18 @@ async def generate_rag_response_and_post(
             "summary": response,
         }
 
+        headers = {
+            "Authorization": f"Token {settings.SCOPE_BACKEND_AUTH_TOKEN}",
+            "Content-Type": "application/json",
+        }
+
         logger.info(f"Posting response to external API: {payload}")
 
         async with aiohttp.ClientSession() as session:
             async with session.post(
-                f"{settings.SCOPE_BACKEND_URL}/api/ai_responses/", json=payload
+                f"{settings.SCOPE_BACKEND_URL}/api/ai_responses/",
+                json=payload,
+                headers=headers,
             ) as resp:
                 if resp.status == 200:
                     logger.info("Successfully posted response to external API.")

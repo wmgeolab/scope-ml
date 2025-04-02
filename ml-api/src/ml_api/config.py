@@ -14,6 +14,7 @@ class Settings(BaseSettings):
 
     # Scope Backend
     SCOPE_BACKEND_URL: str = ""
+    SCOPE_BACKEND_AUTH_TOKEN: str = ""
 
     # LLM
     LLM_CONTEXT_WINDOW: int = 8192

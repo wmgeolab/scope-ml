@@ -32,6 +32,11 @@ spec:
             # Scope
             - name: SCOPE_BACKEND_URL
               value: "http://scope-backend-svc:8000" # TODO not sure if this is correct
+            - name: SCOPE_BACKEND_AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: scope-backend-auth
+                  key: SCOPE_BACKEND_AUTH_TOKEN
 
             # Qdrant
             - name: QDRANT_URL
