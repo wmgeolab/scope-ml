@@ -24,7 +24,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args: # --kv-cache-dtype fp8_e5m2
             - |
-              vllm serve Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4 --quantization gptq --max-model-len 16384 --gpu-memory-utilization 0.9 --enable-chunked-prefill --kv-cache-dtype fp8_e5m2
+              vllm serve Qwen/Qwen2.5-32B-Instruct-AWQ --quantization awq_marlin --max-model-len 24576 --gpu-memory-utilization 0.9 --enable-chunked-prefill --kv-cache-dtype fp8_e5m2
           ports:
             - containerPort: 8000
           resources:
