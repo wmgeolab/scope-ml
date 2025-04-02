@@ -53,5 +53,8 @@ class Settings(BaseSettings):
     SUPPRESS_LOGGERS: list[str] = []
     SUPPRESSED_LEVEL: str = "INFO"
 
+    MLFLOW_LOGGING: bool = True
+    MLFLOW_TRACKING_URI: str = "http://mlflow-server-svc:5000"
+
 
 settings = Settings()

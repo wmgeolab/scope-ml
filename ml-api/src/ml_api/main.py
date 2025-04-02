@@ -2,7 +2,7 @@ import logging
 import os
 
 import uvicorn
-import weave
+import mlflow
 from fastapi import FastAPI
 from llama_index.core import set_global_handler
 from ml_api.api.router import router
@@ -15,8 +15,11 @@ for logger_name in settings.SUPPRESS_LOGGERS:
     suppress_logger = logging.getLogger(logger_name).setLevel(settings.SUPPRESSED_LEVEL)
 
 # set_global_handler("simple")
+if settings.MLFLOW_LOGGING:
+    mlflow.llama_index.autolog()
+    mlflow.set_tracking_uri(settings.MLFLOW_TRACKING_URI)
+    mlflow.set_experiment("ml-api")
 
-weave.init("ml-api")
 
 app = FastAPI()
 app.include_router(router)
