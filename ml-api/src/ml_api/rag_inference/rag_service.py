@@ -49,4 +49,4 @@ async def generate_rag_response(query: str, project_id: str) -> str:
 
     response = await summarize.asynthesize(query=query, nodes=nodes)
 
-    return response
+    return str(response)
