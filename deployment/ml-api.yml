@@ -41,7 +41,7 @@ spec:
 
             # VLLM/TEI
             - name: VLLM_URL
-              value: "http://vllm-qwen2-5-svc:8001"
+              value: "http://vllm-qwen2-5-svc:8001/v1"
             - name: VLLM_MODEL_NAME
               value: "Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4"
             - name: TEI_URL
