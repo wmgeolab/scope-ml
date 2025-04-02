@@ -45,14 +45,14 @@ spec:
             - name: VLLM_URL
               value: "http://vllm-qwen2-5-svc:8001"
             - name: VLLM_LLM_MODEL_NAME
-              value: "Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4"
+              value: "Qwen/Qwen2.5-32B-Instruct-AWQ"
 
             - name: LLM_CONTEXT_WINDOW
-              value: "16384"
+              value: "24576"
             - name: LLM_MAX_OUTPUT_TOKENS
-              value: "4096"
+              value: "2048"
             - name: LLM_NUM_OUTPUT
-              value: "4096"
+              value: "2048"
 
             # Ingestion
             - name: DATA_BASE_DIR
