@@ -47,9 +47,9 @@ spec:
             - name: TEI_URL
               value: "http://text-embedding-svc:8080"
             - name: LLM_CONTEXT_WINDOW
-              value: "16384"
+              value: "16000"
             - name: LLM_NUM_OUTPUT
-              value: "8192"
+              value: "4096"
 
             # Ingestion
             - name: DATA_BASE_DIR
