@@ -42,8 +42,8 @@ spec:
             # VLLM/TEI
             - name: VLLM_URL
               value: "http://vllm-qwen2-5-svc:8001/v1"
-            - name: VLLM_MODEL_NAME
-              value: "Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4"
+            - name: VLLM_LLM_MODEL_NAME
+              value: "Qwen/Qwen2.5-32B-Instruct-AWQ"
             - name: TEI_URL
               value: "http://text-embedding-svc:8080"
             - name: LLM_CONTEXT_WINDOW
