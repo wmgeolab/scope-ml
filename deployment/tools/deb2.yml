@@ -1,0 +1,144 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deb-tools2
+spec:
+  imagePullSecrets:
+    - name: github-registry-secret
+  containers:
+    - image: ghcr.io/wmgeolab/deb-tools:latest
+      volumeMounts:
+        - name: scopenfs
+          mountPath: /scope # Any path you want to mount to.
+        - name: kube-config
+          mountPath: /app/.kube
+          readOnly: true
+        - name: 237827-home
+          mountPath: /home/237827
+        - name: bash-config
+          mountPath: /home/237827/.bashrc
+          subPath: .bashrc
+        - name: sciclone-home
+          mountPath: /sciclone-home
+      env:
+        - name: KUBECONFIG
+          value: /app/.kube/config
+        - name: HOME
+          value: /home/237827
+      command: ["/bin/bash", "-c"]
+      args: ["sleep infinity"]
+      imagePullPolicy: Always
+      name: debian
+      resources:
+        limits:
+          cpu: "2" # Total 32 cores.
+          memory: "4Gi"
+        requests:
+          cpu: "2" # Total 32 cores.
+          memory: "4Gi"
+      securityContext:
+        runAsGroup: 50036
+        runAsUser: 237827
+  volumes:
+    - name: scopenfs
+      nfs:
+        server: 128.239.59.144 # NFS Server address.
+        path: /sciclone/geograd/scope
+    - name: kube-config
+      secret:
+        secretName: kube-certs
+    - name: 237827-home
+      nfs:
+        server: 128.239.59.144
+        path: /sciclone/geograd/scope/user-data/237827
+    - name: bash-config
+      configMap:
+        name: bash-config
+    - name: sciclone-home
+      nfs:
+        server: 128.239.56.166
+        path: /sciclone/home/sczupka/nfs_test/
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bash-config
+data:
+  .bashrc: |
+    # Default kubernetes namespace
+    export K8S_NAMESPACE="scope-dsmr"
+
+    # Function to set namespace (replacement for set-ns)
+    set-ns() {
+      export K8S_NAMESPACE="$1"
+      echo "Kubernetes namespace set to $K8S_NAMESPACE"
+    }
+
+    # Basic kubectl aliases
+    alias k='kubectl'
+    alias kn="kubectl -n \$K8S_NAMESPACE"
+    alias kg="kubectl get -n \$K8S_NAMESPACE"
+    alias kd="kubectl describe -n \$K8S_NAMESPACE"
+    alias kl="kubectl logs -n \$K8S_NAMESPACE"
+    # Shell execution functions (replacing ke/keb aliases for better parameter handling)
+    ke() {
+        if [ -z "$1" ]; then
+            echo "Usage: ke <pod-name>"
+            return 1
+        fi
+        kubectl exec -it -n "$K8S_NAMESPACE" "$1" -- /bin/sh
+    }
+
+    keb() {
+        if [ -z "$1" ]; then
+            echo "Usage: keb <pod-name>"
+            return 1
+        fi
+        kubectl exec -it -n "$K8S_NAMESPACE" "$1" -- /bin/bash
+    }
+    alias kap="kubectl apply -n \$K8S_NAMESPACE -f"
+    alias kdel="kubectl delete -n \$K8S_NAMESPACE"
+
+    # Function to replace kupdate alias with exact same behavior
+    kupdate() {
+      if [ -z "$1" ]; then
+        echo "Usage: kupdate <file>"
+        return 1
+      fi
+      kubectl delete -n "$K8S_NAMESPACE" -f "$1" && kubectl apply -n "$K8S_NAMESPACE" -f "$1"
+    }
+
+    # Pod-specific aliases - exactly as in original
+    alias kgp="kubectl get pods -n \$K8S_NAMESPACE"
+    alias kgpa="kubectl get pods -n \$K8S_NAMESPACE --all-namespaces"  # Fixed to match original
+    alias kgpw="kubectl get pods -n \$K8S_NAMESPACE -o wide"
+    alias kdp="kubectl describe pod -n \$K8S_NAMESPACE"
+    alias klf="kubectl logs -n \$K8S_NAMESPACE -f"
+
+    # Deployment aliases
+    alias kgd="kubectl get deployments -n \$K8S_NAMESPACE"
+    alias kdd="kubectl describe deployment -n \$K8S_NAMESPACE"
+
+    # Service aliases
+    alias kgs="kubectl get services -n \$K8S_NAMESPACE"
+    alias kds="kubectl describe service -n \$K8S_NAMESPACE"
+
+    # Useful combo commands
+    alias kgall="kubectl get all -n \$K8S_NAMESPACE"
+    alias kgallw="kubectl get all -n \$K8S_NAMESPACE -o wide"
+
+    # Watch pods
+    alias kwp="kubectl get pods -n \$K8S_NAMESPACE -w"
+
+    # Add color to common commands
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+
+    # Source any existing bashrc
+    if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+    fi
+
+    # Show current namespace in prompt
+    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] [\[\033[01;35m\]$K8S_NAMESPACE\[\033[00m\]] \$ '
