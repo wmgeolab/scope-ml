@@ -101,7 +101,7 @@ data:
     - hostname: backend.scnw.cc
       service: http://scope-backend-svc:8000
     - hostname: frontend.scnw.cc
-      service: http://scope-frontend-svc:3000
+      service: http://scope-frontend:3000
     - hostname: mlflow.scnw.cc
       service: http://mlflow-server-svc:5000
     # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
