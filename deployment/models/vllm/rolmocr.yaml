@@ -1,0 +1,91 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm-rolmocr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vllm-rolmocr
+  template:
+    metadata:
+      labels:
+        app: vllm-rolmocr
+    spec:
+      imagePullSecrets:
+        - name: github-registry-secret
+      nodeSelector:
+        nvidia.com/gpu.product: NVIDIA-A40
+      containers:
+        - name: vllm
+          # image: vllm/vllm-openai:v0.7.2
+          image: ghcr.io/wmgeolab/vllm-nonroot
+          imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          # args:
+          #   - |
+          #     pip list && \
+          #     vllm serve unsloth/Qwen2.5-VL-7B-Instruct-unsloth-bnb-4bit --quantization bitsandbytes --load-format bitsandbytes --trust-remote-code --enable-chunked-prefill --max_num_batched_tokens 1024 --dtype bfloat16
+          args:
+            - |
+              vllm serve reducto/RolmOCR --trust-remote-code --enable-chunked-prefill --max_num_batched_tokens 1024 --dtype bfloat16
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              cpu: "8"
+              memory: 16Gi
+              nvidia.com/gpu: "1"
+            requests:
+              cpu: "8"
+              memory: 16Gi
+              nvidia.com/gpu: "1"
+          env:
+            - name: HUGGING_FACE_HUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: huggingface-secret
+                  key: token
+            - name: HOME
+              value: /home/vllm_user
+            - name: HF_HOME
+              value: /home/vllm_user/.cache/huggingface
+            - name: VLLM_CONFIG_ROOT
+              value: /home/vllm_user/.vllm/config
+            - name: VLLM_CACHE_ROOT
+              value: /home/vllm_user/.vllm/cache
+            - name: VLLM_ASSETS_CACHE
+              value: /home/vllm_user/.vllm/assets
+            - name: VLLM_XLA_CACHE_PATH
+              value: /home/vllm_user/.vllm/xla_cache
+          volumeMounts:
+            - name: hf-cache-volume
+              mountPath: /home/vllm_user/.cache/huggingface
+            - name: shm
+              mountPath: /dev/shm
+          securityContext:
+            runAsGroup: 50036
+            runAsUser: 237827
+      volumes:
+        - name: hf-cache-volume
+          nfs:
+            server: 128.239.59.144
+            path: /sciclone/geograd/scope/k8s-storage/vllm/hf_cache
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 2Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vllm-rolmocr-svc
+spec:
+  selector:
+    app: vllm
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP
