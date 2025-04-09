@@ -17,20 +17,26 @@ NOTE: The actual documents (pdfs/docs) are downloaded to a seperate directory st
 Contains methods for interacting with the SQLite database.
 
 
-# Running
+# How to Run these Scripts
 
 It is recommended to run these scripts as containers using docker.
 
-## locally
+## Locally
 
 From the gef-portal-scraper directory, build the image using the Dockerfile and name it gef_scraper.
-`docker build -t gef_scraper .
+```
+docker build -t gef_scraper .
+```
 
 Run the gef_scraper image linking the local data directory to the container's data directory (this is where the documents and SQLite database will be stored)
-`docker run -v "$(pwd)/data:/app/data" gef_scraper
+```
+docker run -v "$(pwd)/data:/app/data" gef_scraper
+```
 
 ## On the Cluster
 
 Github actions automatically build a new image after each commit. The yml files in the deployment/scraper folder define which image to pull and how it should be run.
 
-`kubectl create -f gef-scraper.yml -n scope-dsmr
+```
+kubectl create -f gef-scraper.yml -n scope-dsmr
+```
