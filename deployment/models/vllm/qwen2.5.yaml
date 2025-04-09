@@ -19,7 +19,7 @@ spec:
       containers:
         - name: vllm
           # image: vllm/vllm-openai:latest
-          image: ghcr.io/wmgeolab/vllm-qwen
+          image: ghcr.io/wmgeolab/vllm-nonroot
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args: # --kv-cache-dtype fp8_e5m2
