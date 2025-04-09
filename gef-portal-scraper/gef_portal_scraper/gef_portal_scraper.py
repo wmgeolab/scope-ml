@@ -122,6 +122,8 @@ def download_files_from_project_page(project_id):
         if href:
             file_extension = os.path.splitext(href)[1]
             if file_extension in VALID_EXTENSIONS:
+                # An updated version of a document would be skipped if it uses the same url as the old version
+                # Should not be a problem as the gef does not seem to update documents in this way
                 if document_db_manager.document_exists(href):
                     logging.info(f"Document already in database, skipping: {href}")
                     continue

@@ -10,10 +10,6 @@ Contains all kubernetes related deployment manifests.
 
 Contains code for the ml-backend api that responds to requests for summarization and question answering from the scope backend.
 
-## /gef-portal-scraper
-
-Contains code for scraping the GEF portal for project data.
-
 ## /k8s-autoscaler
 
 Contains code for a FastAPI server that manages the scaling of certain deployments.
@@ -22,3 +18,6 @@ Contains code for a FastAPI server that manages the scaling of certain deploymen
 
 Contains code for scraping data from the GEF portal. One script (get_project_ids) gets an updated list of project ids and the other (gef_portal_scraper) downloads any new files using the project ids from step 1.
 
+## /scope-add-gef-sources-job
+
+Contains code for adding the sources gathered by the gef portal scraper to the SCOPE MySQL database
