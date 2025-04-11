@@ -59,6 +59,8 @@ spec:
               value: /home/vllm_user/.vllm/assets
             - name: VLLM_XLA_CACHE_PATH
               value: /home/vllm_user/.vllm/xla_cache
+            - name: VLLM_USE_V1
+              value: "1"
           volumeMounts:
             - name: hf-cache-volume
               mountPath: /home/vllm_user/.cache/huggingface
