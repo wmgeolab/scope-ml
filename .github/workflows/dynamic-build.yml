@@ -42,17 +42,17 @@ jobs:
         run: |
           cd deployment/images
           echo "📁 Scanning directory: $(pwd)"
-          
+
           # Initialize matrix
           MATRIX="["
           SEPARATOR=""
-          
+
           # Find and display all Dockerfiles
           echo "🐳 Found Dockerfiles:"
           find . -type f -name "Dockerfile.*" | while read -r dockerfile; do
             echo "  → $dockerfile"
           done
-          
+
           # Process each Dockerfile
           for dockerfile in $(find . -type f -name "Dockerfile.*"); do
             # Remove leading ./ if present
@@ -100,12 +100,12 @@ jobs:
               echo "  ⏭️ No changes detected - skipping"
             fi
           done
-          
+
           MATRIX="${MATRIX}]"
-          
+
           echo "📊 Final build matrix:"
           echo "$MATRIX" | jq '.'
-          
+
           if [ "$MATRIX" = "[]" ]; then
             echo "⚠️ No changes detected in any Docker contexts - skipping builds"
             echo "matrix=[]" >> $GITHUB_OUTPUT
@@ -125,6 +125,21 @@ jobs:
       matrix:
         include: ${{ fromJson(needs.detect_changes.outputs.matrix) }}
     steps:
+      - name: Free disk space
+        run: |
+          # Show initial space
+          df -h
+          # Remove unnecessary tools and packages
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          # Clean Docker cache
+          docker rmi $(docker image ls -aq) || true
+          docker system prune -af --volumes || true
+          # Show available space after cleanup
+          df -h
+
       - name: Check out the repository
         uses: actions/checkout@v3
 
