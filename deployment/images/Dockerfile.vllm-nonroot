@@ -1,6 +1,7 @@
 FROM vllm/vllm-openai:v0.8.3
 # RUN pip install git+https://github.com/huggingface/transformers.git
 
+# WORKFLOW TRIGGER: 1
 # Use geolab group (50036) and sawyer's id (237827)
 RUN groupadd -g 50036 vllm_user && \
     useradd -u 237827 -g vllm_user -m -s /bin/bash vllm_user
