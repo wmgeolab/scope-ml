@@ -6,6 +6,8 @@ RUN groupadd -g 50036 vllm_user && \
     useradd -u 237827 -g vllm_user -m -s /bin/bash vllm_user
 
 RUN mkdir -p /home/vllm_user/.vllm && \
+    mkdir -p /home/vllm_user/.cache/huggingface && \
+    mkdir -p /home/vllm_user/.cache/flashinfer && \
     chown -R vllm_user:vllm_user /home/vllm_user
 
 ENV HOME=/home/vllm_user

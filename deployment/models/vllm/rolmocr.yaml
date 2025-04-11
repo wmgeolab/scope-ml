@@ -20,7 +20,7 @@ spec:
       containers:
         - name: vllm
           # image: vllm/vllm-openai:v0.7.2
-          image: ghcr.io/wmgeolab/vllm-nonroot
+          image: ghcr.io/wmgeolab/vllm-nonroot:latest
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           # args:
