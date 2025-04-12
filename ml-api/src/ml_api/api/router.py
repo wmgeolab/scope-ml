@@ -2,11 +2,10 @@ import asyncio
 import logging
 
 from fastapi import APIRouter, BackgroundTasks
-from ml_api.api.tasks import generate_rag_response_and_post, ingest_projects_background
-from ml_api.ingestion.ingestion_service import IngestionService
+from ml_api.api.tasks import generate_rag_response_and_post
 from ml_api.rag_inference.rag_service import generate_rag_response
 
-from .schemas import GEFRagRequest, GEFRagRequestBatch, GEFRagResponse, IngestionRequest
+from .schemas import GEFRagRequest, GEFRagRequestBatch, GEFRagResponse
 
 logger = logging.getLogger(__name__)
 
@@ -52,26 +51,13 @@ async def generate_rag_response_single(
     """Generates a RAG response for a single question and posts it to an external API in the background."""
 
     background_tasks.add_task(
-        generate_rag_response_and_post, request.question, "9467" , request.source, request.workspace
+        generate_rag_response_and_post,
+        request.question,
+        "9467",
+        request.source,
+        request.workspace,
     )
 
     return {
         "message": "RAG response generation and posting to external API initiated in the background."
-    }
-
-
-@router.post("/ingestion/projects")
-async def ingest_data(request: IngestionRequest, background_tasks: BackgroundTasks):
-    """Ingests data into the system."""
-
-    service = IngestionService()
-
-    background_tasks.add_task(
-        ingest_projects_background,
-        request.project_ids,
-        service,
-    )
-
-    return {
-        "message": f"Ingestion service initialized and running in the background. Project IDs: {request.project_ids}"
     }

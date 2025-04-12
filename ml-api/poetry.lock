@@ -179,6 +179,20 @@ test = ["anyio[trio]", "blockbuster (>=1.5.23)", "coverage[toml] (>=7)", "except
 trio = ["trio (>=0.26.1)"]
 
 [[package]]
+name = "aspose-words"
+version = "25.4.0"
+description = "Aspose.Words for Python is a Document Processing library that allows developers to work with documents in many popular formats without needing Office Automation."
+optional = false
+python-versions = "<3.14,>=3.6"
+files = [
+    {file = "aspose_words-25.4.0-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:58c62a9a6515832096c681ba4228daacbc6b8f22b3af037caea2f8dd84c51a35"},
+    {file = "aspose_words-25.4.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:11594fdcf8006f6009e56e29a6ae1df807df61cbc788230c3a35d2057fcb9ce3"},
+    {file = "aspose_words-25.4.0-py3-none-manylinux1_x86_64.whl", hash = "sha256:396a0362089aedd94bfec6e7e0429f5630761a492b0e4f3595d37c59f153f504"},
+    {file = "aspose_words-25.4.0-py3-none-win32.whl", hash = "sha256:66b2d3b4cbb14e02da382b231535160e6ba7a26577f331803d89709f8f401432"},
+    {file = "aspose_words-25.4.0-py3-none-win_amd64.whl", hash = "sha256:416e3f9c9481aca387b1e6d192672c8a337f6060be71797186530552d252c3d9"},
+]
+
+[[package]]
 name = "attrs"
 version = "25.3.0"
 description = "Classes Without Boilerplate"
@@ -2707,6 +2721,20 @@ files = [
 ]
 
 [[package]]
+name = "pdf2image"
+version = "1.17.0"
+description = "A wrapper around the pdftoppm and pdftocairo command line tools to convert PDF to a PIL Image list."
+optional = false
+python-versions = "*"
+files = [
+    {file = "pdf2image-1.17.0-py3-none-any.whl", hash = "sha256:ecdd58d7afb810dffe21ef2b1bbc057ef434dabbac6c33778a38a3f7744a27e2"},
+    {file = "pdf2image-1.17.0.tar.gz", hash = "sha256:eaa959bc116b420dd7ec415fcae49b98100dda3dd18cd2fdfa86d09f112f6d57"},
+]
+
+[package.dependencies]
+pillow = "*"
+
+[[package]]
 name = "pillow"
 version = "11.1.0"
 description = "Python Imaging Library (Fork)"
@@ -2824,6 +2852,23 @@ files = [
 [package.extras]
 dev = ["pre-commit", "tox"]
 testing = ["pytest", "pytest-benchmark"]
+
+[[package]]
+name = "poppler-utils"
+version = "0.1.0"
+description = "Precompiled command-line utilities (based on Poppler) for manipulating PDF files and converting them to other formats."
+optional = false
+python-versions = "*"
+files = [
+    {file = "poppler-utils-0.1.0.tar.gz", hash = "sha256:e97a92dcfde57b21a90c3070694e58f8eea155515ae8e624266a052d0776a349"},
+    {file = "poppler_utils-0.1.0-py3-none-any.whl", hash = "sha256:a6336b4c7d59e49d339b92c60d1f63905f577ab106038bde940a6861deefd3f3"},
+]
+
+[package.dependencies]
+Click = ">=7.0"
+
+[package.extras]
+dev = ["Click (>=7.0)", "Sphinx (>=2.2.1)"]
 
 [[package]]
 name = "portalocker"
@@ -4917,4 +4962,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.13"
-content-hash = "d7c5b880947d5a46c8268fe7c508dd4df6e693a8256e9dc9463047a60124e48e"
+content-hash = "ead7a15becaa74fc264ed4a3f8086eeb2e57fade815a9b4bc86525319c9d1e1c"

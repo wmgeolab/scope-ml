@@ -13,57 +13,58 @@ from llama_index.core.vector_stores.types import BasePydanticVectorStore
 from ml_api.config import settings
 from ml_api.utils.qdrant import get_qdrant_vector_store
 
+from ..base import BaseIngestionService
 from .metadata import file_metadata
 from .pipeline import get_pipeline
 
 logger = logging.getLogger(__name__)
 
 
-class IngestionService:
+class NaiveIngestionService(BaseIngestionService):
     """Service to ingest data into the Qdrant database and manage state."""
 
     def __init__(self, vector_store: BasePydanticVectorStore | None = None):
         self.vector_store = (
             get_qdrant_vector_store() if vector_store is None else vector_store
         )
-        self.data_base_dir = settings.DATA_BASE_DIR
-        self.pipeline = get_pipeline()
 
-    def ingest_single_file(self, file_path: Path) -> bool:
+        self._pipeline = get_pipeline()
+
+    def ingest_file(self, file: Path) -> bool:
         """Ingest a specific file into the qdrant database.
 
         Args:
-            file_path (Path): the path to the file to ingest
+            file (Path): the path to the file to ingest
         """
 
         try:
             # Try to ingest the file
             reader = SimpleDirectoryReader(
-                input_files=[file_path], file_metadata=file_metadata
+                input_files=[file], file_metadata=file_metadata
             )
 
             docs = reader.load_data(num_workers=settings.READER_NUM_WORKERS_SINGLE)
-            logger.info(f"Loaded {len(docs)} documents from {file_path}")
+            logger.info(f"Loaded {len(docs)} documents from {file}")
 
             # Pipeline includes embeddings and vector db, so this is all we need to run
-            processed_nodes = self.pipeline.run(
+            processed_nodes = self._pipeline.run(
                 show_progress=True,
                 documents=docs,
                 num_workers=settings.PIPELINE_NUM_WORKERS_SINGLE,
             )
             if settings.PIPELINE_PERSIST:
-                self.pipeline.persist(persist_dir=settings.PIPELINE_PERSIST_PATH)
+                self._pipeline.persist(persist_dir=settings.PIPELINE_PERSIST_PATH)
 
             logger.info(
-                f"Processed & ingested {len(processed_nodes)} nodes from {file_path}"
+                f"Processed & ingested {len(processed_nodes)} nodes from {file}"
             )
             return True
 
         except Exception as e:
-            logger.error(f"Failed to ingest file {file_path}: {e}")
+            logger.error(f"Failed to ingest file {file}: {e}")
             return False
 
-    def ingest_files(self, file_paths: list[Path]):
+    def ingest_file_batch(self, file_batch: list[Path]) -> bool:
         """
         Ingests a group of files into the vector database. Expects a pre-batched list of file paths.
 
@@ -75,25 +76,28 @@ class IngestionService:
         """
         try:
             reader = SimpleDirectoryReader(
-                input_files=file_paths, file_metadata=file_metadata
+                input_files=file_batch, file_metadata=file_metadata
             )
 
             docs = reader.load_data(num_workers=settings.READER_NUM_WORKERS_BATCH)
-            logger.info(f"Loaded {len(docs)} documents from {len(file_paths)} files.")
+            logger.info(f"Loaded {len(docs)} documents from {len(file_batch)} files.")
 
-            processed_nodes = self.pipeline.run(
+            processed_nodes = self._pipeline.run(
                 show_progress=True,
                 documents=docs,
                 num_workers=settings.PIPELINE_NUM_WORKERS_BATCH,
             )
             logger.info(
-                f"Processed & ingested {len(processed_nodes)} nodes from {len(file_paths)} files."
+                f"Processed & ingested {len(processed_nodes)} nodes from {len(file_batch)} files."
             )
 
         except Exception as e:
             logger.error(f"Batch ingestion failed: {e}", exc_info=True)
+            return False
 
-    def _batch_files(
+        return True
+
+    def generate_file_batches(
         self, files: list[Path], batch_size: int = settings.INGEST_BATCH_SIZE
     ):
         """Batch files into groups of a certain size.
@@ -108,7 +112,7 @@ class IngestionService:
         for i in range(0, len(files), batch_size):
             yield files[i : i + batch_size]
 
-    def ingest_directory(self, directory: Path = settings.DATA_BASE_DIR):
+    def ingest_directory(self, directory: Path = settings.DATA_BASE_DIR) -> bool:
         """Ingest all files in a directory.
 
         This method will enumerate all files in the given directory and its subdirectories,
@@ -125,14 +129,16 @@ class IngestionService:
             logger.warning(
                 f"No files found in directory {directory}, aborting ingestion."
             )
-            return
+            return False
 
-        batches = list(self._batch_files(all_files))
+        batches = list(self.generate_file_batches(all_files))
 
         num_processed_files = 0
         for i, batch in enumerate(batches):
-            self.ingest_files(batch)
+            self.ingest_file_batch(batch)
             num_processed_files += len(batch)
             logger.info(
                 f"Progress: Batch #{i} | {num_processed_files}/{len(all_files)} files processed."
             )
+
+        return True

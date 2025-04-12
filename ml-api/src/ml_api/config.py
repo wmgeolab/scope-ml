@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     TEI_EMBEDDING_MODEL_NAME: str = "TODO"
     LLM_TIMEOUT: int = 180  # seconds
 
+    VLLM_VLM_MODEL_NAME: str = ""
+    VLLM_VLM_URL: str = ""
+
     # Scope Backend
     SCOPE_BACKEND_URL: str = ""
     SCOPE_BACKEND_AUTH_TOKEN: str = ""
@@ -40,6 +43,9 @@ class Settings(BaseSettings):
         "/scope/scope-data/gef/output"
     )  # then /{project_id}/{document_id}.{extension}
     INGEST_BATCH_SIZE: int = 10
+
+    # VLM Ingestion
+    PDF_2_PNG_DPI: int = 300
 
     # Single file
     READER_NUM_WORKERS_SINGLE: int = 4

@@ -6,6 +6,7 @@ import mlflow
 from fastapi import FastAPI
 from llama_index.core import set_global_handler
 from ml_api.api.router import router
+from ml_api.api.ingestion.router import router as ingestion_router
 from ml_api.config import settings
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO").upper())

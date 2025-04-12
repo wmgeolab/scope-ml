@@ -7,8 +7,9 @@ build/
 *.egg-info/
 
 # Virtual environment
-*venv/
+# *venv/
 env/
+.venv/
 
 *.env
 

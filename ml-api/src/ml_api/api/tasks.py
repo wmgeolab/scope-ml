@@ -5,7 +5,7 @@ import logging
 import aiohttp
 
 from ml_api.config import settings
-from ml_api.ingestion.ingestion_service import IngestionService
+from ml_api.ingestion import BaseIngestionService
 from ml_api.rag_inference.rag_service import generate_rag_response
 
 logger = logging.getLogger(__name__)
@@ -66,10 +66,10 @@ async def generate_rag_response_and_post(
         logger.error(f"Error posting to external API: {e}", stack_info=True)
 
 
-def ingest_projects_background(project_ids: list[str], service: IngestionService):
+def ingest_projects_background(project_ids: list[str], service: BaseIngestionService):
     """Ingests data into the system in the background."""
 
-    project_base_dir = service.data_base_dir
+    project_base_dir = settings.DATA_BASE_DIR
     project_dirs = [project_base_dir / project_id for project_id in project_ids]
 
     for project_dir in project_dirs:
