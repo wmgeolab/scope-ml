@@ -27,5 +27,13 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
     && chmod +x kubectl \
     && mv kubectl /usr/local/bin/
 
+RUN curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+    | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+    && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+    | tee /etc/apt/sources.list.d/ngrok.list \
+    && apt-get update \
+    && apt-get install -y ngrok \
+    && rm -rf /var/lib/apt/lists/*
+
 # Set default command to bash
 CMD ["/bin/bash"]
