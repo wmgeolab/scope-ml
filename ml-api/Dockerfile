@@ -37,6 +37,11 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PYTHONPYCACHEPREFIX=/var/cache/python
 
+# Install system dependencies including poppler-utils
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    poppler-utils \
+    && rm -rf /var/lib/apt/lists/*
+
 # Create and set permissions for Python cache directory
 RUN mkdir -p /var/cache/python && chmod -R 777 /var/cache/python
 
