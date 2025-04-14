@@ -52,8 +52,8 @@ spec:
             - name: VLLM_LLM_MODEL_NAME
               value: "Qwen/Qwen2.5-32B-Instruct-AWQ"
             - name: VLLM_VLM_URL
-              value: "http://vllm-rolmocr-svc:8000"
-            - name: VLLM_LLM_MODEL_NAME
+              value: "http://vllm-rolmocr-svc:8000/v1"
+            - name: VLLM_VLM_MODEL_NAME
               value: "reducto/RolmOCR"
 
             - name: LLM_CONTEXT_WINDOW
