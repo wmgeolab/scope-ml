@@ -16,6 +16,9 @@ class VLMIngestionService(BaseIngestionService):
     def __init__(self, vector_store: BasePydanticVectorStore | None = None):
         super().__init__()
 
+        if settings.VLLM_VLM_URL is None:
+            raise ValueError("VLLM_VLM_URL is not set in the environment variables.")
+
         self.vector_store = (
             get_qdrant_vector_store() if vector_store is None else vector_store
         )
