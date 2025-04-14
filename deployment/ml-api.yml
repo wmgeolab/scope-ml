@@ -47,10 +47,14 @@ spec:
             # VLLM/TEI
             - name: TEI_URL
               value: "http://text-embedding-svc:8080"
-            - name: VLLM_URL
+            - name: VLLM_LLM_URL
               value: "http://vllm-qwen2-5-svc:8001"
             - name: VLLM_LLM_MODEL_NAME
               value: "Qwen/Qwen2.5-32B-Instruct-AWQ"
+            - name: VLLM_VLM_URL
+              value: "http://vllm-rolmocr-svc:8000"
+            - name: VLLM_LLM_MODEL_NAME
+              value: "reducto/RolmOCR"
 
             - name: LLM_CONTEXT_WINDOW
               value: "12288"
