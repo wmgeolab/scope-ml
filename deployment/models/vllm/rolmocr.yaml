@@ -85,7 +85,7 @@ metadata:
   name: vllm-rolmocr-svc
 spec:
   selector:
-    app: vllm
+    app: vllm-rolmocr
   ports:
     - protocol: TCP
       port: 8000
