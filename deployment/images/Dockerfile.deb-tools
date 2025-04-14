@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     pipx \
     rsync \
+    httpie \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pipx ensurepath
@@ -26,8 +27,6 @@ RUN pipx install poetry
 RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
     && chmod +x kubectl \
     && mv kubectl /usr/local/bin/
-
-RUN curl -fsSL https://git.io/resto | bash
 
 RUN curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
     | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
