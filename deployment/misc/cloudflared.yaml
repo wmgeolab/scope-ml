@@ -104,6 +104,8 @@ data:
       service: http://scope-frontend:3000
     - hostname: mlflow.scnw.cc
       service: http://mlflow-server-svc:5000
+    - hostname: qdrant.scnw.cc
+      service: http://qdrant-svc:6333
     # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
     # issues. If hello.example.com resolves and tunnel.example.com does not, then the problem is
     # in the connection from cloudflared to your local service, not from the internet to cloudflared.
