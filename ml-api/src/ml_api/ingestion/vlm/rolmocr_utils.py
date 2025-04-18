@@ -8,6 +8,20 @@ from openai import OpenAI
 
 
 def document_to_base64_images(document_path: Path):
+    """
+    Given a document path, convert it to a list of base64 encoded strings, each representing a page in the document.
+
+    Currently, only PDF documents are supported.
+
+    Args:
+        document_path (Path): The path to the document.
+
+    Returns:
+        List[str]: A list of base64 encoded strings, each representing a page in the document.
+
+    Raises:
+        ValueError: If the document type is not supported.
+    """
     match document_path.suffix.lower():
         case ".pdf":
             return pdf_to_base64_images(document_path)
@@ -15,9 +29,18 @@ def document_to_base64_images(document_path: Path):
             raise ValueError(f"Unsupported file type: {document_path.suffix}")
 
 
-def pdf_to_base64_images(pdf_path: Path):
+def pdf_to_base64_images(pdf_path: Path) -> list[str]:
+    """
+    Given a PDF path, convert it to a list of base64 encoded strings, each representing a page in the document.
+
+    Args:
+        pdf_path (Path): The path to the PDF document.
+
+    Returns:
+        List[str]: A list of base64 encoded strings, each representing a page in the document.
+    """
     page_images = pdf2image.convert_from_path(pdf_path, dpi=settings.PDF_2_PNG_DPI)
-    base64_images = []
+    base64_images: list[str] = []
 
     for image in page_images:
         tmp_image_file = io.BytesIO()
@@ -30,7 +53,17 @@ def pdf_to_base64_images(pdf_path: Path):
     return base64_images
 
 
-def do_ocr_on_image(img_png_base64, client: OpenAI):
+def do_ocr_on_image(img_png_base64: str, client: OpenAI) -> str | None:
+    """
+    Given an image as a base64 encoded string, performs OCR on the image using the VLLM model.
+
+    Args:
+        img_png_base64 (str): The base64 encoded PNG image.
+        client (OpenAI): The OpenAI client used to make the request.
+
+    Returns:
+        str | None: The plain text representation of the document, or None if the request failed.
+    """
     response = client.chat.completions.create(
         model=settings.VLLM_VLM_MODEL_NAME,
         messages=[
