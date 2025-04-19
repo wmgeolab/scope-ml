@@ -15,7 +15,7 @@ from ml_api.utils.qdrant import get_qdrant_vector_store
 
 from ..base import BaseIngestionService
 from .metadata import file_metadata
-from .pipeline import get_pipeline
+from ..pipeline import get_pipeline
 
 logger = logging.getLogger(__name__)
 
