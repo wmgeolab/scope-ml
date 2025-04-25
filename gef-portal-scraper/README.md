@@ -35,8 +35,12 @@ docker run -v "$(pwd)/data:/app/data" gef_scraper
 
 ## On the Cluster
 
-Github actions automatically build a new image after each commit. The yml files in the deployment/scraper folder define which image to pull and how it should be run.
+Github Actions automatically builds a new image after each commit. The yml files in the deployment/scraper folder define which image to pull and how it should be run.
 
 ```
 kubectl create -f gef-scraper.yml -n scope-dsmr
 ```
+
+# TODO
+
+Ideally, the scraper would be run on a regular interval to stay updated with new documents. Using a [Kubernetes CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) would make sense but appears to be currently permission blocked on the cluster.
