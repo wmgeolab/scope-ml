@@ -48,20 +48,20 @@ spec:
             - name: TEI_URL
               value: "http://text-embedding-svc:8080"
             - name: VLLM_LLM_URL
-              value: "http://vllm-qwen2-5-svc:8001"
+              value: "http://vllm-qwen3-svc:8001"
             - name: VLLM_LLM_MODEL_NAME
-              value: "Qwen/Qwen2.5-32B-Instruct-AWQ"
+              value: "Qwen/Qwen3-8B-FP8"
             - name: VLLM_VLM_URL
               value: "http://vllm-rolmocr-svc:8000/v1"
             - name: VLLM_VLM_MODEL_NAME
               value: "reducto/RolmOCR"
 
             - name: LLM_CONTEXT_WINDOW
-              value: "12288"
+              value: "32768"
             - name: LLM_MAX_OUTPUT_TOKENS
-              value: "512"
+              value: "2048"
             - name: LLM_NUM_OUTPUT
-              value: "1024"
+              value: "2048"
 
             # Ingestion
             - name: DATA_BASE_DIR
@@ -72,11 +72,11 @@ spec:
               value: "/scope/k8s-storage/ml-api/ingestion"
 
             # WandB API
-            - name: WANDB_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: wandb-credentials
-                  key: WANDB_API_KEY
+            # - name: WANDB_API_KEY
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: wandb-credentials
+            #       key: WANDB_API_KEY
           resources:
             requests:
               cpu: "2"

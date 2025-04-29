@@ -49,8 +49,12 @@ class Settings(BaseSettings):
 
     # LLM Parameters
     LLM_CONTEXT_WINDOW: int = 8192
-    LLM_MAX_OUTPUT_TOKENS: int | None = 2048  # Parameter for the OpenAILike llm
-    LLM_NUM_OUTPUT: int = 2048  # parameter for the PromptHelper
+    LLM_MAX_OUTPUT_TOKENS: int | None = (
+        2048  # Parameter for the OpenAILike llm, number of output tokens for the openai api request
+    )
+    LLM_NUM_OUTPUT: int = (
+        2048  # parameter for the PromptHelper, space to leave in the prompt for output tokens
+    )
     LLM_TEMPERATURE: float = 0.7
 
     # Retrieval Parameters
