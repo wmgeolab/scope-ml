@@ -1,4 +1,4 @@
-FROM vllm/vllm-openai:v0.8.3
+FROM vllm/vllm-openai:v0.8.5
 # RUN pip install git+https://github.com/huggingface/transformers.git
 
 # WORKFLOW TRIGGER: 1
