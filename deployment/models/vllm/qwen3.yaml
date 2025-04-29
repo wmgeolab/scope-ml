@@ -33,7 +33,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args: # Model can use up to 32768 natively but can be increased to 131072 w/ rope scaling
             - |
-              vllm serve Qwen/Qwen3-8B --enable-reasoning --reasoning-parser deepseek_r1 --gpu-memory-utilization 0.95 --enable-chunked-prefill
+              vllm serve Qwen/Qwen3-8B-FP8 --enable-reasoning --reasoning-parser deepseek_r1 --gpu-memory-utilization 0.95 --enable-chunked-prefill
           ports:
             - containerPort: 8000
           resources:
